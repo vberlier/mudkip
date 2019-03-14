@@ -277,7 +277,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.1.0"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Python Library for Tom's Obvious, Minimal Language"
 name = "toml"
 optional = false
@@ -306,7 +306,7 @@ argh = ">=0.24.1"
 pathtools = ">=0.1.1"
 
 [metadata]
-content-hash = "a21356da24a2c80f637702118d2141c5dc49b4e16722125c311ecf3545d0b6d5"
+content-hash = "8fe1bd219c237b4aa5d42367891cc99ce1aba8cec9c90902c149ad9001306e04"
 python-versions = "^3.7"
 
 [metadata.hashes]

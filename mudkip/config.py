@@ -1,16 +1,25 @@
 from pathlib import Path
 
+import toml
+
 
 class Config:
     default_source_dir = "docs"
     default_output_dir = "docs/_build"
 
-    def __init__(self, source_dir=None, output_dir=None, verbose=False):
+    def __init__(
+        self, source_dir=None, output_dir=None, verbose=False, project_name=None
+    ):
         self.mkdir = []
 
         self.source_dir = Path(source_dir or self.default_source_dir)
         self.output_dir = Path(output_dir or self.default_output_dir)
         self.verbose = verbose
+
+        if project_name:
+            self.project_name = project_name
+        else:
+            self.try_set_project_name()
 
         self.mkdir += self.source_dir, self.output_dir
 
@@ -28,3 +37,12 @@ class Config:
 
         self.sphinx_confdir = None
         self.sphinx_confoverrides = {}
+
+    def try_set_project_name(self):
+        try:
+            with open("pyproject.toml") as pyproject:
+                package_info = toml.load(pyproject)["tool"]["poetry"]
+        except FileNotFoundError:
+            return
+        else:
+            self.project_name = package_info["name"]

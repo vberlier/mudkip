@@ -43,17 +43,14 @@ class Mudkip:
 
         self.sphinx.setup_extension("recommonmark")
 
-        self.sphinx.add_config_value(
-            "recommonmark_config",
-            {
-                "enable_auto_toc_tree": True,
-                "enable_math": True,
-                "enable_inline_math": True,
-                "enable_eval_rst": True,
-            },
-            True,
-        )
+        recommonmark_config = {
+            "enable_auto_toc_tree": True,
+            "enable_math": True,
+            "enable_inline_math": True,
+            "enable_eval_rst": True,
+        }
 
+        self.sphinx.add_config_value("recommonmark_config", recommonmark_config, "env")
         self.sphinx.add_transform(AutoStructify)
 
     @property

@@ -4,5 +4,6 @@
   "[python]": {
     "editor.formatOnSave": true,
     "editor.formatOnType": true
-  }
+  },
+  "restructuredtext.confPath": ""
 }

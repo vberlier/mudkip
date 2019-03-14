@@ -1,0 +1,2 @@
+class MudkipError(Exception):
+    pass

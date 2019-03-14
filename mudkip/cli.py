@@ -30,7 +30,7 @@ def print_version(ctx, _param, value):
     help="Show the version and exit.",
 )
 def mudkip():
-    """Work in progress."""
+    """A friendly Sphinx wrapper."""
 
 
 @contextmanager

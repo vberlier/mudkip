@@ -1,3 +1,5 @@
-# 📘 mudkip
+# 📘 Mudkip
 
-> Work in progress
+> A friendly Sphinx wrapper.
+
+**🚧 Work in progress 🚧**

@@ -39,7 +39,6 @@ class Mudkip:
         conf = self.sphinx.config
 
         conf.master_doc = "index"
-        conf.source_suffix = {".rst": "restructuredtext", ".md": "markdown"}
         conf.exclude_patterns = [".*", "**/.*", "_*", "**/_*"]
 
         self.sphinx.setup_extension("recommonmark")
@@ -64,7 +63,7 @@ class Mudkip:
             raise MudkipError(exc.args[0]) from exc
 
     def develop(self, build_manager):
-        patterns = [f"**/*{suff}" for suff in self.sphinx.config.source_suffix]
+        patterns = [f"*{suff}" for suff in self.sphinx.config.source_suffix]
         ignore_patterns = self.sphinx.config.exclude_patterns
 
         for event in watch_directory(

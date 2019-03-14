@@ -6,6 +6,7 @@ from recommonmark.transform import AutoStructify
 
 from .config import Config
 from .errors import MudkipError
+from .watch import watch_directory
 
 
 class Mudkip:
@@ -53,14 +54,18 @@ class Mudkip:
         self.sphinx.add_config_value("recommonmark_config", recommonmark_config, "env")
         self.sphinx.add_transform(AutoStructify)
 
-    @property
-    def watch_patterns(self):
-        patterns = [f"**/*{suff}" for suff in self.sphinx.config.source_suffix]
-        ignore_patterns = self.sphinx.config.exclude_patterns
-        return patterns, ignore_patterns
-
     def build(self):
         try:
             self.sphinx.build()
         except SphinxError as exc:
             raise MudkipError(exc.args[0]) from exc
+
+    def develop(self, build_manager):
+        patterns = [f"**/*{suff}" for suff in self.sphinx.config.source_suffix]
+        ignore_patterns = self.sphinx.config.exclude_patterns
+
+        for event in watch_directory(
+            str(self.config.source_dir), patterns, ignore_patterns
+        ):
+            with build_manager(event):
+                self.build()

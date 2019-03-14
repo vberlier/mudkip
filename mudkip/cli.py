@@ -10,7 +10,6 @@ from . import __version__
 from .application import Mudkip
 from .config import Config
 from .errors import MudkipError
-from .watch import watch_directory
 
 
 def print_version(ctx, _param, value):
@@ -97,13 +96,16 @@ def develop(source_dir, output_dir, verbose):
     with exception_handler():
         application.build()
 
-    try:
-        for event in watch_directory(source_dir, *application.watch_patterns):
-            now = time.strftime("%H:%M:%S")
-            click.secho(f"{padding}{now}", fg="black", bold=True, nl=False)
-            click.echo(f" {event.src_path} {event.event_type} {padding}")
+    @contextmanager
+    def build_manager(event):
+        now = time.strftime("%H:%M:%S")
+        click.secho(f"{padding}{now}", fg="black", bold=True, nl=False)
+        click.echo(f" {event.src_path} {event.event_type}{padding}")
 
-            with exception_handler():
-                application.build()
+        with exception_handler():
+            yield
+
+    try:
+        application.develop(build_manager)
     except KeyboardInterrupt:
         click.secho("\nExit.", fg="yellow")

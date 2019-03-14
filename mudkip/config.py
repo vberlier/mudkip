@@ -14,12 +14,12 @@ class Config:
 
         self.mkdir += self.source_dir, self.output_dir
 
-        self.configure_sphinx()
+        self.set_sphinx_arguments()
 
         for directory in self.mkdir:
             directory.mkdir(parents=True, exist_ok=True)
 
-    def configure_sphinx(self):
+    def set_sphinx_arguments(self):
         self.sphinx_srcdir = self.source_dir
         self.sphinx_outdir = self.output_dir / "sphinx"
         self.sphinx_doctreedir = self.sphinx_outdir / ".doctrees"
@@ -27,9 +27,4 @@ class Config:
         self.sphinx_buildername = "xml"
 
         self.sphinx_confdir = None
-        self.sphinx_confoverrides = {
-            "extensions": ["recommonmark"],
-            "master_doc": "index",
-            "source_suffix": {".rst": "restructuredtext", ".md": "markdown"},
-            "exclude_patterns": [".*", "**/.*", "_*", "**/_*"],
-        }
+        self.sphinx_confoverrides = {}

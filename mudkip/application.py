@@ -2,6 +2,7 @@ import sys
 
 from sphinx.application import Sphinx
 from sphinx.errors import SphinxError
+from recommonmark.transform import AutoStructify
 
 from .config import Config
 from .errors import MudkipError
@@ -13,7 +14,9 @@ class Mudkip:
             config = Config()
 
         self.config = config
-        self.sphinx = self.create_sphinx_application()
+
+        self.create_sphinx_application()
+        self.configure_sphinx()
 
     def create_sphinx_application(self):
         extra_args = {}
@@ -21,7 +24,7 @@ class Mudkip:
         if not self.config.verbose:
             extra_args["status"] = None
 
-        return Sphinx(
+        self.sphinx = Sphinx(
             self.config.sphinx_srcdir,
             self.config.sphinx_confdir,
             self.config.sphinx_outdir,
@@ -30,6 +33,28 @@ class Mudkip:
             self.config.sphinx_confoverrides,
             **extra_args,
         )
+
+    def configure_sphinx(self):
+        conf = self.sphinx.config
+
+        conf.master_doc = "index"
+        conf.source_suffix = {".rst": "restructuredtext", ".md": "markdown"}
+        conf.exclude_patterns = [".*", "**/.*", "_*", "**/_*"]
+
+        self.sphinx.setup_extension("recommonmark")
+
+        self.sphinx.add_config_value(
+            "recommonmark_config",
+            {
+                "enable_auto_toc_tree": True,
+                "enable_math": True,
+                "enable_inline_math": True,
+                "enable_eval_rst": True,
+            },
+            True,
+        )
+
+        self.sphinx.add_transform(AutoStructify)
 
     @property
     def watch_patterns(self):

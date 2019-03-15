@@ -102,12 +102,14 @@ def develop(source_dir, output_dir, verbose):
         now = time.strftime("%H:%M:%S")
         click.secho(f"{padding}{now}", fg="black", bold=True, nl=False)
 
-        if len(event_batch) == 1:
-            event = event_batch[0]
+        events = event_batch.all_events
+
+        if len(events) == 1:
+            event = events[0]
             filename = path.basename(event.src_path)
             click.echo(f" {event.event_type} {filename}{padding}")
         else:
-            click.echo(f" {len(event_batch)} changes{padding}")
+            click.echo(f" {len(events)} changes{padding}")
 
         with exception_handler():
             yield

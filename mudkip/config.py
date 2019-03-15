@@ -8,7 +8,12 @@ class Config:
     default_output_dir = "docs/_build"
 
     def __init__(
-        self, source_dir=None, output_dir=None, verbose=False, project_name=None
+        self,
+        source_dir=None,
+        output_dir=None,
+        verbose=False,
+        project_name=None,
+        project_dir=None,
     ):
         self.mkdir = []
 
@@ -20,6 +25,11 @@ class Config:
             self.project_name = project_name
         else:
             self.try_set_project_name()
+
+        if project_dir:
+            self.project_dir = project_dir
+        else:
+            self.try_set_project_dir()
 
         self.mkdir += self.source_dir, self.output_dir
 
@@ -43,6 +53,15 @@ class Config:
             with open("pyproject.toml") as pyproject:
                 package_info = toml.load(pyproject)["tool"]["poetry"]
         except FileNotFoundError:
-            return
+            self.project_name = None
         else:
             self.project_name = package_info["name"]
+
+    def try_set_project_dir(self):
+        self.project_dir = None
+
+        if self.project_name:
+            path = Path(self.project_name)
+
+            if path.is_dir():
+                self.project_dir = path

@@ -69,8 +69,11 @@ class Mudkip:
         patterns = [f"*{suff}" for suff in self.sphinx.config.source_suffix]
         ignore_patterns = self.sphinx.config.exclude_patterns
 
-        # TODO: Also watch python project if available
         dirs = [self.config.source_dir]
+
+        if self.config.project_dir:
+            dirs.append(self.config.project_dir)
+            patterns.append("*.py")
 
         for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
             # TODO: Remove sys.modules entries added by autodoc before building

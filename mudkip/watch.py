@@ -1,53 +1,86 @@
 from queue import Queue
 from threading import Timer
+from pathlib import Path
 
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
 
-class QueueHandler(PatternMatchingEventHandler):
-    debounce = 0.001
+class DirectoryWatcher:
+    def __init__(
+        self,
+        directories=(),
+        patterns=None,
+        ignore_patterns=None,
+        ignore_directories=False,
+        case_sensitive=False,
+        recursive=True,
+        debounce_time=0.001,
+    ):
+        self.directories = set()
+        self.patterns = patterns
+        self.ignore_patterns = ignore_patterns
+        self.ignore_directories = ignore_directories
+        self.case_sensitive = case_sensitive
+        self.recursive = recursive
+        self.debounce_time = debounce_time
 
-    def __init__(self, queue, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.queue = queue
+        for directory in directories:
+            self.watch(directory)
+
+        self.queue = Queue()
         self.timer = None
+        self.events = []
 
-    def on_any_event(self, event):
-        if self.timer is not None:
+    def watch(self, directory):
+        directory = Path(directory).absolute()
+        subdirs = set()
+
+        for watched in self.directories:
+            if directory in watched.parents:
+                subdirs.add(watched)
+            elif watched in directory.parents:
+                return
+
+        self.directories.add(directory)
+        self.directories -= subdirs
+
+    def __iter__(self):
+        observer = Observer()
+
+        for directory in self.directories:
+            handler = PatternMatchingEventHandler(
+                self.patterns,
+                self.ignore_patterns,
+                self.ignore_directories,
+                self.case_sensitive,
+            )
+            handler.on_any_event = self.callback
+
+            observer.schedule(handler, str(directory), self.recursive)
+
+        observer.start()
+
+        try:
+            while True:
+                yield self.queue.get()
+        finally:
+            observer.stop()
+            observer.join()
+
+    def callback(self, event):
+        self.events.append(event)
+
+        if self.timer:
             self.timer.cancel()
-        self.timer = Timer(self.debounce, self.debounced_callback, args=[event])
+
+        self.timer = Timer(self.debounce_time, self.debounced_callback)
         self.timer.start()
 
-    def debounced_callback(self, event):
-        self.queue.put(event)
+    def debounced_callback(self):
         self.timer = None
 
+        event_batch = self.events
+        self.events = []
 
-def watch_directory(
-    path,
-    patterns=None,
-    ignore_patterns=None,
-    ignore_directories=False,
-    case_sensitive=False,
-    recursive=True,
-):
-    queue = Queue()
-
-    observer = Observer()
-    observer.schedule(
-        QueueHandler(
-            queue, patterns, ignore_patterns, ignore_directories, case_sensitive
-        ),
-        path,
-        recursive,
-    )
-
-    observer.start()
-
-    try:
-        while True:
-            yield queue.get()
-    finally:
-        observer.stop()
-        observer.join()
+        self.queue.put(event_batch)

@@ -6,7 +6,7 @@ from recommonmark.transform import AutoStructify
 
 from .config import Config
 from .errors import MudkipError
-from .watch import watch_directory
+from .watch import DirectoryWatcher
 
 
 class Mudkip:
@@ -69,8 +69,11 @@ class Mudkip:
         patterns = [f"*{suff}" for suff in self.sphinx.config.source_suffix]
         ignore_patterns = self.sphinx.config.exclude_patterns
 
-        for event in watch_directory(
-            str(self.config.source_dir), patterns, ignore_patterns
-        ):
-            with build_manager(event):
+        # TODO: Also watch python project if available
+        dirs = [self.config.source_dir]
+
+        for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
+            # TODO: Remove sys.modules entries added by autodoc before building
+
+            with build_manager(event_batch):
                 self.build()

@@ -1,5 +1,6 @@
 import sys
 import time
+from os import path
 from functools import wraps
 from contextlib import contextmanager
 from traceback import format_exc
@@ -97,10 +98,16 @@ def develop(source_dir, output_dir, verbose):
         application.build()
 
     @contextmanager
-    def build_manager(event):
+    def build_manager(event_batch):
         now = time.strftime("%H:%M:%S")
         click.secho(f"{padding}{now}", fg="black", bold=True, nl=False)
-        click.echo(f" {event.src_path} {event.event_type}{padding}")
+
+        if len(event_batch) == 1:
+            event = event_batch[0]
+            filename = path.basename(event.src_path)
+            click.echo(f" {event.event_type} {filename}{padding}")
+        else:
+            click.echo(f" {len(event_batch)} changes{padding}")
 
         with exception_handler():
             yield

@@ -76,7 +76,21 @@ class Mudkip:
             patterns.append("*.py")
 
         for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
-            # TODO: Remove sys.modules entries added by autodoc before building
+            self.delete_autodoc_cache()
 
             with build_manager(event_batch):
                 self.build()
+
+    def delete_autodoc_cache(self):
+        if not self.config.project_name:
+            return
+
+        modules = [
+            mod
+            for mod in sys.modules
+            if mod == self.config.project_name
+            or mod.startswith(self.config.project_name + ".")
+        ]
+
+        for mod in modules:
+            del sys.modules[mod]

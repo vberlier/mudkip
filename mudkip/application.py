@@ -38,6 +38,9 @@ class Mudkip:
     def configure_sphinx(self):
         conf = self.sphinx.config
 
+        if self.config.project_name:
+            conf.project = self.config.project_name
+
         conf.master_doc = "index"
         conf.exclude_patterns = [".*", "**/.*", "_*", "**/_*"]
 

@@ -15,7 +15,7 @@ class DirectoryWatcher:
         ignore_directories=False,
         case_sensitive=False,
         recursive=True,
-        debounce_time=0.001,
+        debounce_time=0.005,
     ):
         self.directories = set()
         self.patterns = patterns

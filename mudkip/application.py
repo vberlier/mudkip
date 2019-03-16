@@ -1,6 +1,7 @@
 import sys
 from io import StringIO
 from contextlib import contextmanager
+import shutil
 
 from sphinx.application import Sphinx
 from sphinx.errors import SphinxError
@@ -102,6 +103,8 @@ class Mudkip:
             self.delete_autodoc_cache()
 
             if check:
+                self.clean()
+
                 with self.sphinx_warning_is_error():
                     self.sphinx.build()
 
@@ -157,3 +160,6 @@ class Mudkip:
         _, _, result = content.partition("\n\n")
 
         return self.sphinx.statuscode == 0, result.strip()
+
+    def clean(self):
+        shutil.rmtree(self.config.output_dir)

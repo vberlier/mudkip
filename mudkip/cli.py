@@ -150,3 +150,20 @@ def test(source_dir, output_dir, verbose):
     else:
         click.secho("\nFailed.", fg="red", bold=True)
         sys.exit(1)
+
+
+@mudkip.add_command
+@click.command()
+@config_params
+def clean(source_dir, output_dir, verbose):
+    """Remove output directory."""
+    padding = "\n" * verbose
+
+    click.secho(f'Cleaning "{source_dir}"...{padding}', fg="blue")
+
+    application = Mudkip(Config(source_dir, output_dir, verbose))
+
+    with exception_handler(exit=True):
+        application.clean()
+
+    click.secho("\nDone.", fg="yellow")

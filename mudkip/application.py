@@ -63,20 +63,6 @@ class Mudkip:
         self.sphinx.setup_extension("sphinx.ext.napoleon")
         self.sphinx.setup_extension("sphinx.ext.doctest")
 
-    def build(self, *, check=False, skip_broken_links=False):
-        try:
-            if check:
-                with self.sphinx_warning_is_error():
-                    self.sphinx.build()
-
-                    if not skip_broken_links:
-                        with self.sphinx_builder("linkcheck"):
-                            self.sphinx.build()
-            else:
-                self.sphinx.build()
-        except SphinxError as exc:
-            raise MudkipError(exc.args[0]) from exc
-
     @contextmanager
     def sphinx_warning_is_error(self):
         try:
@@ -96,6 +82,34 @@ class Mudkip:
             yield
         finally:
             self.sphinx.builder = original_builder
+
+    @contextmanager
+    def sphinx_mute(self):
+        try:
+            original_status = self.sphinx._status
+            original_warning = self.sphinx._warning
+            self.sphinx._status = StringIO()
+            self.sphinx._warning = StringIO()
+            logging.setup(self.sphinx, self.sphinx._status, self.sphinx._warning)
+            yield
+        finally:
+            self.sphinx._status = original_status
+            self.sphinx._warning = original_warning
+            logging.setup(self.sphinx, self.sphinx._status, self.sphinx._warning)
+
+    def build(self, *, check=False, skip_broken_links=False):
+        try:
+            if check:
+                with self.sphinx_warning_is_error():
+                    self.sphinx.build()
+
+                    if not skip_broken_links:
+                        with self.sphinx_builder("linkcheck"):
+                            self.sphinx.build()
+            else:
+                self.sphinx.build()
+        except SphinxError as exc:
+            raise MudkipError(exc.args[0]) from exc
 
     def develop(self, *, build_manager=None):
         patterns = [f"*{suff}" for suff in self.sphinx.config.source_suffix]
@@ -143,17 +157,3 @@ class Mudkip:
         _, _, result = content.partition("\n\n")
 
         return self.sphinx.statuscode == 0, result.strip()
-
-    @contextmanager
-    def sphinx_mute(self):
-        try:
-            original_status = self.sphinx._status
-            original_warning = self.sphinx._warning
-            self.sphinx._status = StringIO()
-            self.sphinx._warning = StringIO()
-            logging.setup(self.sphinx, self.sphinx._status, self.sphinx._warning)
-            yield
-        finally:
-            self.sphinx._status = original_status
-            self.sphinx._warning = original_warning
-            logging.setup(self.sphinx, self.sphinx._status, self.sphinx._warning)

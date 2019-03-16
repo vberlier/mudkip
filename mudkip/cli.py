@@ -123,6 +123,6 @@ def develop(source_dir, output_dir, verbose):
             yield
 
     try:
-        application.develop(build_manager)
+        application.develop(build_manager=build_manager)
     except KeyboardInterrupt:
         click.secho("\nExit.", fg="yellow")

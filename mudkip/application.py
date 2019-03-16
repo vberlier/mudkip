@@ -94,7 +94,7 @@ class Mudkip:
         finally:
             self.sphinx.builder = original_builder
 
-    def develop(self, build_manager):
+    def develop(self, *, build_manager=None):
         patterns = [f"*{suff}" for suff in self.sphinx.config.source_suffix]
         ignore_patterns = self.sphinx.config.exclude_patterns
 
@@ -107,7 +107,10 @@ class Mudkip:
         for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
             self.delete_autodoc_cache()
 
-            with build_manager(event_batch):
+            if build_manager:
+                with build_manager(event_batch):
+                    self.build()
+            else:
                 self.build()
 
     def delete_autodoc_cache(self):

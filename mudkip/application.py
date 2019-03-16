@@ -1,8 +1,10 @@
 import sys
+from io import StringIO
 from contextlib import contextmanager
 
 from sphinx.application import Sphinx
 from sphinx.errors import SphinxError
+from sphinx.util import logging
 from recommonmark.transform import AutoStructify
 
 from .config import Config
@@ -59,6 +61,7 @@ class Mudkip:
 
         self.sphinx.setup_extension("sphinx.ext.autodoc")
         self.sphinx.setup_extension("sphinx.ext.napoleon")
+        self.sphinx.setup_extension("sphinx.ext.doctest")
 
     def build(self, *, check=False, skip_broken_links=False):
         try:
@@ -126,3 +129,31 @@ class Mudkip:
 
         for mod in modules:
             del sys.modules[mod]
+
+    def test(self):
+        with self.sphinx_builder("doctest"):
+            if self.config.verbose:
+                self.build()
+            else:
+                with self.sphinx_mute():
+                    self.build()
+
+        output = self.config.sphinx_outdir / "output.txt"
+        content = output.read_text() if output.is_file() else ""
+        _, _, result = content.partition("\n\n")
+
+        return self.sphinx.statuscode == 0, result.strip()
+
+    @contextmanager
+    def sphinx_mute(self):
+        try:
+            original_status = self.sphinx._status
+            original_warning = self.sphinx._warning
+            self.sphinx._status = StringIO()
+            self.sphinx._warning = StringIO()
+            logging.setup(self.sphinx, self.sphinx._status, self.sphinx._warning)
+            yield
+        finally:
+            self.sphinx._status = original_status
+            self.sphinx._warning = original_warning
+            logging.setup(self.sphinx, self.sphinx._status, self.sphinx._warning)

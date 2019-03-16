@@ -126,3 +126,27 @@ def develop(source_dir, output_dir, verbose):
         application.develop(build_manager=build_manager)
     except KeyboardInterrupt:
         click.secho("\nExit.", fg="yellow")
+
+
+@mudkip.add_command
+@click.command()
+@config_params
+def test(source_dir, output_dir, verbose):
+    """Test documentation."""
+    padding = "\n" * verbose
+
+    click.secho(f'Testing "{source_dir}"...{padding}', fg="blue")
+
+    application = Mudkip(Config(source_dir, output_dir, verbose))
+
+    with exception_handler(exit=True):
+        passed, summary = application.test()
+
+    if not verbose:
+        click.echo("\n" + summary)
+
+    if passed:
+        click.secho("\nPassed.", fg="yellow")
+    else:
+        click.secho("\nFailed.", fg="red", bold=True)
+        sys.exit(1)

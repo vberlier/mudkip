@@ -99,6 +99,8 @@ class Mudkip:
 
     def build(self, *, check=False, skip_broken_links=False):
         try:
+            self.delete_autodoc_cache()
+
             if check:
                 with self.sphinx_warning_is_error():
                     self.sphinx.build()
@@ -110,25 +112,6 @@ class Mudkip:
                 self.sphinx.build()
         except SphinxError as exc:
             raise MudkipError(exc.args[0]) from exc
-
-    def develop(self, *, build_manager=None):
-        patterns = [f"*{suff}" for suff in self.sphinx.config.source_suffix]
-        ignore_patterns = self.sphinx.config.exclude_patterns
-
-        dirs = [self.config.source_dir]
-
-        if self.config.project_dir:
-            dirs.append(self.config.project_dir)
-            patterns.append("*.py")
-
-        for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
-            self.delete_autodoc_cache()
-
-            if build_manager:
-                with build_manager(event_batch):
-                    self.build()
-            else:
-                self.build()
 
     def delete_autodoc_cache(self):
         if not self.config.project_name:
@@ -143,6 +126,23 @@ class Mudkip:
 
         for mod in modules:
             del sys.modules[mod]
+
+    def develop(self, *, build_manager=None):
+        patterns = [f"*{suff}" for suff in self.sphinx.config.source_suffix]
+        ignore_patterns = self.sphinx.config.exclude_patterns
+
+        dirs = [self.config.source_dir]
+
+        if self.config.project_dir:
+            dirs.append(self.config.project_dir)
+            patterns.append("*.py")
+
+        for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
+            if build_manager:
+                with build_manager(event_batch):
+                    self.build()
+            else:
+                self.build()
 
     def test(self):
         with self.sphinx_builder("doctest"):

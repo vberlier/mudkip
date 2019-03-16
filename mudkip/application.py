@@ -1,4 +1,5 @@
 import sys
+from contextlib import contextmanager
 
 from sphinx.application import Sphinx
 from sphinx.errors import SphinxError
@@ -59,11 +60,39 @@ class Mudkip:
         self.sphinx.setup_extension("sphinx.ext.autodoc")
         self.sphinx.setup_extension("sphinx.ext.napoleon")
 
-    def build(self):
+    def build(self, *, check=False, skip_broken_links=False):
         try:
-            self.sphinx.build()
+            if check:
+                with self.sphinx_warning_is_error():
+                    self.sphinx.build()
+
+                    if not skip_broken_links:
+                        with self.sphinx_builder("linkcheck"):
+                            self.sphinx.build()
+            else:
+                self.sphinx.build()
         except SphinxError as exc:
             raise MudkipError(exc.args[0]) from exc
+
+    @contextmanager
+    def sphinx_warning_is_error(self):
+        try:
+            original_value = self.sphinx.warningiserror
+            self.sphinx.warningiserror = True
+            yield
+        finally:
+            self.sphinx.warningiserror = original_value
+
+    @contextmanager
+    def sphinx_builder(self, buildername):
+        try:
+            original_builder = self.sphinx.builder
+            self.sphinx.preload_builder(buildername)
+            self.sphinx.builder = self.sphinx.create_builder(buildername)
+            self.sphinx._init_builder()
+            yield
+        finally:
+            self.sphinx.builder = original_builder
 
     def develop(self, build_manager):
         patterns = [f"*{suff}" for suff in self.sphinx.config.source_suffix]

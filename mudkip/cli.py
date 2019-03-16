@@ -68,19 +68,27 @@ def config_params(command):
 
 @mudkip.add_command
 @click.command()
+@click.option("--check", is_flag=True, help="Check documentation.")
+@click.option(
+    "--skip-broken-links",
+    is_flag=True,
+    help="Do not check external links for integrity.",
+)
 @config_params
-def build(source_dir, output_dir, verbose):
+def build(check, skip_broken_links, source_dir, output_dir, verbose):
     """Build documentation."""
     padding = "\n" * verbose
 
-    click.secho(f'Building "{source_dir}"...{padding}', fg="blue")
+    action = "Building and checking" if check else "Building"
+    click.secho(f'{action} "{source_dir}"...{padding}', fg="blue")
 
     application = Mudkip(Config(source_dir, output_dir, verbose))
 
     with exception_handler(exit=True):
-        application.build()
+        application.build(check=check, skip_broken_links=skip_broken_links)
 
-    click.secho("\nDone.", fg="yellow")
+    message = "All good" if check else "Done"
+    click.secho(f"\n{message}.", fg="yellow")
 
 
 @mudkip.add_command

@@ -48,6 +48,8 @@ class Mudkip:
         conf.master_doc = "index"
         conf.exclude_patterns = [".*", "**/.*", "_*", "**/_*"]
 
+        self.sphinx.setup_extension("mudkip.extension")
+
         self.sphinx.setup_extension("recommonmark")
 
         recommonmark_config = {

@@ -159,7 +159,7 @@ def clean(source_dir, output_dir, verbose):
     """Remove output directory."""
     padding = "\n" * verbose
 
-    click.secho(f'Cleaning "{source_dir}"...{padding}', fg="blue")
+    click.secho(f'Removing "{output_dir}"...{padding}', fg="blue")
 
     application = Mudkip(Config(source_dir, output_dir, verbose))
 

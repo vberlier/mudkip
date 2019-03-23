@@ -155,19 +155,13 @@ class Mudkip:
 
         with server:
             for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
-                if build_manager:
-                    with build_manager(event_batch):
-                        self.build()
-                else:
+                with build_manager(event_batch) if build_manager else nullcontext():
                     self.build()
 
     def test(self):
         with self.sphinx_builder("doctest"):
-            if self.config.verbose:
+            with nullcontext() if self.config.verbose else self.sphinx_mute():
                 self.build()
-            else:
-                with self.sphinx_mute():
-                    self.build()
 
         output = self.config.sphinx_outdir / "output.txt"
         content = output.read_text() if output.is_file() else ""

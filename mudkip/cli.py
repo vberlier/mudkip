@@ -46,6 +46,7 @@ def exception_handler(exit=False):
 
 
 def config_params(command):
+    @click.option("--rtd", is_flag=True, help="Use the Read the Docs theme.")
     @click.option(
         "--source-dir",
         type=click.Path(file_okay=False),
@@ -75,14 +76,14 @@ def config_params(command):
     help="Do not check external links for integrity.",
 )
 @config_params
-def build(check, skip_broken_links, source_dir, output_dir, verbose):
+def build(check, skip_broken_links, rtd, source_dir, output_dir, verbose):
     """Build documentation."""
     padding = "\n" * verbose
 
     action = "Building and checking" if check else "Building"
     click.secho(f'{action} "{source_dir}"...{padding}', fg="blue")
 
-    application = Mudkip(Config(source_dir, output_dir, verbose))
+    application = Mudkip(Config(rtd, source_dir, output_dir, verbose))
 
     with exception_handler(exit=True):
         application.build(check=check, skip_broken_links=skip_broken_links)
@@ -94,16 +95,35 @@ def build(check, skip_broken_links, source_dir, output_dir, verbose):
 @mudkip.add_command
 @click.command()
 @config_params
-def develop(source_dir, output_dir, verbose):
+@click.option(
+    "--host", help="Development server host.", default=Config.default_dev_server_host
+)
+@click.option(
+    "--port", help="Development server port.", default=Config.default_dev_server_port
+)
+def develop(rtd, source_dir, output_dir, verbose, host, port):
     """Start development server."""
     padding = "\n" * verbose
 
     click.secho(f'Watching "{source_dir}"...{padding}', fg="blue")
 
-    application = Mudkip(Config(source_dir, output_dir, verbose))
+    application = Mudkip(
+        Config(
+            rtd,
+            source_dir,
+            output_dir,
+            verbose,
+            dev_server_host=host,
+            dev_server_port=port,
+        )
+    )
 
     with exception_handler():
         application.build()
+
+    if application.config.dev_server:
+        url = f"http://{application.config.dev_server_host}:{application.config.dev_server_port}"
+        click.secho(f"{padding}Server running on {url}", fg="blue")
 
     @contextmanager
     def build_manager(event_batch):
@@ -131,13 +151,13 @@ def develop(source_dir, output_dir, verbose):
 @mudkip.add_command
 @click.command()
 @config_params
-def test(source_dir, output_dir, verbose):
+def test(rtd, source_dir, output_dir, verbose):
     """Test documentation."""
     padding = "\n" * verbose
 
     click.secho(f'Testing "{source_dir}"...{padding}', fg="blue")
 
-    application = Mudkip(Config(source_dir, output_dir, verbose))
+    application = Mudkip(Config(rtd, source_dir, output_dir, verbose))
 
     with exception_handler(exit=True):
         passed, summary = application.test()
@@ -155,13 +175,13 @@ def test(source_dir, output_dir, verbose):
 @mudkip.add_command
 @click.command()
 @config_params
-def clean(source_dir, output_dir, verbose):
+def clean(rtd, source_dir, output_dir, verbose):
     """Remove output directory."""
     padding = "\n" * verbose
 
     click.secho(f'Removing "{output_dir}"...{padding}', fg="blue")
 
-    application = Mudkip(Config(source_dir, output_dir, verbose))
+    application = Mudkip(Config(rtd, source_dir, output_dir, verbose))
 
     with exception_handler(exit=True):
         application.clean()

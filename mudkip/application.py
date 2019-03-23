@@ -1,6 +1,6 @@
 import sys
 from io import StringIO
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 import shutil
 
 from sphinx.application import Sphinx
@@ -10,6 +10,7 @@ from recommonmark.transform import AutoStructify
 
 from .config import Config
 from .errors import MudkipError
+from .server import dev_server
 from .watch import DirectoryWatcher
 
 
@@ -143,12 +144,22 @@ class Mudkip:
             dirs.append(self.config.project_dir)
             patterns.append("*.py")
 
-        for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
-            if build_manager:
-                with build_manager(event_batch):
+        if self.config.dev_server:
+            server = dev_server(
+                self.sphinx.outdir,
+                self.config.dev_server_host,
+                self.config.dev_server_port,
+            )
+        else:
+            server = nullcontext()
+
+        with server:
+            for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
+                if build_manager:
+                    with build_manager(event_batch):
+                        self.build()
+                else:
                     self.build()
-            else:
-                self.build()
 
     def test(self):
         with self.sphinx_builder("doctest"):

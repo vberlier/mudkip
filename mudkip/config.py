@@ -6,15 +6,26 @@ import toml
 class Config:
     default_source_dir = "docs"
     default_output_dir = "docs/_build"
+    default_dev_server_host = "127.0.0.1"
+    default_dev_server_port = 5500
 
     def __init__(
         self,
+        rtd=False,
         source_dir=None,
         output_dir=None,
         verbose=False,
         project_name=None,
         project_dir=None,
+        dev_server=None,
+        dev_server_host=None,
+        dev_server_port=None,
     ):
+        self.rtd = rtd
+        self.dev_server = self.rtd if dev_server is None else dev_server
+        self.dev_server_host = dev_server_host or self.default_dev_server_host
+        self.dev_server_port = dev_server_port or self.default_dev_server_port
+
         self.mkdir = []
 
         self.source_dir = Path(source_dir or self.default_source_dir)
@@ -43,10 +54,12 @@ class Config:
         self.sphinx_outdir = self.output_dir / "sphinx"
         self.sphinx_doctreedir = self.sphinx_outdir / ".doctrees"
 
-        self.sphinx_buildername = "xml"
+        self.sphinx_buildername = "dirhtml" if self.rtd else "xml"
 
         self.sphinx_confdir = None
-        self.sphinx_confoverrides = {}
+        self.sphinx_confoverrides = (
+            {"html_theme": "sphinx_rtd_theme"} if self.rtd else {}
+        )
 
     def try_set_project_name(self):
         try:

@@ -20,10 +20,10 @@ sphinx = "^1.8"
 click = "^7.0"
 recommonmark = "^0.5.0"
 watchdog = "^0.9.0"
-toml = "^0.10.0"
 sphinx-autodoc-typehints = "^1.6"
 sphinx_rtd_theme = "^0.4.3"
 livereload = "^2.6"
+tomlkit = "^0.5.3"
 
 [tool.poetry.dev-dependencies]
 black = { version = "^18.3-alpha.0", allows-prereleases = true }

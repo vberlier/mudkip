@@ -8,6 +8,7 @@ from sphinx.application import Sphinx
 from sphinx.errors import SphinxError
 from sphinx.util import logging
 from recommonmark.transform import AutoStructify
+from tomlkit.toml_file import TOMLFile
 
 from .config import Config
 from .errors import MudkipError
@@ -16,11 +17,26 @@ from .watch import DirectoryWatcher
 
 
 class Mudkip:
-    def __init__(self, *args, config=None, **kwargs):
+    def __init__(self, *args, config=None, pyproject="pyproject.toml", **kwargs):
+        if pyproject and not isinstance(pyproject, TOMLFile):
+            pyproject = TOMLFile(pyproject)
+
         if config is None:
-            config = Config(*args, **kwargs)
+            params = {}
+
+            if pyproject:
+                try:
+                    tool = pyproject.read()["tool"]
+                    params.update(tool.get("mudkip", {}), poetry=tool.get("poetry"))
+                except FileNotFoundError:
+                    pass
+
+            params.update(kwargs)
+
+            config = Config(*args, **params)
 
         self.config = config
+        self.pyproject = pyproject
 
         self.create_sphinx_application()
         self.configure_sphinx()
@@ -141,7 +157,7 @@ class Mudkip:
         for mod in modules:
             del sys.modules[mod]
 
-    def develop(self, *, build_manager=None):
+    def develop(self, host="127.0.0.1", port=5500, build_manager=None):
         patterns = [f"*{suff}" for suff in self.sphinx.config.source_suffix]
         ignore_patterns = self.sphinx.config.exclude_patterns
 
@@ -152,11 +168,7 @@ class Mudkip:
             patterns.append("*.py")
 
         if self.config.dev_server:
-            server = dev_server(
-                self.sphinx.outdir,
-                self.config.dev_server_host,
-                self.config.dev_server_port,
-            )
+            server = dev_server(self.sphinx.outdir, host, port)
         else:
             server = nullcontext()
 

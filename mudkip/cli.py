@@ -70,6 +70,23 @@ def with_application(command):
 
 
 @mudkip.command()
+@click.option("--title", help="Documentation title.")
+@with_application
+def init(application, title):
+    """Initialize documentation."""
+    padding = "\n" * application.config.verbose
+
+    click.secho(
+        f'{padding}Initializing "{application.config.source_dir}"...', fg="blue"
+    )
+
+    with exception_handler(exit=True):
+        application.init(title)
+
+    click.secho("\nDone.", fg="yellow")
+
+
+@mudkip.command()
 @click.option("--check", is_flag=True, help="Check documentation.")
 @click.option(
     "--skip-broken-links",

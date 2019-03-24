@@ -4,11 +4,12 @@ import shutil
 from io import StringIO
 from contextlib import contextmanager, nullcontext
 
+import tomlkit
+from tomlkit.toml_file import TOMLFile
 from sphinx.application import Sphinx
 from sphinx.errors import SphinxError
 from sphinx.util import logging
 from recommonmark.transform import AutoStructify
-from tomlkit.toml_file import TOMLFile
 
 from .config import Config
 from .errors import MudkipError
@@ -122,6 +123,42 @@ class Mudkip:
             self.sphinx._status = original_status
             self.sphinx._warning = original_warning
             logging.setup(self.sphinx, self.sphinx._status, self.sphinx._warning)
+
+    def init(self, title=None):
+        table = tomlkit.table()
+        table["title"] = title or self.config.title
+        table["preset"] = self.config.preset.name
+
+        source_dir = str(self.config.source_dir)
+        output_dir = str(self.config.output_dir)
+
+        if source_dir != self.config.default_source_dir:
+            table["source_dir"] = source_dir
+
+        if output_dir != self.config.default_output_dir:
+            table["output_dir"] = output_dir
+
+        table.add(tomlkit.nl())
+
+        try:
+            doc = self.pyproject.read()
+            tool = None
+
+            try:
+                tool = doc["tool"]
+                if "mudkip" not in tool:
+                    tool._insert_after("poetry", "mudkip", table)
+                else:
+                    tool["mudkip"].update(table)
+            except KeyError:
+                if tool is None:
+                    doc["tool"] = {"mudkip": table}
+                else:
+                    tool["mudkip"] = table
+
+            self.pyproject.write(doc)
+        except FileNotFoundError:
+            pass
 
     def build(self, *, check=False, skip_broken_links=False):
         try:

@@ -83,7 +83,7 @@ def build(check, skip_broken_links, rtd, source_dir, output_dir, verbose):
     action = "Building and checking" if check else "Building"
     click.secho(f'{action} "{source_dir}"...{padding}', fg="blue")
 
-    application = Mudkip(Config(rtd, source_dir, output_dir, verbose))
+    application = Mudkip(rtd, source_dir, output_dir, verbose)
 
     with exception_handler(exit=True):
         application.build(check=check, skip_broken_links=skip_broken_links)
@@ -108,14 +108,7 @@ def develop(rtd, source_dir, output_dir, verbose, host, port):
     click.secho(f'Watching "{source_dir}"...{padding}', fg="blue")
 
     application = Mudkip(
-        Config(
-            rtd,
-            source_dir,
-            output_dir,
-            verbose,
-            dev_server_host=host,
-            dev_server_port=port,
-        )
+        rtd, source_dir, output_dir, verbose, dev_server_host=host, dev_server_port=port
     )
 
     with exception_handler():
@@ -157,7 +150,7 @@ def test(rtd, source_dir, output_dir, verbose):
 
     click.secho(f'Testing "{source_dir}"...{padding}', fg="blue")
 
-    application = Mudkip(Config(rtd, source_dir, output_dir, verbose))
+    application = Mudkip(rtd, source_dir, output_dir, verbose)
 
     with exception_handler(exit=True):
         passed, summary = application.test()
@@ -181,7 +174,7 @@ def clean(rtd, source_dir, output_dir, verbose):
 
     click.secho(f'Removing "{output_dir}"...{padding}', fg="blue")
 
-    application = Mudkip(Config(rtd, source_dir, output_dir, verbose))
+    application = Mudkip(rtd, source_dir, output_dir, verbose)
 
     with exception_handler(exit=True):
         application.clean()

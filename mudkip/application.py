@@ -16,9 +16,9 @@ from .watch import DirectoryWatcher
 
 
 class Mudkip:
-    def __init__(self, config=None):
+    def __init__(self, *args, config=None, **kwargs):
         if config is None:
-            config = Config()
+            config = Config(*args, **kwargs)
 
         self.config = config
 

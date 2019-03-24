@@ -35,6 +35,7 @@ class Config:
         project_name=None,
         project_dir=None,
         title=None,
+        copyright=None,
         author=None,
         dev_server=False,
         poetry=None,
@@ -57,6 +58,7 @@ class Config:
             self.try_set_project_dir()
 
         self.title = title or self.project_name
+        self.copyright = copyright
         self.author = author or join_authors(self.poetry.get("authors"))
 
         self.mkdir += self.source_dir, self.output_dir

@@ -68,6 +68,9 @@ class Mudkip:
             conf.author = self.config.author
             conf.copyright += ", " + conf.author
 
+        if self.config.copyright:
+            conf.copyright = self.config.copyright
+
         conf.master_doc = "index"
         conf.exclude_patterns = [".*", "**/.*", "_*", "**/_*"]
 

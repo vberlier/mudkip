@@ -71,6 +71,9 @@ class Mudkip:
         if self.config.copyright:
             conf.copyright = self.config.copyright
 
+        conf.version = self.config.version
+        conf.release = self.config.release
+
         conf.master_doc = "index"
         conf.exclude_patterns = [".*", "**/.*", "_*", "**/_*"]
 

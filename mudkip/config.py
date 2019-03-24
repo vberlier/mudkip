@@ -37,6 +37,8 @@ class Config:
         title=None,
         copyright=None,
         author=None,
+        version=None,
+        release=None,
         dev_server=False,
         poetry=None,
     ):
@@ -60,6 +62,8 @@ class Config:
         self.title = title or self.project_name
         self.copyright = copyright
         self.author = author or join_authors(self.poetry.get("authors"))
+        self.release = release or self.poetry.get("version")
+        self.version = version or self.release and ".".join(self.release.split(".")[:2])
 
         self.mkdir += self.source_dir, self.output_dir
 

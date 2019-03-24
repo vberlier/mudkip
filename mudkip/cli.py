@@ -57,7 +57,10 @@ def with_application(command):
     @wraps(command)
     def wrapper(rtd, source_dir, output_dir, verbose, *args, **kwargs):
         params = dict(
-            rtd=rtd, source_dir=source_dir, output_dir=output_dir, verbose=verbose
+            preset="rtd" if rtd else None,
+            source_dir=source_dir,
+            output_dir=output_dir,
+            verbose=verbose,
         )
         for key, value in tuple(params.items()):
             if not value:

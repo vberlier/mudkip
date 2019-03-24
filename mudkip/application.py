@@ -64,8 +64,8 @@ class Mudkip:
         conf.project = self.config.sphinx_project
         conf.copyright = time.strftime("%Y")
 
-        if self.config.project_author:
-            conf.author = self.config.project_author
+        if self.config.author:
+            conf.author = self.config.author
             conf.copyright += ", " + conf.author
 
         conf.master_doc = "index"

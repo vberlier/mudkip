@@ -32,10 +32,10 @@ class Config:
         source_dir=None,
         output_dir=None,
         verbose=False,
-        title=None,
         project_name=None,
-        project_author=None,
         project_dir=None,
+        title=None,
+        author=None,
         dev_server=False,
         poetry=None,
     ):
@@ -50,13 +50,14 @@ class Config:
         self.verbose = verbose
 
         self.project_name = project_name or self.poetry.get("name")
-        self.project_author = project_author or join_authors(self.poetry.get("authors"))
-        self.title = title or self.project_name
 
         if project_dir:
             self.project_dir = project_dir
         else:
             self.try_set_project_dir()
+
+        self.title = title or self.project_name
+        self.author = author or join_authors(self.poetry.get("authors"))
 
         self.mkdir += self.source_dir, self.output_dir
 

@@ -1,6 +1,22 @@
+import re
 from pathlib import Path
 
 import toml
+
+
+AUTHOR_EXTRA = re.compile(r"<.*?>|\(.*?\)|\[.*?\]")
+SPACES = re.compile(r"\s+")
+
+
+def join_authors(authors):
+    if isinstance(authors, str):
+        string = authors
+    elif len(authors) < 2:
+        string = "".join(authors)
+    else:
+        string = ", ".join(authors[:-1]) + f" and {authors[-1]}"
+
+    return SPACES.sub(" ", AUTHOR_EXTRA.sub("", string)).strip().replace(" ,", ",")
 
 
 class Config:
@@ -16,6 +32,7 @@ class Config:
         output_dir=None,
         verbose=False,
         project_name=None,
+        project_author=None,
         project_dir=None,
         dev_server=None,
         dev_server_host=None,
@@ -32,10 +49,11 @@ class Config:
         self.output_dir = Path(output_dir or self.default_output_dir)
         self.verbose = verbose
 
-        if project_name:
+        if project_name and project_author:
             self.project_name = project_name
+            self.project_author = project_author
         else:
-            self.try_set_project_name()
+            self.try_set_project_info(project_name, project_author)
 
         if project_dir:
             self.project_dir = project_dir
@@ -61,14 +79,18 @@ class Config:
             {"html_theme": "sphinx_rtd_theme"} if self.rtd else {}
         )
 
-    def try_set_project_name(self):
+    def try_set_project_info(self, project_name, project_author):
         try:
             with open("pyproject.toml") as pyproject:
                 package_info = toml.load(pyproject)["tool"]["poetry"]
         except FileNotFoundError:
-            self.project_name = None
+            self.project_name = project_name
+            self.project_author = project_author
         else:
-            self.project_name = package_info["name"]
+            self.project_name = project_name or package_info["name"]
+            self.project_author = project_author or join_authors(
+                package_info["authors"]
+            )
 
     def try_set_project_dir(self):
         self.project_dir = None

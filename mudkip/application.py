@@ -1,7 +1,8 @@
 import sys
+import time
+import shutil
 from io import StringIO
 from contextlib import contextmanager, nullcontext
-import shutil
 
 from sphinx.application import Sphinx
 from sphinx.errors import SphinxError
@@ -45,6 +46,12 @@ class Mudkip:
 
         if self.config.project_name:
             conf.project = self.config.project_name
+
+        conf.copyright = time.strftime("%Y")
+
+        if self.config.project_author:
+            conf.author = self.config.project_author
+            conf.copyright += ", " + conf.author
 
         conf.master_doc = "index"
         conf.exclude_patterns = [".*", "**/.*", "_*", "**/_*"]

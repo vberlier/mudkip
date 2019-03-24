@@ -67,8 +67,7 @@ def config_params(command):
     return wrapper
 
 
-@mudkip.add_command
-@click.command()
+@mudkip.command()
 @click.option("--check", is_flag=True, help="Check documentation.")
 @click.option(
     "--skip-broken-links",
@@ -92,8 +91,7 @@ def build(check, skip_broken_links, rtd, source_dir, output_dir, verbose):
     click.secho(f"\n{message}.", fg="yellow")
 
 
-@mudkip.add_command
-@click.command()
+@mudkip.command()
 @config_params
 @click.option(
     "--host", help="Development server host.", default=Config.default_dev_server_host
@@ -141,8 +139,7 @@ def develop(rtd, source_dir, output_dir, verbose, host, port):
         click.secho("\nExit.", fg="yellow")
 
 
-@mudkip.add_command
-@click.command()
+@mudkip.command()
 @config_params
 def test(rtd, source_dir, output_dir, verbose):
     """Test documentation."""
@@ -165,8 +162,7 @@ def test(rtd, source_dir, output_dir, verbose):
         sys.exit(1)
 
 
-@mudkip.add_command
-@click.command()
+@mudkip.command()
 @config_params
 def clean(rtd, source_dir, output_dir, verbose):
     """Remove output directory."""

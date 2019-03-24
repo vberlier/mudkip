@@ -13,6 +13,18 @@ from .config import Config
 from .errors import MudkipError
 
 
+@contextmanager
+def exception_handler(exit=False):
+    try:
+        yield
+    except Exception as exc:
+        error = exc.args[0] if isinstance(exc, MudkipError) else format_exc()
+        click.secho(error, fg="red", bold=True)
+
+        if exit:
+            sys.exit(1)
+
+
 def print_version(ctx, _param, value):
     if not value or ctx.resilient_parsing:
         return
@@ -31,18 +43,6 @@ def print_version(ctx, _param, value):
 )
 def mudkip():
     """A friendly Sphinx wrapper."""
-
-
-@contextmanager
-def exception_handler(exit=False):
-    try:
-        yield
-    except Exception as exc:
-        error = exc.args[0] if isinstance(exc, MudkipError) else format_exc()
-        click.secho(error, fg="red", bold=True)
-
-        if exit:
-            sys.exit(1)
 
 
 def with_application(command):

@@ -13,6 +13,9 @@ from .config import Config
 from .errors import MudkipError
 
 
+DIRECTORY = click.Path(file_okay=False)
+
+
 @contextmanager
 def exception_handler(exit=False):
     try:
@@ -47,12 +50,8 @@ def mudkip():
 
 def with_application(command):
     @click.option("--rtd", is_flag=True, help="Use the Read the Docs theme.")
-    @click.option(
-        "--source-dir", type=click.Path(file_okay=False), help="The source directory."
-    )
-    @click.option(
-        "--output-dir", type=click.Path(file_okay=False), help="The output directory."
-    )
+    @click.option("--source-dir", type=DIRECTORY, help="The source directory.")
+    @click.option("--output-dir", type=DIRECTORY, help="The output directory.")
     @click.option("--verbose", is_flag=True, help="Show Sphinx output.")
     @wraps(command)
     def wrapper(rtd, source_dir, output_dir, verbose, *args, **kwargs):

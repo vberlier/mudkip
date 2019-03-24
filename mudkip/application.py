@@ -60,9 +60,7 @@ class Mudkip:
     def configure_sphinx(self):
         conf = self.sphinx.config
 
-        if self.config.project_name:
-            conf.project = self.config.project_name
-
+        conf.project = self.config.sphinx_project
         conf.copyright = time.strftime("%Y")
 
         if self.config.project_author:

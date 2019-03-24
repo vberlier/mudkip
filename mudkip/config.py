@@ -33,6 +33,7 @@ class Config:
         output_dir=None,
         verbose=False,
         project_name=None,
+        project_title=None,
         project_author=None,
         project_dir=None,
         dev_server=False,
@@ -49,6 +50,7 @@ class Config:
         self.verbose = verbose
 
         self.project_name = project_name or self.poetry.get("name")
+        self.project_title = project_title or self.project_name
         self.project_author = project_author or join_authors(self.poetry.get("authors"))
 
         if project_dir:
@@ -66,6 +68,8 @@ class Config:
         self.preset.execute(self)
 
     def set_sphinx_arguments(self):
+        self.sphinx_project = self.project_title
+
         self.sphinx_srcdir = self.source_dir
         self.sphinx_outdir = self.output_dir / "sphinx"
         self.sphinx_doctreedir = self.sphinx_outdir / ".doctrees"

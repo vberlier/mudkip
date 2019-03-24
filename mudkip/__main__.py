@@ -1,4 +1,4 @@
-from mudkip.cli import mudkip
+from mudkip.cli import main
 
 
-mudkip(prog_name="mudkip")
+main()

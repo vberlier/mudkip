@@ -29,7 +29,7 @@ livereload = "^2.6"
 black = { version = "^18.3-alpha.0", allows-prereleases = true }
 
 [tool.poetry.scripts]
-mudkip = 'mudkip.cli:mudkip'
+mudkip = 'mudkip.cli:main'
 
 [build-system]
 requires = ["poetry>=0.12"]

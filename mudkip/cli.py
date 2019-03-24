@@ -176,3 +176,7 @@ def clean(rtd, source_dir, output_dir, verbose):
         application.clean()
 
     click.secho("\nDone.", fg="yellow")
+
+
+def main():
+    mudkip(prog_name="mudkip")

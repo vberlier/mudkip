@@ -132,7 +132,7 @@ class Mudkip:
 
     def init(self, title=None):
         table = tomlkit.table()
-        table["title"] = title or self.config.title
+        table["title"] = title = title or self.config.title
         table["preset"] = self.config.preset.name
 
         source_dir = str(self.config.source_dir)
@@ -165,6 +165,12 @@ class Mudkip:
             self.pyproject.write(doc)
         except FileNotFoundError:
             pass
+
+        index_rst = self.config.source_dir / "index.rst"
+        index_md = self.config.source_dir / "index.md"
+
+        if not index_rst.is_file() and not index_md.is_file():
+            index_rst.write_text(f"{title}\n{'=' * len(title)}\n")
 
     def build(self, *, check=False, skip_broken_links=False):
         try:

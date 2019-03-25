@@ -76,6 +76,7 @@ class Mudkip:
 
         conf.master_doc = "index"
         conf.exclude_patterns = [".*", "**/.*", "_*", "**/_*"]
+        conf.nitpicky = True
 
         self.sphinx.setup_extension("mudkip.extension")
 

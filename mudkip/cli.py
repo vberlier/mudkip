@@ -11,6 +11,7 @@ from . import __version__
 from .application import Mudkip
 from .config import Config
 from .errors import MudkipError
+from .preset import Preset
 from .server import noop_dev_server
 
 
@@ -50,17 +51,18 @@ def mudkip():
 
 
 def with_application(command):
-    @click.option("--rtd", is_flag=True, help="Use the Read the Docs theme.")
+    @click.option(
+        "--preset",
+        type=click.Choice(list(Preset.registry)),
+        help="Documentation preset.",
+    )
     @click.option("--source-dir", type=DIRECTORY, help="The source directory.")
     @click.option("--output-dir", type=DIRECTORY, help="The output directory.")
     @click.option("--verbose", is_flag=True, help="Show Sphinx output.")
     @wraps(command)
-    def wrapper(rtd, source_dir, output_dir, verbose, *args, **kwargs):
+    def wrapper(preset, source_dir, output_dir, verbose, *args, **kwargs):
         params = dict(
-            preset="rtd" if rtd else None,
-            source_dir=source_dir,
-            output_dir=output_dir,
-            verbose=verbose,
+            preset=preset, source_dir=source_dir, output_dir=output_dir, verbose=verbose
         )
         for key, value in tuple(params.items()):
             if not value:

@@ -29,7 +29,7 @@ class Config:
 
     def __init__(
         self,
-        preset="default",
+        preset="rtd",
         source_dir=None,
         output_dir=None,
         verbose=False,

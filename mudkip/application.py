@@ -146,7 +146,9 @@ class Mudkip:
 
     def init(self, title=None):
         table = tomlkit.table()
-        table["title"] = title = title or self.config.title
+        table["title"] = title = (
+            title or self.config.title or path.basename(path.abspath("."))
+        )
         table["preset"] = self.config.preset.name
 
         source_dir = str(self.config.source_dir)
@@ -160,7 +162,17 @@ class Mudkip:
 
         table.add(tomlkit.nl())
 
-        try:
+        if self.mudkip.exists():
+            doc = self.mudkip.read()
+
+            if "mudkip" not in doc:
+                doc["mudkip"] = table
+            else:
+                doc["mudkip"].update(table)
+
+            self.mudkip.write(doc)
+
+        elif self.pyproject.exists():
             doc = self.pyproject.read()
             tool = None
 
@@ -177,8 +189,9 @@ class Mudkip:
                     tool["mudkip"] = table
 
             self.pyproject.write(doc)
-        except FileNotFoundError:
-            pass
+
+        else:
+            self.mudkip.write(tomlkit.document().add("mudkip", table))
 
         index_rst = self.config.source_dir / "index.rst"
         index_md = self.config.source_dir / "index.md"

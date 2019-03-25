@@ -1,11 +1,12 @@
 import sys
 import time
 import shutil
+from os import path
 from io import StringIO
 from contextlib import contextmanager, nullcontext
 
 import tomlkit
-from tomlkit.toml_file import TOMLFile
+from tomlkit.toml_file import TOMLFile as BaseTOMLFile
 from sphinx.application import Sphinx
 from sphinx.errors import SphinxError
 from sphinx.util import logging
@@ -16,19 +17,21 @@ from .errors import MudkipError
 from .watch import DirectoryWatcher
 
 
+class TOMLFile(BaseTOMLFile):
+    def exists(self):
+        return path.isfile(self._path)
+
+
 class Mudkip:
-    def __init__(self, *args, config=None, pyproject="pyproject.toml", **kwargs):
-        if not isinstance(pyproject, TOMLFile):
-            pyproject = TOMLFile(pyproject)
+    def __init__(self, *args, config=None, pyproject_file="pyproject.toml", **kwargs):
+        pyproject = TOMLFile(pyproject_file)
 
         if config is None:
             params = {}
 
-            try:
+            if pyproject.exists():
                 tool = pyproject.read().get("tool", {})
                 params.update(tool.get("mudkip", {}), poetry=tool.get("poetry"))
-            except FileNotFoundError:
-                pass
 
             params.update(kwargs)
 

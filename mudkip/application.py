@@ -18,18 +18,17 @@ from .watch import DirectoryWatcher
 
 class Mudkip:
     def __init__(self, *args, config=None, pyproject="pyproject.toml", **kwargs):
-        if pyproject and not isinstance(pyproject, TOMLFile):
+        if not isinstance(pyproject, TOMLFile):
             pyproject = TOMLFile(pyproject)
 
         if config is None:
             params = {}
 
-            if pyproject:
-                try:
-                    tool = pyproject.read()["tool"]
-                    params.update(tool.get("mudkip", {}), poetry=tool.get("poetry"))
-                except FileNotFoundError:
-                    pass
+            try:
+                tool = pyproject.read()["tool"]
+                params.update(tool.get("mudkip", {}), poetry=tool.get("poetry"))
+            except FileNotFoundError:
+                pass
 
             params.update(kwargs)
 

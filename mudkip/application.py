@@ -25,7 +25,7 @@ class Mudkip:
             params = {}
 
             try:
-                tool = pyproject.read()["tool"]
+                tool = pyproject.read().get("tool", {})
                 params.update(tool.get("mudkip", {}), poetry=tool.get("poetry"))
             except FileNotFoundError:
                 pass

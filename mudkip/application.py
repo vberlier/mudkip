@@ -50,6 +50,7 @@ class Mudkip:
 
         self.config = config
         self.pyproject = pyproject
+        self.mudkip = mudkip
 
         self.create_sphinx_application()
         self.configure_sphinx()

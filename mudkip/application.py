@@ -13,7 +13,6 @@ from recommonmark.transform import AutoStructify
 
 from .config import Config
 from .errors import MudkipError
-from .server import dev_server
 from .watch import DirectoryWatcher
 
 
@@ -209,12 +208,7 @@ class Mudkip:
             dirs.append(self.config.project_dir)
             patterns.append("*.py")
 
-        if self.config.dev_server:
-            server = dev_server(self.sphinx.outdir, host, port)
-        else:
-            server = nullcontext()
-
-        with server:
+        with self.config.dev_server(self.sphinx.outdir, host, port):
             for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
                 with build_manager(event_batch) if build_manager else nullcontext():
                     self.build()

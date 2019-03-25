@@ -2,6 +2,7 @@ import re
 from pathlib import Path
 
 from .preset import Preset
+from .server import noop_dev_server
 
 
 AUTHOR_EXTRA = re.compile(r"<.*?>|\(.*?\)|\[.*?\]")
@@ -39,11 +40,11 @@ class Config:
         author=None,
         version=None,
         release=None,
-        dev_server=False,
+        dev_server=None,
         poetry=None,
     ):
         self.preset = preset if isinstance(preset, Preset) else Preset.get(preset)
-        self.dev_server = dev_server
+        self.dev_server = dev_server or noop_dev_server
         self.poetry = {} if poetry is None else poetry
 
         self.mkdir = []

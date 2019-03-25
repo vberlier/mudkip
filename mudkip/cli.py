@@ -11,6 +11,7 @@ from . import __version__
 from .application import Mudkip
 from .config import Config
 from .errors import MudkipError
+from .server import noop_dev_server
 
 
 DIRECTORY = click.Path(file_okay=False)
@@ -125,7 +126,7 @@ def develop(application, host, port):
     with exception_handler():
         application.build()
 
-    if application.config.dev_server:
+    if application.config.dev_server != noop_dev_server:
         click.secho(f"{padding}Server running on http://{host}:{port}", fg="blue")
 
     @contextmanager

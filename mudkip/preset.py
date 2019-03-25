@@ -1,3 +1,6 @@
+from .server import livereload_dev_server
+
+
 def preset(func):
     Preset.register(Preset(func.__name__, func))
     return func
@@ -31,6 +34,6 @@ def default(config):
 
 @preset
 def rtd(config):
-    config.dev_server = True
+    config.dev_server = livereload_dev_server
     config.sphinx_buildername = "dirhtml"
     config.sphinx_confoverrides.update(html_theme="sphinx_rtd_theme")

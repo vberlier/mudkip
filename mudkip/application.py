@@ -74,7 +74,9 @@ class Mudkip:
     def configure_sphinx(self):
         conf = self.sphinx.config
 
-        conf.project = self.config.sphinx_project
+        if self.config.sphinx_project:
+            conf.project = self.config.sphinx_project
+
         conf.copyright = time.strftime("%Y")
 
         if self.config.author:
@@ -84,8 +86,11 @@ class Mudkip:
         if self.config.copyright:
             conf.copyright = self.config.copyright
 
-        conf.version = self.config.version
-        conf.release = self.config.release
+        if self.config.version:
+            conf.version = self.config.version
+
+        if self.config.release:
+            conf.release = self.config.release
 
         conf.master_doc = "index"
         conf.exclude_patterns = [".*", "**/.*", "_*", "**/_*"]

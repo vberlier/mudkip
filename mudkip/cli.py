@@ -114,9 +114,9 @@ def build(application, check, skip_broken_links):
 
 
 @mudkip.command()
-@with_application
 @click.option("--host", help="Development server host.", default="127.0.0.1")
 @click.option("--port", help="Development server port.", default=5500)
+@with_application
 def develop(application, host, port):
     """Start development server."""
     padding = "\n" * application.config.verbose

@@ -25,7 +25,7 @@ def join_authors(authors):
 
 class Config:
     default_source_dir = "docs"
-    default_output_dir = "docs/_build"
+    default_output_dir = "docs/.mudkip/dist"
 
     def __init__(
         self,
@@ -79,7 +79,7 @@ class Config:
         self.sphinx_project = self.title
 
         self.sphinx_srcdir = self.source_dir
-        self.sphinx_outdir = self.output_dir / "sphinx"
+        self.sphinx_outdir = self.output_dir
         self.sphinx_doctreedir = self.sphinx_outdir / ".doctrees"
 
         self.sphinx_buildername = "xml"

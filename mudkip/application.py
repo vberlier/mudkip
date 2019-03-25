@@ -23,8 +23,16 @@ class TOMLFile(BaseTOMLFile):
 
 
 class Mudkip:
-    def __init__(self, *args, config=None, pyproject_file="pyproject.toml", **kwargs):
+    def __init__(
+        self,
+        *args,
+        config=None,
+        pyproject_file="pyproject.toml",
+        mudkip_file="mudkip.toml",
+        **kwargs,
+    ):
         pyproject = TOMLFile(pyproject_file)
+        mudkip = TOMLFile(mudkip_file)
 
         if config is None:
             params = {}
@@ -32,6 +40,9 @@ class Mudkip:
             if pyproject.exists():
                 tool = pyproject.read().get("tool", {})
                 params.update(tool.get("mudkip", {}), poetry=tool.get("poetry"))
+
+            if mudkip.exists():
+                params.update(mudkip.read().get("mudkip", {}))
 
             params.update(kwargs)
 

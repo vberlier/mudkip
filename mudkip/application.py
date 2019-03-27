@@ -110,6 +110,10 @@ class Mudkip:
         self.sphinx.add_config_value("recommonmark_config", recommonmark_config, "env")
         self.sphinx.add_transform(AutoStructify)
 
+        self.sphinx.setup_extension("nbsphinx")
+
+        conf.nbsphinx_execute = "always"
+
         self.sphinx.setup_extension("sphinx.ext.autodoc")
         self.sphinx.setup_extension("sphinx.ext.napoleon")
         self.sphinx.setup_extension("sphinx.ext.doctest")

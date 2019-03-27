@@ -281,6 +281,9 @@ class Mudkip:
 
         with self.sphinx_config(nbsphinx_execute="never"):
             with self.config.dev_server(self.sphinx.outdir, host, port):
+                with build_manager():
+                    self.build()
+
                 for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
                     with build_manager(event_batch):
                         self.build()

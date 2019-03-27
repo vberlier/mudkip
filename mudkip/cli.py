@@ -125,14 +125,17 @@ def develop(application, host, port):
         f'{padding}Watching "{application.config.source_dir}"...{padding}', fg="blue"
     )
 
-    with exception_handler():
-        application.build()
-
-    if application.config.dev_server != noop_dev_server:
-        click.secho(f"{padding}Server running on http://{host}:{port}", fg="blue")
-
     @contextmanager
-    def build_manager(event_batch):
+    def build_manager(event_batch=None):
+        if event_batch is None:
+            if application.config.dev_server != noop_dev_server:
+                click.secho(
+                    f"{padding}Server running on http://{host}:{port}", fg="blue"
+                )
+            with exception_handler():
+                yield
+            return
+
         now = time.strftime("%H:%M:%S")
         click.secho(f"{padding}{now}", fg="black", bold=True, nl=False)
 

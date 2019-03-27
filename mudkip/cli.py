@@ -12,7 +12,6 @@ from .application import Mudkip
 from .config import Config
 from .errors import MudkipError
 from .preset import Preset
-from .server import noop_dev_server
 
 
 DIRECTORY = click.Path(file_okay=False)
@@ -129,7 +128,7 @@ def develop(application, notebook, host, port):
     @contextmanager
     def build_manager(event_batch=None):
         if event_batch is None:
-            if application.config.dev_server != noop_dev_server:
+            if application.config.dev_server:
                 click.secho(
                     f"{padding}Server running on http://{host}:{port}", fg="blue"
                 )

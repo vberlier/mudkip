@@ -286,7 +286,10 @@ class Mudkip:
             if notebook:
                 stack.enter_context(jupyter_notebook(str(self.config.source_dir)))
 
-            stack.enter_context(self.config.dev_server(self.sphinx.outdir, host, port))
+            if self.config.dev_server:
+                stack.enter_context(
+                    self.config.dev_server(self.sphinx.outdir, host, port)
+                )
 
             with build_manager():
                 self.build()

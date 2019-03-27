@@ -7,11 +7,6 @@ from livereload import Server
 
 
 @contextmanager
-def noop_dev_server(directory, host, port):
-    yield
-
-
-@contextmanager
 def livereload_dev_server(directory, host, port):
     try:
         process = Process(

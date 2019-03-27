@@ -119,6 +119,7 @@ class Mudkip:
         self.sphinx.setup_extension("nbsphinx")
 
         conf.nbsphinx_execute = "always"
+        conf.nbsphinx_allow_errors = True
 
         self.sphinx.setup_extension("sphinx.ext.autodoc")
         self.sphinx.setup_extension("sphinx.ext.napoleon")
@@ -158,6 +159,24 @@ class Mudkip:
             self.sphinx._status = original_status
             self.sphinx._warning = original_warning
             logging.setup(self.sphinx, self.sphinx._status, self.sphinx._warning)
+
+    @contextmanager
+    def sphinx_config(self, **kwargs):
+        not_present = object()
+        conf = self.sphinx.config
+
+        try:
+            original_values = {}
+            for key, value in kwargs.items():
+                original_values[key] = getattr(conf, key, not_present)
+                setattr(conf, key, value)
+            yield
+        finally:
+            for key, value in original_values.items():
+                if value is not_present:
+                    delattr(conf, key)
+                else:
+                    setattr(conf, key, value)
 
     def init(self, title=None):
         table = tomlkit.table()
@@ -222,11 +241,12 @@ class Mudkip:
                 self.clean()
 
                 with self.sphinx_warning_is_error():
-                    self.sphinx.build()
+                    with self.sphinx_config(nbsphinx_allow_errors=False):
+                        self.sphinx.build()
 
-                    if not skip_broken_links:
-                        with self.sphinx_builder("linkcheck"):
-                            self.sphinx.build()
+                        if not skip_broken_links:
+                            with self.sphinx_builder("linkcheck"):
+                                self.sphinx.build()
             else:
                 self.sphinx.build()
         except SphinxError as exc:

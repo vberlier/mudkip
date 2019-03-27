@@ -14,6 +14,7 @@ from recommonmark.transform import AutoStructify
 
 from .config import Config
 from .errors import MudkipError
+from .jupyter import jupyter_notebook
 from .watch import DirectoryWatcher
 
 
@@ -266,7 +267,7 @@ class Mudkip:
         for mod in modules:
             del sys.modules[mod]
 
-    def develop(self, host="127.0.0.1", port=5500, build_manager=None):
+    def develop(self, notebook=False, host="127.0.0.1", port=5500, build_manager=None):
         if not build_manager:
             build_manager = lambda *args: nullcontext()
 
@@ -280,13 +281,18 @@ class Mudkip:
             patterns.append("*.py")
 
         with self.sphinx_config(nbsphinx_execute="never"):
-            with self.config.dev_server(self.sphinx.outdir, host, port):
-                with build_manager():
-                    self.build()
-
-                for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
-                    with build_manager(event_batch):
+            with jupyter_notebook(
+                str(self.config.source_dir)
+            ) if notebook else nullcontext():
+                with self.config.dev_server(self.sphinx.outdir, host, port):
+                    with build_manager():
                         self.build()
+
+                    for event_batch in DirectoryWatcher(
+                        dirs, patterns, ignore_patterns
+                    ):
+                        with build_manager(event_batch):
+                            self.build()
 
     def test(self):
         with self.sphinx_builder("doctest"):

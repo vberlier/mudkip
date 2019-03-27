@@ -29,6 +29,7 @@ class Mudkip:
         config=None,
         pyproject_file="pyproject.toml",
         mudkip_file="mudkip.toml",
+        silence_pandoc_version_warning=True,
         **kwargs,
     ):
         pyproject = TOMLFile(pyproject_file)
@@ -54,6 +55,11 @@ class Mudkip:
 
         self.create_sphinx_application()
         self.configure_sphinx()
+
+        if silence_pandoc_version_warning:
+            import nbconvert
+
+            nbconvert.utils.pandoc._maximal_version = None
 
     def create_sphinx_application(self):
         extra_args = {}

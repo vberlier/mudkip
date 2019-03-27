@@ -1,7 +1,7 @@
 from contextlib import contextmanager
 from multiprocessing import Process
 
-from notebook.notebookapp import launch_new_instance
+from notebook.notebookapp import NotebookApp
 
 
 @contextmanager
@@ -15,7 +15,10 @@ def jupyter_notebook(source_dir):
 
 
 def notebook_process(source_dir):
-    try:
-        launch_new_instance(argv=[source_dir])
-    except KeyboardInterrupt:
-        pass
+    Notebook.launch_instance(argv=[source_dir])
+
+
+class Notebook(NotebookApp):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.log.setLevel(100)

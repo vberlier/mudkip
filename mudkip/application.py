@@ -3,7 +3,7 @@ import time
 import shutil
 from os import path
 from io import StringIO
-from contextlib import contextmanager, nullcontext
+from contextlib import contextmanager, nullcontext, ExitStack
 
 import tomlkit
 from tomlkit.toml_file import TOMLFile as BaseTOMLFile
@@ -280,19 +280,20 @@ class Mudkip:
             dirs.append(self.config.project_dir)
             patterns.append("*.py")
 
-        with self.sphinx_config(nbsphinx_execute="never"):
-            with jupyter_notebook(
-                str(self.config.source_dir)
-            ) if notebook else nullcontext():
-                with self.config.dev_server(self.sphinx.outdir, host, port):
-                    with build_manager():
-                        self.build()
+        with ExitStack() as stack:
+            stack.enter_context(self.sphinx_config(nbsphinx_execute="never"))
 
-                    for event_batch in DirectoryWatcher(
-                        dirs, patterns, ignore_patterns
-                    ):
-                        with build_manager(event_batch):
-                            self.build()
+            if notebook:
+                stack.enter_context(jupyter_notebook(str(self.config.source_dir)))
+
+            stack.enter_context(self.config.dev_server(self.sphinx.outdir, host, port))
+
+            with build_manager():
+                self.build()
+
+            for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
+                with build_manager(event_batch):
+                    self.build()
 
     def test(self):
         with self.sphinx_builder("doctest"):

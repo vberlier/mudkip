@@ -267,6 +267,9 @@ class Mudkip:
             del sys.modules[mod]
 
     def develop(self, host="127.0.0.1", port=5500, build_manager=None):
+        if not build_manager:
+            build_manager = lambda *args: nullcontext()
+
         patterns = [f"*{suff}" for suff in self.sphinx.config.source_suffix]
         ignore_patterns = self.sphinx.config.exclude_patterns
 
@@ -279,7 +282,7 @@ class Mudkip:
         with self.sphinx_config(nbsphinx_execute="never"):
             with self.config.dev_server(self.sphinx.outdir, host, port):
                 for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
-                    with build_manager(event_batch) if build_manager else nullcontext():
+                    with build_manager(event_batch):
                         self.build()
 
     def test(self):

@@ -294,4 +294,7 @@ class Mudkip:
         return self.sphinx.statuscode == 0, result.strip()
 
     def clean(self):
-        shutil.rmtree(self.config.output_dir)
+        try:
+            shutil.rmtree(self.config.output_dir)
+        except FileNotFoundError:
+            pass

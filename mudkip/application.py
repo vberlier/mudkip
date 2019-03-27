@@ -276,10 +276,11 @@ class Mudkip:
             dirs.append(self.config.project_dir)
             patterns.append("*.py")
 
-        with self.config.dev_server(self.sphinx.outdir, host, port):
-            for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
-                with build_manager(event_batch) if build_manager else nullcontext():
-                    self.build()
+        with self.sphinx_config(nbsphinx_execute="never"):
+            with self.config.dev_server(self.sphinx.outdir, host, port):
+                for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
+                    with build_manager(event_batch) if build_manager else nullcontext():
+                        self.build()
 
     def test(self):
         with self.sphinx_builder("doctest"):

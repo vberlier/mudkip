@@ -26,6 +26,7 @@ livereload = "^2.6"
 tomlkit = "^0.5.3"
 nbsphinx = "^0.4.2"
 notebook = "^5.7"
+jupyter_nbextensions_configurator = "^0.4.1"
 
 [tool.poetry.dev-dependencies]
 black = { version = "^18.3-alpha.0", allows-prereleases = true }

@@ -1,5 +1,5 @@
 from contextlib import contextmanager
-from multiprocessing import Process
+from multiprocessing import Process, Queue
 
 from notebook.notebookapp import NotebookApp
 
@@ -7,19 +7,24 @@ from notebook.notebookapp import NotebookApp
 @contextmanager
 def jupyter_notebook(source_dir, verbose, ip, port):
     try:
-        process = Process(target=notebook_process, args=(source_dir, verbose, ip, port))
+        queue = Queue()
+        process = Process(
+            target=notebook_process, args=(queue, source_dir, verbose, ip, port)
+        )
         process.start()
-        yield
+        yield queue.get()
     finally:
         process.terminate()
 
 
-def notebook_process(source_dir, verbose, ip, port):
-    Notebook.launch_instance(argv=[source_dir], verbose=verbose, ip=ip, port=port)
+def notebook_process(queue, source_dir, verbose, ip, port):
+    Notebook.launch_instance(
+        argv=[source_dir], queue=queue, verbose=verbose, ip=ip, port=port
+    )
 
 
 class Notebook(NotebookApp):
-    def __init__(self, *args, verbose=False, ip=None, port=None, **kwargs):
+    def __init__(self, *args, queue, verbose=False, ip=None, port=None, **kwargs):
         super().__init__(*args, **kwargs)
         if not verbose:
             self.log.setLevel(100)
@@ -27,3 +32,4 @@ class Notebook(NotebookApp):
             self.ip = ip
         if port:
             self.port = port
+        queue.put(self.display_url)

@@ -137,12 +137,13 @@ def develop(
     )
 
     @contextmanager
-    def build_manager(event_batch=None):
+    def build_manager(event_batch=None, server_url=None, notebook_url=None):
         if event_batch is None:
-            if application.config.dev_server:
-                click.secho(
-                    f"Server running on http://{host}:{port}{padding}", fg="blue"
-                )
+            if server_url:
+                click.secho(f"Server running on {server_url}{padding}", fg="blue")
+            if notebook_url:
+                click.secho(f"Notebook running on {notebook_url}{padding}", fg="blue")
+
             with exception_handler():
                 yield
             return

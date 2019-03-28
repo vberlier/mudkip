@@ -293,8 +293,9 @@ class Mudkip:
         with ExitStack() as stack:
             stack.enter_context(self.sphinx_config(nbsphinx_execute="never"))
 
+            notebook_url = None
             if notebook:
-                stack.enter_context(
+                notebook_url = stack.enter_context(
                     jupyter_notebook(
                         str(self.config.source_dir),
                         self.config.verbose,
@@ -303,18 +304,19 @@ class Mudkip:
                     )
                 )
 
+            server_url = None
             if self.config.dev_server:
-                stack.enter_context(
+                server_url = stack.enter_context(
                     self.config.dev_server(self.sphinx.outdir, host, port)
                 )
 
                 if open_browser:
                     try:
-                        webbrowser.open(f"http://{host}:{port}")
+                        webbrowser.open(server_url)
                     except webbrowser.Error:
                         pass
 
-            with build_manager():
+            with build_manager(server_url=server_url, notebook_url=notebook_url):
                 self.build()
 
             for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):

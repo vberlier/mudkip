@@ -13,7 +13,7 @@ def livereload_dev_server(directory, host, port):
             target=LivereloadServer.serve_directory, args=(directory, host, port)
         )
         process.start()
-        yield
+        yield f"http://{host}:{port}"
     finally:
         process.terminate()
 

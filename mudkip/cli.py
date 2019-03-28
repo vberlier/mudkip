@@ -130,7 +130,7 @@ def develop(application, notebook, host, port):
         if event_batch is None:
             if application.config.dev_server:
                 click.secho(
-                    f"{padding}Server running on http://{host}:{port}", fg="blue"
+                    f"Server running on http://{host}:{port}{padding}", fg="blue"
                 )
             with exception_handler():
                 yield

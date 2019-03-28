@@ -270,12 +270,12 @@ class Mudkip:
 
     def develop(
         self,
-        notebook=False,
-        notebook_host="localhost",
-        notebook_port=8888,
         open_browser=False,
         host="localhost",
         port=5500,
+        notebook=False,
+        notebook_host="localhost",
+        notebook_port=8888,
         build_manager=None,
     ):
         if not build_manager:

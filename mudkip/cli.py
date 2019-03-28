@@ -113,9 +113,6 @@ def build(application, check, skip_broken_links):
 
 
 @mudkip.command()
-@click.option("-n", "--notebook", is_flag=True, help="Open the Jupyter notebook.")
-@click.option("--notebook-host", help="Notebook host.", default="localhost")
-@click.option("--notebook-port", help="Notebook port.", default=8888)
 @click.option(
     "-o",
     "--open",
@@ -125,9 +122,12 @@ def build(application, check, skip_broken_links):
 )
 @click.option("--host", help="Development server host.", default="localhost")
 @click.option("--port", help="Development server port.", default=5500)
+@click.option("-n", "--notebook", is_flag=True, help="Open the Jupyter notebook.")
+@click.option("--notebook-host", help="Notebook host.", default="localhost")
+@click.option("--notebook-port", help="Notebook port.", default=8888)
 @with_application
 def develop(
-    application, notebook, notebook_host, notebook_port, open_browser, host, port
+    application, open_browser, host, port, notebook, notebook_host, notebook_port
 ):
     """Start development server."""
     padding = "\n" * application.config.verbose
@@ -164,12 +164,12 @@ def develop(
 
     try:
         application.develop(
-            notebook,
-            notebook_host,
-            notebook_port,
             open_browser,
             host,
             port,
+            notebook,
+            notebook_host,
+            notebook_port,
             build_manager,
         )
     except KeyboardInterrupt:

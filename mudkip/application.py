@@ -284,7 +284,9 @@ class Mudkip:
             stack.enter_context(self.sphinx_config(nbsphinx_execute="never"))
 
             if notebook:
-                stack.enter_context(jupyter_notebook(str(self.config.source_dir)))
+                stack.enter_context(
+                    jupyter_notebook(str(self.config.source_dir), self.config.verbose)
+                )
 
             if self.config.dev_server:
                 stack.enter_context(

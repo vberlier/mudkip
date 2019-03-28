@@ -114,7 +114,7 @@ def build(application, check, skip_broken_links):
 
 @mudkip.command()
 @click.option("-n", "--notebook", is_flag=True, help="Open the Jupyter notebook.")
-@click.option("--host", help="Development server host.", default="127.0.0.1")
+@click.option("--host", help="Development server host.", default="localhost")
 @click.option("--port", help="Development server port.", default=5500)
 @with_application
 def develop(application, notebook, host, port):

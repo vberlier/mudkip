@@ -267,7 +267,7 @@ class Mudkip:
         for mod in modules:
             del sys.modules[mod]
 
-    def develop(self, notebook=False, host="127.0.0.1", port=5500, build_manager=None):
+    def develop(self, notebook=False, host="localhost", port=5500, build_manager=None):
         if not build_manager:
             build_manager = lambda *args: nullcontext()
 

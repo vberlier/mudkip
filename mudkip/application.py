@@ -4,6 +4,7 @@ import shutil
 from os import path
 from io import StringIO
 from contextlib import contextmanager, nullcontext, ExitStack
+import webbrowser
 
 import tomlkit
 from tomlkit.toml_file import TOMLFile as BaseTOMLFile
@@ -267,7 +268,14 @@ class Mudkip:
         for mod in modules:
             del sys.modules[mod]
 
-    def develop(self, notebook=False, host="localhost", port=5500, build_manager=None):
+    def develop(
+        self,
+        notebook=False,
+        open_browser=False,
+        host="localhost",
+        port=5500,
+        build_manager=None,
+    ):
         if not build_manager:
             build_manager = lambda *args: nullcontext()
 
@@ -292,6 +300,12 @@ class Mudkip:
                 stack.enter_context(
                     self.config.dev_server(self.sphinx.outdir, host, port)
                 )
+
+                if open_browser:
+                    try:
+                        webbrowser.open(f"http://{host}:{port}")
+                    except webbrowser.Error:
+                        pass
 
             with build_manager():
                 self.build()

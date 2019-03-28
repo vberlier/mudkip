@@ -271,6 +271,8 @@ class Mudkip:
     def develop(
         self,
         notebook=False,
+        notebook_host="localhost",
+        notebook_port=8888,
         open_browser=False,
         host="localhost",
         port=5500,
@@ -293,7 +295,12 @@ class Mudkip:
 
             if notebook:
                 stack.enter_context(
-                    jupyter_notebook(str(self.config.source_dir), self.config.verbose)
+                    jupyter_notebook(
+                        str(self.config.source_dir),
+                        self.config.verbose,
+                        notebook_host,
+                        notebook_port,
+                    )
                 )
 
             if self.config.dev_server:

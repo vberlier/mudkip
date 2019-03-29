@@ -192,7 +192,7 @@ Here is the list of all the options that can be overwritten in the config file:
 
   default: The value of the `project_name` option
 
-  Mudkip will watch the project directory in addition to the source directory when using the development server. This enables live reloading even when you're editing docstrings.
+  Mudkip will watch the python files in your project directory when using the development server. This enables live reloading even when you're editing docstrings.
 
 - `title`
 

@@ -33,7 +33,12 @@ def default(config):
 
 
 @preset
-def rtd(config):
+def alabaster(config):
     config.dev_server = livereload_dev_server
     config.sphinx_buildername = "dirhtml"
+
+
+@preset
+def rtd(config):
+    alabaster(config)
     config.sphinx_confoverrides.update(html_theme="sphinx_rtd_theme")

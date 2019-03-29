@@ -49,6 +49,44 @@ The package can be installed with `pip`.
 $ pip install mudkip
 ```
 
+## Getting started
+
+After installing the package, no need to run `sphinx-quickstart` or to configure anything, you can immediatly run the `develop` command and start writing docs.
+
+```bash
+$ mudkip develop
+Watching "docs"...
+Server running on http://localhost:5500
+```
+
+The command will create the "docs" directory if it doesn't already exist and launch a development server with live reloading. If you create an `index.rst` file and open the link in your browser, you'll see that mudkip uses the [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme by default.
+
+> Note that mudkip enables the [`recommonmark`](https://recommonmark.readthedocs.io/en/latest/) extension, allowing you to use both reStructuredText and markdown files. You can totally create an `index.md` file instead if you prefer markdown over reStructuredText.
+
+Press `Ctrl+C` at any time to exit.
+
+### Building and checking documentation
+
+The `build` command invokes Sphinx and builds your documentation. By default, the generated files are in "docs/.mudkip/dist".
+
+```bash
+$ mudkip build
+Building "docs"...
+
+Done.
+```
+
+Running the command with the `--check` flag will exit with code 1 if Sphinx reports any error or warning.
+
+```bash
+$ mudkip build --check
+Building and checking "docs"...
+
+All good.
+```
+
+The `--check` flag also makes sure that there are no broken links by running the [`linkcheck`](https://www.sphinx-doc.org/en/master/usage/builders/index.html#sphinx.builders.linkcheck.CheckExternalLinksBuilder) builder on your documentation.
+
 ## Usage
 
 > **TODO**

@@ -71,18 +71,12 @@ The `build` command invokes the [`dirhtml`](https://www.sphinx-doc.org/en/master
 
 ```bash
 $ mudkip build
-Building "docs"...
-
-Done.
 ```
 
 Running the command with the `--check` flag will exit with code 1 if Sphinx reports any error or warning.
 
 ```bash
 $ mudkip build --check
-Building and checking "docs"...
-
-All good.
 ```
 
 The `--check` flag also makes sure that there are no broken links by running the [`linkcheck`](https://www.sphinx-doc.org/en/master/usage/builders/index.html#sphinx.builders.linkcheck.CheckExternalLinksBuilder) builder on your documentation.

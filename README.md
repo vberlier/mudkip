@@ -87,6 +87,42 @@ All good.
 
 The `--check` flag also makes sure that there are no broken links by running the [`linkcheck`](https://www.sphinx-doc.org/en/master/usage/builders/index.html#sphinx.builders.linkcheck.CheckExternalLinksBuilder) builder on your documentation.
 
+### Running doctests
+
+Mudkip enables the [`sphinx.ext.doctest`](https://www.sphinx-doc.org/en/master/usage/extensions/doctest.html) extension, making it possible to test interactive code examples. Try to add the following snippet to your `index` document:
+
+```py
+>>> import this
+The Zen of Python, by Tim Peters
+<BLANKLINE>
+Beautiful is better than ugly.
+...
+```
+
+The `test` command will run the code example and make sure that the output matches the documentation.
+
+```bash
+$ mudkip test
+Testing "docs"...
+
+Document: index
+---------------
+1 items passed all tests:
+   1 tests in default
+1 tests in 1 items.
+1 passed and 0 failed.
+Test passed.
+
+Doctest summary
+===============
+    1 test
+    0 failures in tests
+    0 failures in setup code
+    0 failures in cleanup code
+
+Passed.
+```
+
 ## Usage
 
 > **TODO**

@@ -132,6 +132,98 @@ Notebook running on http://localhost:8888/?token=5e64df6...
 
 With the `build` command, Notebooks are executed as part of the build process. The `--check` flag will make sure that there are no uncaught exceptions in any cell.
 
+### Configuration
+
+Mudkip doesn't require any configuration. You can however overwrite some of the default settings with command-line options or a configuration file.
+
+For instance, when running any command, you can use the `--preset` option to overwrite the default preset with `alabaster` if you want to use the [Alabaster](https://alabaster.readthedocs.io/en/latest/) theme instead of the default [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme.
+
+```
+$ mudkip build --preset alabaster
+```
+
+It's also possible to change the default source and output directories with the `--source-dir` and `--output-dir` options respectively.
+
+```
+$ mudkip build --source-dir path/to/docs --output-dir path/to/output
+```
+
+Passing these options to every single command can become tedious so you can use a configuration file to save your custom settings.
+
+Running the `init` command will either add a `[tool.mudkip]` section to your `pyproject.toml` or create a `mudkip.toml` file with some basic configuration.
+
+```bash
+$ mudkip init
+```
+
+Here is the list of all the options that can be overwritten in the config file:
+
+- `preset`
+
+  default: `"rtd"`
+
+  Presets configure mudkip and Sphinx to enable specific features. The `rtd` and `alabaster` presets enable the development server and configure Sphinx to use the `dirhtml` builder. The `rtd` preset also changes the html theme to the Read the Docs theme.
+
+- `source_dir`
+
+  default: `"docs"`
+
+  This is the directory containing the source files for your documentation. Sphinx is configured to use it as its source directory and when the development server is enabled, mudkip will watch the directory for changes to rebuild your documentation.
+
+- `output_dir`
+
+  default: `"docs/.mudkip/dist"`
+
+  The output directory is where Sphinx will output the generated files. This is also the directory served by the development server.
+
+- `verbose`
+
+  default: `false`
+
+  This option can also be enabled on the command-line with the `--verbose` flag. Setting it to `true` will tell mudkip to display the entire Sphinx output as well as the Jupyter output when running the `develop` command with the `--notebook` flag.
+
+- `project_name`
+
+  default: The name of the project you're documenting in `pyproject.toml`
+
+  If you're not using [poetry](https://poetry.eustace.io/), you will need to set it manually.
+
+- `project_dir`
+
+  default: The value of the `project_name` option
+
+  Mudkip will watch the project directory in addition to the source directory when using the development server. This enables live reloading even when you're editing docstrings.
+
+- `title`
+
+  default: The value of the `project_name` option
+
+  The project title used by Sphinx when building the documentation.
+
+- `copyright`
+
+  default: The current year followed by the value of the `author` option
+
+  The copyright notice used by Sphinx when building the documentation.
+
+- `author`
+
+  default: The concatenated list of authors in `pyproject.toml`
+
+  If you're not using [poetry](https://poetry.eustace.io/), you will need to set it manually.
+
+- `version`
+
+  default: The first two numbers of the `release` option
+
+  The version used by Sphinx when building the documentation.
+
+- `release`
+
+  default: The project version in `pyproject.toml`
+
+  If you're not using [poetry](https://poetry.eustace.io/), you will need to set it manually.
+
 ## Contributing
 
 Contributions are welcome. This project uses [poetry](https://poetry.eustace.io/).

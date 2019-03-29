@@ -8,7 +8,7 @@
 
 **🚧 Work in progress 🚧**
 
-Mudkip is a small wrapper around [Sphinx](sphinx-doc.org) that bundles essential tools and extensions, providing everything needed for most day-to-day documentation.
+Mudkip is a small wrapper around [Sphinx](sphinx-doc.org) that bundles essential tools and extensions, providing everything needed for documenting your projects.
 
 ```bash
 $ mudkip --help
@@ -67,7 +67,7 @@ Press `Ctrl+C` at any time to exit.
 
 ### Building and checking documentation
 
-The `build` command invokes Sphinx and builds your documentation. By default, the generated files are in "docs/.mudkip/dist".
+The `build` command invokes the [`dirhtml`](https://www.sphinx-doc.org/en/master/usage/builders/index.html#sphinx.builders.dirhtml.DirectoryHTMLBuilder) builder and builds your documentation. By default, the generated files are in "docs/.mudkip/dist".
 
 ```bash
 $ mudkip build
@@ -123,9 +123,20 @@ Doctest summary
 Passed.
 ```
 
-## Usage
+### Using Jupyter notebooks
 
-> **TODO**
+The [`nbsphinx`](https://nbsphinx.readthedocs.io) extension provides support for Jupyter notebooks. This means that in addition to `.rst` and `.md` files, Sphinx will also generate pages for `.ipynb` files.
+
+The `develop` command can launch the jupyter notebook in the "docs" directory and open it in your browser with the `--notebook` or `-n` flag.
+
+```bash
+$ mudkip develop --notebook
+Watching "docs"...
+Server running on http://localhost:5500
+Notebook running on http://localhost:8888/?token=5e64df6...
+```
+
+With the `build` command, Notebooks are executed as part of the build process. The `--check` flag will make sure that there are no uncaught exceptions in any cell.
 
 ## Contributing
 

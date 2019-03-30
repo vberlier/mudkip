@@ -73,7 +73,7 @@ def with_application(command):
 
 
 @mudkip.command()
-@click.option("--title", help="Documentation title.")
+@click.option("-t", "--title", help="Documentation title.")
 @with_application
 def init(application, title):
     """Initialize documentation."""

@@ -51,6 +51,7 @@ def mudkip():
 
 def with_application(command):
     @click.option(
+        "-p",
         "--preset",
         type=click.Choice(list(Preset.registry)),
         help="Documentation preset.",

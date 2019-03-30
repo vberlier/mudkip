@@ -136,7 +136,7 @@ With the `build` command, Notebooks are executed as part of the build process. T
 
 Mudkip doesn't require any configuration. You can however overwrite some of the default settings with command-line options or a configuration file.
 
-For instance, when running any command, you can use the `--preset` option to overwrite the default preset with `alabaster` if you want to use the [Alabaster](https://alabaster.readthedocs.io/en/latest/) theme instead of the default [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme.
+For instance, when running any command, you can use the `--preset` or `-p` option to overwrite the default preset with `alabaster` if you want to use the [Alabaster](https://alabaster.readthedocs.io/en/latest/) theme instead of the default [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme.
 
 ```
 $ mudkip build --preset alabaster

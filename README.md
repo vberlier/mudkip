@@ -73,7 +73,7 @@ The `build` command invokes the [`dirhtml`](https://www.sphinx-doc.org/en/master
 $ mudkip build
 ```
 
-Running the command with the `--check` flag will exit with code 1 if Sphinx reports any error or warning.
+Running the command with the `--check` or `-c` flag will exit with code `1` if Sphinx reports any error or warning.
 
 ```bash
 $ mudkip build --check

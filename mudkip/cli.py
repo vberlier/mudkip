@@ -89,7 +89,7 @@ def init(application, title):
 
 
 @mudkip.command()
-@click.option("--check", is_flag=True, help="Check documentation.")
+@click.option("-c", "--check", is_flag=True, help="Check documentation.")
 @click.option(
     "--skip-broken-links",
     is_flag=True,

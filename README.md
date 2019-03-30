@@ -67,7 +67,7 @@ Press `Ctrl+C` at any time to exit.
 
 ### Building and checking documentation
 
-The `build` command invokes the [`dirhtml`](https://www.sphinx-doc.org/en/master/usage/builders/index.html#sphinx.builders.dirhtml.DirectoryHTMLBuilder) builder and builds your documentation. By default, the generated files are in "docs/.mudkip/dist".
+The `build` command invokes the [`dirhtml`](https://www.sphinx-doc.org/en/master/usage/builders/index.html#sphinx.builders.dirhtml.DirectoryHTMLBuilder) builder and builds your documentation. By default, the generated files are in "docs/dist".
 
 ```bash
 $ mudkip build
@@ -172,7 +172,7 @@ Here is the list of all the options that can be overwritten in the config file:
 
 - `output_dir`
 
-  default: `"docs/.mudkip/dist"`
+  default: `"docs/dist"`
 
   The output directory is where Sphinx will output the generated files. This is also the directory served by the development server.
 

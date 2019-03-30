@@ -24,7 +24,7 @@ def join_authors(authors):
 
 class Config:
     default_source_dir = "docs"
-    default_output_dir = "docs/.mudkip/dist"
+    default_output_dir = "docs/dist"
 
     def __init__(
         self,

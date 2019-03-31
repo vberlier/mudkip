@@ -1,4 +1,4 @@
-from queue import Queue
+from queue import Queue, Empty
 from threading import Timer
 from pathlib import Path
 from functools import partial
@@ -30,6 +30,7 @@ class DirectoryWatcher:
         case_sensitive=False,
         recursive=True,
         debounce_time=0.25,
+        queue_timeout=2,
     ):
         self.directories = set()
         self.patterns = patterns
@@ -38,6 +39,7 @@ class DirectoryWatcher:
         self.case_sensitive = case_sensitive
         self.recursive = recursive
         self.debounce_time = debounce_time
+        self.queue_timeout = queue_timeout
 
         for directory in directories:
             self.watch(directory)
@@ -81,7 +83,10 @@ class DirectoryWatcher:
 
         try:
             while True:
-                yield self.queue.get()
+                try:
+                    yield self.queue.get(timeout=self.queue_timeout)
+                except Empty:
+                    pass
         finally:
             observer.stop()
             observer.join()

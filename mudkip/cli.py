@@ -32,7 +32,7 @@ def exception_handler(exit=False):
 def print_version(ctx, _param, value):
     if not value or ctx.resilient_parsing:
         return
-    click.secho(f"Mudkip v{__version__}", fg="blue")
+    click.secho(f"Mudkip v{__version__}", fg="cyan")
     ctx.exit()
 
 
@@ -80,7 +80,7 @@ def init(application, title):
     padding = "\n" * application.config.verbose
 
     click.secho(
-        f'{padding}Initializing "{application.config.source_dir}"...', fg="blue"
+        f'{padding}Initializing "{application.config.source_dir}"...', fg="cyan"
     )
 
     with exception_handler(exit=True):
@@ -103,7 +103,7 @@ def build(application, check, skip_broken_links):
 
     action = "Building and checking" if check else "Building"
     click.secho(
-        f'{padding}{action} "{application.config.source_dir}"...{padding}', fg="blue"
+        f'{padding}{action} "{application.config.source_dir}"...{padding}', fg="cyan"
     )
 
     with exception_handler(exit=True):
@@ -134,16 +134,16 @@ def develop(
     padding = "\n" * application.config.verbose
 
     click.secho(
-        f'{padding}Watching "{application.config.source_dir}"...{padding}', fg="blue"
+        f'{padding}Watching "{application.config.source_dir}"...{padding}', fg="cyan"
     )
 
     @contextmanager
     def build_manager(event_batch=None, server_url=None, notebook_url=None):
         if event_batch is None:
             if server_url:
-                click.secho(f"Server running on {server_url}{padding}", fg="blue")
+                click.secho(f"Server running on {server_url}{padding}", fg="cyan")
             if notebook_url:
-                click.secho(f"Notebook running on {notebook_url}{padding}", fg="blue")
+                click.secho(f"Notebook running on {notebook_url}{padding}", fg="cyan")
 
             with exception_handler():
                 yield
@@ -185,7 +185,7 @@ def test(application):
     padding = "\n" * application.config.verbose
 
     click.secho(
-        f'{padding}Testing "{application.config.source_dir}"...{padding}', fg="blue"
+        f'{padding}Testing "{application.config.source_dir}"...{padding}', fg="cyan"
     )
 
     with exception_handler(exit=True):
@@ -207,7 +207,7 @@ def clean(application):
     """Remove output directory."""
     padding = "\n" * application.config.verbose
 
-    click.secho(f'{padding}Removing "{application.config.output_dir}"...', fg="blue")
+    click.secho(f'{padding}Removing "{application.config.output_dir}"...', fg="cyan")
 
     with exception_handler(exit=True):
         application.clean()

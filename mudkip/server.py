@@ -16,6 +16,7 @@ def livereload_dev_server(directory, host, port):
         yield f"http://{host}:{port}"
     finally:
         process.terminate()
+        process.join()
 
 
 class LivereloadServer(Server):

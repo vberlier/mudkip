@@ -15,6 +15,7 @@ def jupyter_notebook(source_dir, verbose, ip, port):
         yield queue.get()
     finally:
         process.terminate()
+        process.join()
 
 
 def notebook_process(queue, source_dir, verbose, ip, port):

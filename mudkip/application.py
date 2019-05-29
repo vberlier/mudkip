@@ -104,8 +104,6 @@ class Mudkip:
         conf.exclude_patterns = [".*", "**/.*", "_*", "**/_*"]
         conf.nitpicky = True
 
-        self.sphinx.setup_extension("mudkip.extension")
-
         self.sphinx.setup_extension("recommonmark")
 
         recommonmark_config = {
@@ -127,6 +125,8 @@ class Mudkip:
         self.sphinx.setup_extension("sphinx.ext.napoleon")
         self.sphinx.setup_extension("sphinx.ext.doctest")
         self.sphinx.setup_extension("sphinx_autodoc_typehints")
+
+        self.sphinx.setup_extension("mudkip.extension")
 
     @contextmanager
     def sphinx_warning_is_error(self):

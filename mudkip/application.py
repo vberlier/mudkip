@@ -214,10 +214,7 @@ class Mudkip:
 
             try:
                 tool = doc["tool"]
-                if "mudkip" not in tool:
-                    tool._insert_after("poetry", "mudkip", table)
-                else:
-                    tool["mudkip"].update(table)
+                tool["mudkip"].update(table)
             except KeyError:
                 if tool is None:
                     doc["tool"] = {"mudkip": table}

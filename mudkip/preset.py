@@ -28,7 +28,7 @@ class Preset:
 
 
 @preset
-def default(config):
+def xml(config):
     pass
 
 

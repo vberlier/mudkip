@@ -150,11 +150,27 @@ Notebook running on http://localhost:8888/?token=5e64df6...
 
 With the `build` command, Notebooks are executed as part of the build process. The `--check` flag will make sure that there are no uncaught exceptions in any cell.
 
+### Integration with npm and yarn
+
+Mudkip can help you go further than regular Sphinx themes by running npm scripts for you if you're building your own front-end. If your docs contain a `package.json` file, Mudkip will invoke the appropriate npm script after running Sphinx using your preferred npm client.
+
+```bash
+$ mudkip build
+```
+
+Here, Mudkip would try to run either `npm run build` or `yarn build` before exiting the command. Similarly, `mudkip clean` would try to run either `npm run clean` or `yarn clean`.
+
+```bash
+$ mudkip develop
+```
+
+The `develop` command will try to run one of the following scripts: `develop`, `dev`, `start` or `serve`. If you don't have a dedicated script to run your project in development mode, Mudkip will simply execute the `build` script after running Sphinx each time you make a modification.
+
 ### Configuration
 
 Mudkip doesn't require any configuration. You can however overwrite some of the default settings with command-line options or a configuration file.
 
-For instance, when running any command, you can use the `--preset` or `-p` option to overwrite the default preset with `alabaster` if you want to use the [Alabaster](https://alabaster.readthedocs.io/en/latest/) theme instead of the default [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme.
+For instance, when running a command, you can use the `--preset` or `-p` option to overwrite the default preset with `alabaster` if you want to use the [Alabaster](https://alabaster.readthedocs.io/en/latest/) theme instead of the default [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme.
 
 ```
 $ mudkip build --preset alabaster

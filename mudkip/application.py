@@ -101,8 +101,17 @@ class Mudkip:
             conf.release = self.config.release
 
         conf.master_doc = "index"
-        conf.exclude_patterns = [".*", "**/.*", "_*", "**/_*"]
         conf.nitpicky = True
+
+        conf.exclude_patterns = [
+            ".*",
+            "**/.*",
+            "_*",
+            "**/_*",
+            "node_modules",
+            "venv",
+            str(self.config.output_dir),
+        ]
 
         self.sphinx.setup_extension("recommonmark")
 

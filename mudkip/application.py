@@ -16,6 +16,7 @@ from recommonmark.transform import AutoStructify
 from .config import Config
 from .errors import MudkipError
 from .jupyter import jupyter_notebook
+from .npm import NpmDriver, locate_package_json
 from .watch import DirectoryWatcher
 
 
@@ -57,6 +58,13 @@ class Mudkip:
 
         self.create_sphinx_application()
         self.configure_sphinx()
+
+        package_json_dir = locate_package_json(config)
+        self.npm_driver = (
+            NpmDriver(package_json_dir, show_output=config.verbose)
+            if package_json_dir
+            else None
+        )
 
         if silence_pandoc_version_warning:
             import nbconvert
@@ -260,6 +268,9 @@ class Mudkip:
         except SphinxError as exc:
             raise MudkipError(exc.args[0]) from exc
 
+        if self.npm_driver:
+            self.npm_driver.build()
+
     def delete_autodoc_cache(self):
         if not self.config.project_name:
             return
@@ -322,6 +333,9 @@ class Mudkip:
                     except webbrowser.Error:
                         pass
 
+            if self.npm_driver:
+                stack.enter_context(self.npm_driver.develop())
+
             with build_manager(server_url=server_url, notebook_url=notebook_url):
                 self.build()
 
@@ -345,3 +359,6 @@ class Mudkip:
             shutil.rmtree(self.config.output_dir)
         except FileNotFoundError:
             pass
+
+        if self.npm_driver:
+            self.npm_driver.clean()

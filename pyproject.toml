@@ -29,7 +29,7 @@ jupyter = "^1.0"
 jupyter_nbextensions_configurator = "^0.4.1"
 
 [tool.poetry.dev-dependencies]
-black = { version = "^19.3b0", allows-prereleases = true }
+black = { version = "^19.10b0", allows-prereleases = true }
 
 [tool.poetry.scripts]
 mudkip = 'mudkip.cli:main'

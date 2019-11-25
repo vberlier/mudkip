@@ -441,14 +441,14 @@ description = "Jupyter Notebook Tools for Sphinx"
 name = "nbsphinx"
 optional = false
 python-versions = "*"
-version = "0.4.3"
+version = "0.5.0"
 
 [package.dependencies]
 docutils = "*"
 jinja2 = "*"
 nbconvert = "!=5.4"
 nbformat = "*"
-sphinx = ">=1.6.3"
+sphinx = ">=1.8"
 traitlets = "*"
 
 [[package]]
@@ -925,7 +925,7 @@ version = "3.4.2"
 notebook = ">=4.4.1"
 
 [metadata]
-content-hash = "266ac80cf1270b0a8f90cc267d5d70f225347278cc28f0dad62b3c022f77f08c"
+content-hash = "79f6984c3bbc66690210afe68d45ffba63368194fa590f02d63a79ebacd51760"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -968,7 +968,7 @@ markupsafe = ["00bc623926325b26bb9605ae9eae8a215691f33cae5df11ca5424f06f2d1f473"
 mistune = ["59a3429db53c50b5c6bcc8a07f8848cb00d7dc8bdb431a4ab41920d201d4756e", "88a1051873018da288eee8538d476dffe1262495144b33ecb586c4ab266bb8d4"]
 nbconvert = ["302554a2e219bc0fc84f3edd3e79953f3767b46ab67626fdec16e38ba3f7efe4", "5de8fb2284422272a1d45abc77c07b888127550a6d602ce619592a2b08a474ff"]
 nbformat = ["b9a0dbdbd45bb034f4f8893cafd6f652ea08c8c1674ba83f2dc55d3955743b0b", "f7494ef0df60766b7cabe0a3651556345a963b74dbc16bc7c18479041170d402"]
-nbsphinx = ["577a9f26c39fbe0d8eda18940b13661a9b7b4b12c7127bbecdc7edf72b3c4426", "c39b8b4d7f3c7b02ba608be3508414c033906d40caa8b6fcfef81c9c8527c47a"]
+nbsphinx = ["16fad6f2a7191972c98df84e76b78f86161f859682e44107668384f916aee00d", "2d28bde42b22b66ea8699aa8275547baa524c296ee18d440448b7ab000f96f65"]
 notebook = ["573e0ae650c5d76b18b6e564ba6d21bf321d00847de1d215b418acb64f056eb8", "f64fa6624d2323fbef6210a621817d6505a45d0d4a9367f1843b20a38a4666ee"]
 packaging = ["0c98a5d0be38ed775798ece1b9727178c4469d9c3b4ada66e8e6b7849f8732af", "9e1cbf8c12b1f1ce0bb5344b8d7ecf66a6f8a6e91bcb0c84593ed6d3ab5c4ab3"]
 pandocfilters = ["b3dd70e169bb5449e6bc6ff96aea89c5eea8c5f6ab5e207fc2f521a2cf4a0da9"]

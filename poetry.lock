@@ -491,8 +491,8 @@ category = "main"
 description = "Jupyter Notebook Tools for Sphinx"
 name = "nbsphinx"
 optional = false
-python-versions = ">=2.7"
-version = "0.5.1"
+python-versions = ">=3"
+version = "0.6.0"
 
 [package.dependencies]
 docutils = "*"
@@ -1033,7 +1033,7 @@ notebook = ">=4.4.1"
 test = ["nose", "mock"]
 
 [metadata]
-content-hash = "2a1ed49795e5d3e0f41fae142d40deecec3bb9ebe416efa926f06446314bb662"
+content-hash = "d9b826d9a59cb6807491336ca542996cb27eea1023fbd5aac8b845a86b29901b"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1221,8 +1221,8 @@ nbformat = [
     {file = "nbformat-4.4.0.tar.gz", hash = "sha256:f7494ef0df60766b7cabe0a3651556345a963b74dbc16bc7c18479041170d402"},
 ]
 nbsphinx = [
-    {file = "nbsphinx-0.5.1-py2.py3-none-any.whl", hash = "sha256:e100472db293dcc2f7aae04ebebec0bfbe8eba88e209d04f367373fdd4b1455d"},
-    {file = "nbsphinx-0.5.1.tar.gz", hash = "sha256:1c3e1b5c5b4c96c06c2e428536b6a7860ee23bc290dc4e6e73ee6ed5076a004e"},
+    {file = "nbsphinx-0.6.0-py3-none-any.whl", hash = "sha256:bc8ce94b00622e2d8fff61338c68734bf0d68dec844b70a8317e6fad7e619783"},
+    {file = "nbsphinx-0.6.0.tar.gz", hash = "sha256:cf44b8675596fea7320f460f676fee26c8b3ee91140f80e41a77a46272af0081"},
 ]
 notebook = [
     {file = "notebook-5.7.8-py2.py3-none-any.whl", hash = "sha256:f64fa6624d2323fbef6210a621817d6505a45d0d4a9367f1843b20a38a4666ee"},

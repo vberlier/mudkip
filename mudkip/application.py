@@ -134,11 +134,12 @@ class Mudkip:
         self.sphinx.add_transform(AutoStructify)
 
         self.sphinx.setup_extension("nbsphinx")
-
         conf.nbsphinx_execute = "always"
         conf.nbsphinx_allow_errors = True
 
         self.sphinx.setup_extension("sphinx.ext.autodoc")
+        conf.autodoc_member_order = "bysource"
+
         self.sphinx.setup_extension("sphinx.ext.napoleon")
         self.sphinx.setup_extension("sphinx.ext.doctest")
         self.sphinx.setup_extension("sphinx.ext.autosectionlabel")

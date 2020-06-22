@@ -146,6 +146,9 @@ class Mudkip:
 
         self.sphinx.setup_extension("mudkip.extension")
 
+        self.sphinx._init_env(True)
+        self.sphinx._init_builder()
+
     @contextmanager
     def sphinx_warning_is_error(self):
         try:
@@ -161,6 +164,7 @@ class Mudkip:
             original_builder = self.sphinx.builder
             self.sphinx.preload_builder(buildername)
             self.sphinx.builder = self.sphinx.create_builder(buildername)
+            self.sphinx._init_env(False)
             self.sphinx._init_builder()
             yield
         finally:

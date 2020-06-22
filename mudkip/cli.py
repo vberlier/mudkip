@@ -58,11 +58,20 @@ def with_application(command):
     )
     @click.option("--source-dir", type=DIRECTORY, help="The source directory.")
     @click.option("--output-dir", type=DIRECTORY, help="The output directory.")
+    @click.option("--base-url", help="The url of the documentation.")
+    @click.option("--repository", help="The url of the project repository.")
     @click.option("--verbose", is_flag=True, help="Show Sphinx output.")
     @wraps(command)
-    def wrapper(preset, source_dir, output_dir, verbose, *args, **kwargs):
+    def wrapper(
+        preset, source_dir, output_dir, base_url, repository, verbose, *args, **kwargs
+    ):
         params = dict(
-            preset=preset, source_dir=source_dir, output_dir=output_dir, verbose=verbose
+            preset=preset,
+            source_dir=source_dir,
+            output_dir=output_dir,
+            base_url=base_url,
+            repository=repository,
+            verbose=verbose,
         )
         for key, value in tuple(params.items()):
             if not value:
@@ -96,20 +105,34 @@ def init(application, title):
     is_flag=True,
     help="Do not check external links for integrity.",
 )
+@click.option(
+    "--update-gh-pages", is_flag=True, help="Update GitHub Pages.",
+)
 @with_application
-def build(application, check, skip_broken_links):
+def build(application, check, skip_broken_links, update_gh_pages):
     """Build documentation."""
     padding = "\n" * application.config.verbose
 
-    action = "Building and checking" if check else "Building"
+    action = (
+        "Updating GitHub Pages with"
+        if update_gh_pages
+        else "Building and checking"
+        if check
+        else "Building"
+    )
+
     click.secho(
         f'{padding}{action} "{application.config.source_dir}"...{padding}', fg="cyan"
     )
 
     with exception_handler(exit=True):
-        application.build(check=check, skip_broken_links=skip_broken_links)
+        application.build(
+            check=check,
+            skip_broken_links=skip_broken_links,
+            update_gh_pages=update_gh_pages,
+        )
 
-    message = "All good" if check else "Done"
+    message = "All good" if check and not update_gh_pages else "Done"
     click.secho(f"\n{message}.", fg="yellow")
 
 

@@ -31,6 +31,8 @@ class Config:
         preset="rtd",
         source_dir=None,
         output_dir=None,
+        base_url=None,
+        repository=None,
         verbose=False,
         project_name=None,
         project_dir=None,
@@ -50,7 +52,13 @@ class Config:
 
         self.source_dir = Path(source_dir or self.default_source_dir)
         self.output_dir = Path(output_dir or self.default_output_dir)
+        self.base_url = base_url
         self.verbose = verbose
+
+        self.repository = repository or self.poetry.get("repository")
+
+        if self.repository and not self.repository.endswith(".git"):
+            self.repository += ".git"
 
         self.project_name = project_name or self.poetry.get("name")
 

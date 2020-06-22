@@ -17,6 +17,7 @@ from .config import Config
 from .errors import MudkipError
 from .jupyter import jupyter_notebook
 from .npm import NpmDriver, locate_package_json
+from .github import GitHubPagesUpdater
 from .watch import DirectoryWatcher
 
 
@@ -107,6 +108,9 @@ class Mudkip:
 
         if self.config.release:
             conf.release = self.config.release
+
+        if self.config.base_url:
+            conf.html_baseurl = self.config.base_url
 
         conf.master_doc = "index"
         conf.nitpicky = True
@@ -255,10 +259,13 @@ class Mudkip:
         if not index_rst.is_file() and not index_md.is_file():
             index_rst.write_text(f"{title}\n{'=' * len(title)}\n")
 
-    def build(self, *, check=False, skip_broken_links=False):
-        try:
-            self.delete_autodoc_cache()
+    def build(self, *, check=False, skip_broken_links=False, update_gh_pages=False):
+        self.delete_autodoc_cache()
 
+        if update_gh_pages:
+            self.sphinx.setup_extension("sphinx.ext.githubpages")
+
+        try:
             if check:
                 self.clean()
 
@@ -276,6 +283,9 @@ class Mudkip:
 
         if self.npm_driver:
             self.npm_driver.build()
+
+        if update_gh_pages:
+            GitHubPagesUpdater(self.config.output_dir, self.config.repository).update()
 
     def delete_autodoc_cache(self):
         if not self.config.project_name:

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mudkip"
-version = "0.3.5"
+version = "0.3.6"
 description = "A friendly Sphinx wrapper"
 authors = ["Valentin Berlier <berlier.v@gmail.com>"]
 license = "MIT"

@@ -122,7 +122,7 @@ class Mudkip:
             "**/_*",
             "node_modules",
             "venv",
-            str(self.config.output_dir),
+            self.config.output_dir.name,
         ]
 
         self.sphinx.setup_extension("recommonmark")

@@ -477,11 +477,11 @@ test = ["pytest", "pytest-cov", "testpath"]
 
 [[package]]
 name = "nbsphinx"
-version = "0.7.1"
+version = "0.8.0"
 description = "Jupyter Notebook Tools for Sphinx"
 category = "main"
 optional = false
-python-versions = ">=3"
+python-versions = ">=3.6"
 
 [package.dependencies]
 docutils = "*"
@@ -1022,7 +1022,7 @@ testing = ["jaraco.itertools", "func-timeout"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "511d720c531fe559d44be00e969aaf8a322930a1da3ed5a404b22f28c3580622"
+content-hash = "2be1feb8ef90ea49d6f947eaf5df74f236f09cb720f795b841daf76fe6e2a1cd"
 
 [metadata.files]
 alabaster = [
@@ -1248,8 +1248,8 @@ nbformat = [
     {file = "nbformat-5.0.7.tar.gz", hash = "sha256:54d4d6354835a936bad7e8182dcd003ca3dc0cedfee5a306090e04854343b340"},
 ]
 nbsphinx = [
-    {file = "nbsphinx-0.7.1-py3-none-any.whl", hash = "sha256:560b23ff8468643b49e19293c154c93c6ee7090786922731e1c391bd566aac86"},
-    {file = "nbsphinx-0.7.1.tar.gz", hash = "sha256:f50bd750e4ee3a4e4c3cf571155eab413dc87d581c1380021e7623205b5fa648"},
+    {file = "nbsphinx-0.8.0-py3-none-any.whl", hash = "sha256:14ccbbd3d5944fd7e14087f67b83ea75cd41c9eb679561258237987d322e9381"},
+    {file = "nbsphinx-0.8.0.tar.gz", hash = "sha256:369c16fe93af14c878d61fb3e81d838196fb35b27deade2cd7b95efe1fe56ea0"},
 ]
 notebook = [
     {file = "notebook-6.1.4-py3-none-any.whl", hash = "sha256:07b6e8b8a61aa2f780fe9a97430470485bc71262bc5cae8521f1441b910d2c88"},

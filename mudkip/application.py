@@ -25,6 +25,27 @@ class TOMLFile(BaseTOMLFile):
     def exists(self):
         return path.isfile(self._path)
 
+    def extract(self, value=None):
+        if value is None:
+            return self.extract(self.read())
+
+        value = getattr(value, "value", value)
+
+        if isinstance(value, list):
+            return [self.extract(x) for x in value]
+        elif isinstance(value, dict):
+            return {self.extract(key): self.extract(val) for key, val in value.items()}
+        elif isinstance(value, tomlkit.items.Integer):
+            return int(value)
+        elif isinstance(value, tomlkit.items.Float):
+            return float(value)
+        elif isinstance(value, tomlkit.items.String):
+            return str(value)
+        elif isinstance(value, tomlkit.items.Bool):
+            return bool(value)
+
+        return value
+
 
 class Mudkip:
     def __init__(
@@ -43,11 +64,11 @@ class Mudkip:
             params = {}
 
             if pyproject.exists():
-                tool = pyproject.read().get("tool", {})
+                tool = pyproject.extract().get("tool", {})
                 params.update(tool.get("mudkip", {}), poetry=tool.get("poetry"))
 
             if mudkip.exists():
-                params.update(mudkip.read().get("mudkip", {}))
+                params.update(mudkip.extract().get("mudkip", {}))
 
             params.update(kwargs)
 

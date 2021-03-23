@@ -286,6 +286,12 @@ $ mudkip init
 
   If you're not using [poetry](https://poetry.eustace.io/), you will need to set it manually.
 
+- `override`
+
+  **default**: An empty dictionary
+
+  The `override` option lets you override sphinx configuration directly. You can use it to specify a custom theme or a logo for instance.
+
 ## Contributing
 
 Contributions are welcome. This project uses [poetry](https://poetry.eustace.io/).

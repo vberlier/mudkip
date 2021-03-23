@@ -42,10 +42,12 @@ class Config:
         release=None,
         dev_server=None,
         poetry=None,
+        override=None,
     ):
         self.preset = preset if isinstance(preset, Preset) else Preset.get(preset)
         self.dev_server = dev_server
         self.poetry = {} if poetry is None else poetry
+        self.override = override or {}
 
         self.mkdir = []
 
@@ -91,7 +93,7 @@ class Config:
         self.sphinx_buildername = "xml"
 
         self.sphinx_confdir = None
-        self.sphinx_confoverrides = {}
+        self.sphinx_confoverrides = self.override
 
     def try_set_project_dir(self):
         self.project_dir = None

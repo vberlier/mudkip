@@ -41,4 +41,4 @@ def alabaster(config):
 @preset
 def rtd(config):
     alabaster(config)
-    config.sphinx_confoverrides.update(html_theme="sphinx_rtd_theme")
+    config.sphinx_confoverrides.setdefault("html_theme", "sphinx_rtd_theme")

@@ -1,9 +1,9 @@
 import sys
 import time
-from os import path
-from functools import wraps
 from contextlib import contextmanager
-from traceback import format_exc
+from functools import wraps
+from os import path
+from traceback import format_exc, print_exception
 
 import click
 
@@ -13,17 +13,21 @@ from .config import Config
 from .errors import MudkipError
 from .preset import Preset
 
-
 DIRECTORY = click.Path(file_okay=False)
 
 
 @contextmanager
-def exception_handler(exit=False):
+def exception_handler(exit=False, verbose=False):
     try:
         yield
     except Exception as exc:
         error = exc.args[0] if isinstance(exc, MudkipError) else format_exc()
         click.secho(error, fg="red", bold=True)
+
+        if verbose and isinstance(exc, MudkipError) and exc.__cause__:
+            exc = exc.__cause__
+            click.echo()
+            print_exception(type(exc), exc, exc.__traceback__)
 
         if exit:
             sys.exit(1)
@@ -92,7 +96,7 @@ def init(application, title):
         f'{padding}Initializing "{application.config.source_dir}"...', fg="cyan"
     )
 
-    with exception_handler(exit=True):
+    with exception_handler(exit=True, verbose=application.config.verbose):
         application.init(title)
 
     click.secho("\nDone.", fg="yellow")
@@ -106,7 +110,9 @@ def init(application, title):
     help="Do not check external links for integrity.",
 )
 @click.option(
-    "--update-gh-pages", is_flag=True, help="Update GitHub Pages.",
+    "--update-gh-pages",
+    is_flag=True,
+    help="Update GitHub Pages.",
 )
 @with_application
 def build(application, check, skip_broken_links, update_gh_pages):
@@ -125,7 +131,7 @@ def build(application, check, skip_broken_links, update_gh_pages):
         f'{padding}{action} "{application.config.source_dir}"...{padding}', fg="cyan"
     )
 
-    with exception_handler(exit=True):
+    with exception_handler(exit=True, verbose=application.config.verbose):
         application.build(
             check=check,
             skip_broken_links=skip_broken_links,
@@ -168,7 +174,7 @@ def develop(
             if notebook_url:
                 click.secho(f"Notebook running on {notebook_url}{padding}", fg="cyan")
 
-            with exception_handler():
+            with exception_handler(verbose=application.config.verbose):
                 yield
             return
 
@@ -184,7 +190,7 @@ def develop(
         else:
             click.echo(f" {len(events)} changes{padding}")
 
-        with exception_handler():
+        with exception_handler(verbose=application.config.verbose):
             yield
 
     try:
@@ -211,7 +217,7 @@ def test(application):
         f'{padding}Testing "{application.config.source_dir}"...{padding}', fg="cyan"
     )
 
-    with exception_handler(exit=True):
+    with exception_handler(exit=True, verbose=application.config.verbose):
         passed, summary = application.test()
 
     if not application.config.verbose:
@@ -232,7 +238,7 @@ def clean(application):
 
     click.secho(f'{padding}Removing "{application.config.output_dir}"...', fg="cyan")
 
-    with exception_handler(exit=True):
+    with exception_handler(exit=True, verbose=application.config.verbose):
         application.clean()
 
     click.secho("\nDone.", fg="yellow")

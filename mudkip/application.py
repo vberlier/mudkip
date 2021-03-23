@@ -1,10 +1,10 @@
+import os
 import shutil
 import sys
 import time
 import webbrowser
 from contextlib import ExitStack, contextmanager, nullcontext
 from io import StringIO
-from os import path
 
 import tomlkit
 from myst_nb.render_outputs import get_default_render_priority
@@ -23,7 +23,7 @@ from .watch import DirectoryWatcher
 
 class TOMLFile(BaseTOMLFile):
     def exists(self):
-        return path.isfile(self._path)
+        return os.path.isfile(self._path)
 
     def extract(self, value=None):
         if value is None:
@@ -221,7 +221,7 @@ class Mudkip:
     def init(self, title=None):
         table = tomlkit.table()
         table["title"] = title = (
-            title or self.config.title or path.basename(path.abspath("."))
+            title or self.config.title or os.path.basename(os.path.abspath("."))
         )
         table["preset"] = self.config.preset.name
 
@@ -279,7 +279,7 @@ class Mudkip:
         try:
             if check:
                 self.clean()
-                self.config.output_dir.mkdir(parents=True, exist_ok=True)
+                os.makedirs(self.sphinx.outdir, exist_ok=True)
 
                 with self.sphinx_warning_is_error():
                     with self.sphinx_config(execution_allow_errors=False):
@@ -297,7 +297,7 @@ class Mudkip:
             self.npm_driver.build()
 
         if update_gh_pages:
-            GitHubPagesUpdater(self.config.output_dir, self.config.repository).update()
+            GitHubPagesUpdater(self.sphinx.outdir, self.config.repository).update()
 
     def delete_autodoc_cache(self):
         if not self.config.project_name:

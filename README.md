@@ -40,8 +40,8 @@ Mudkip enables the following Sphinx extensions:
 - [`sphinx.ext.doctest`](https://www.sphinx-doc.org/en/master/usage/extensions/doctest.html) for doctest support
 - [`sphinx.ext.autosectionlabel`](https://www.sphinx-doc.org/en/master/usage/extensions/autosectionlabel.html) for referencing sections with their title
 - [`sphinx.ext.githubpages`](https://www.sphinx-doc.org/fr/latest/usage/extensions/githubpages.html) when deploying to GitHub Pages
-- [`recommonmark`](https://recommonmark.readthedocs.io/en/latest/) for markdown support and [`AutoStructify`](https://recommonmark.readthedocs.io/en/latest/auto_structify.html)
-- [`nbsphinx`](https://nbsphinx.readthedocs.io) for Jupyter notebook support
+- [`myst_parser`](https://myst-parser.readthedocs.io/en/latest/) for markdown support
+- [`myst_nb`](https://myst-nb.readthedocs.io/en/latest/) for Jupyter notebook support
 
 Additional features are provided through an internal extension.
 
@@ -182,10 +182,10 @@ The `develop` command will try to run one of the following scripts: `develop`, `
 
 Mudkip doesn't really require any configuration but you can change some of the default settings with command-line options or a configuration file.
 
-For example, when running a command, you can set the `--preset` or `-p` option to `alabaster` if you want to use the [Alabaster](https://alabaster.readthedocs.io/en/latest/) theme instead of the default [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme.
+For example, when running a command, you can set the `--preset` or `-p` option to `furo` if you want to use the [Furo](https://pradyunsg.me/furo/) theme instead of the default [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme.
 
 ```
-$ mudkip build --preset alabaster
+$ mudkip build --preset furo
 ```
 
 It's also possible to change the default source and output directories with the `--source-dir` and `--output-dir` options respectively.
@@ -208,7 +208,7 @@ $ mudkip init
 
   **default**: `"rtd"`
 
-  Presets configure Mudkip and Sphinx to enable specific features. The `rtd` and `alabaster` presets enable the development server and configure Sphinx to use the `dirhtml` builder. The `rtd` preset also changes the html theme to the [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme.
+  Presets configure Mudkip and Sphinx to enable specific features. The `rtd`, `furo` and `alabaster` presets enable the development server and configure Sphinx to use the `dirhtml` builder. The `rtd` preset changes the html theme to the [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme and the `furo` preset to the [Furo](https://pradyunsg.me/furo/) theme.
 
   The `xml` preset configures Sphinx to use the `xml` builder. This is useful for more advanced use-cases when you have a separate static site generator that can process a hierarchy of docutils documents.
 

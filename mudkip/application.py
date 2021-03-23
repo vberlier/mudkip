@@ -180,7 +180,8 @@ class Mudkip:
             self.sphinx.preload_builder(buildername)
             self.sphinx.builder = self.sphinx.create_builder(buildername)
             self.sphinx._init_env(False)
-            self.sphinx._init_builder()
+            self.sphinx.builder.set_environment(self.sphinx.env)
+            self.sphinx.builder.init()
             yield
         finally:
             self.sphinx.builder = original_builder

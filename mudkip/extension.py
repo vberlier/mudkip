@@ -2,10 +2,9 @@ import os
 
 from docutils.core import ErrorString
 from docutils.io import FileInput
-from docutils.utils import relative_path, new_document
 from docutils.parsers import rst
-from recommonmark.parser import CommonMarkParser
-from recommonmark.transform import AutoStructify
+from docutils.utils import new_document, relative_path
+from myst_parser.sphinx_parser import MystParser
 
 from . import __version__
 
@@ -77,8 +76,7 @@ class MdInclude(rst.Directive):
             )
 
         document = new_document(absolute_path, settings)
-        CommonMarkParser().parse(rawtext, document)
-        AutoStructify(document).apply()
+        MystParser().parse(rawtext, document)
 
         return document.children
 

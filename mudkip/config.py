@@ -3,7 +3,6 @@ from pathlib import Path
 
 from .preset import Preset
 
-
 AUTHOR_EXTRA = re.compile(r"<.*?>|\(.*?\)|\[.*?\]")
 SPACES = re.compile(r"\s+")
 
@@ -24,7 +23,7 @@ def join_authors(authors):
 
 class Config:
     default_source_dir = "docs"
-    default_output_dir = "docs/dist"
+    default_output_dir = "docs/_build"
 
     def __init__(
         self,
@@ -86,8 +85,8 @@ class Config:
         self.sphinx_project = self.title
 
         self.sphinx_srcdir = self.source_dir
-        self.sphinx_outdir = self.output_dir
-        self.sphinx_doctreedir = self.sphinx_outdir / ".doctrees"
+        self.sphinx_outdir = self.output_dir / "dist"
+        self.sphinx_doctreedir = self.output_dir / "doctrees"
 
         self.sphinx_buildername = "xml"
 

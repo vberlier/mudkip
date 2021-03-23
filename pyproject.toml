@@ -15,19 +15,19 @@ keywords = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7"
-sphinx = "^3.1.1"
-click = "^7.0"
-recommonmark = ">=0.6,<0.8"
-watchdog = ">=0.10.2,<2.1.0"
-sphinx-autodoc-typehints = "^1.11.0"
-sphinx_rtd_theme = "^0.5.0"
-livereload = "^2.6"
-tomlkit = ">=0.6,<0.8"
-nbsphinx = ">=0.7.1,<0.9.0"
-notebook = "^6.0.3"
+python = "^3.8"
+Sphinx = "^3.5.3"
+click = "^7.1.2"
+watchdog = "^2.0.2"
+sphinx-autodoc-typehints = "^1.11.1"
+sphinx-rtd-theme = "^0.5.1"
+livereload = "^2.6.3"
+tomlkit = "^0.7.0"
+notebook = "^6.3.0"
 jupyter_nbextensions_configurator = "^0.4.1"
 colorama = {version = "*", markers = 'sys_platform == "win32"'}
+myst-parser = "^0.13.5"
+myst-nb = "^0.12.0"
 
 [tool.poetry.dev-dependencies]
 black = { version = "^20.8b1", allow-prereleases = true }

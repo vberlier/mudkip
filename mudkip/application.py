@@ -1,23 +1,23 @@
+import shutil
 import sys
 import time
-import shutil
-from os import path
-from io import StringIO
-from contextlib import contextmanager, nullcontext, ExitStack
 import webbrowser
+from contextlib import ExitStack, contextmanager, nullcontext
+from io import StringIO
+from os import path
 
 import tomlkit
-from tomlkit.toml_file import TOMLFile as BaseTOMLFile
+from myst_nb.render_outputs import get_default_render_priority
 from sphinx.application import Sphinx
 from sphinx.errors import SphinxError
 from sphinx.util import logging
-from recommonmark.transform import AutoStructify
+from tomlkit.toml_file import TOMLFile as BaseTOMLFile
 
 from .config import Config
 from .errors import MudkipError
+from .github import GitHubPagesUpdater
 from .jupyter import jupyter_notebook
 from .npm import NpmDriver, locate_package_json
-from .github import GitHubPagesUpdater
 from .watch import DirectoryWatcher
 
 
@@ -125,21 +125,10 @@ class Mudkip:
             self.config.output_dir.name,
         ]
 
-        self.sphinx.setup_extension("recommonmark")
-
-        recommonmark_config = {
-            "enable_auto_toc_tree": True,
-            "enable_math": True,
-            "enable_inline_math": True,
-            "enable_eval_rst": True,
-        }
-
-        self.sphinx.add_config_value("recommonmark_config", recommonmark_config, "env")
-        self.sphinx.add_transform(AutoStructify)
-
-        self.sphinx.setup_extension("nbsphinx")
-        conf.nbsphinx_execute = "always"
-        conf.nbsphinx_allow_errors = True
+        self.sphinx.setup_extension("myst_nb")
+        conf.jupyter_execute_notebooks = "force"
+        conf.execution_allow_errors = True
+        conf.nb_render_priority = {"xml": get_default_render_priority("dirhtml")}
 
         self.sphinx.setup_extension("sphinx.ext.autodoc")
         conf.autodoc_member_order = "bysource"
@@ -270,7 +259,7 @@ class Mudkip:
                 self.clean()
 
                 with self.sphinx_warning_is_error():
-                    with self.sphinx_config(nbsphinx_allow_errors=False):
+                    with self.sphinx_config(execution_allow_errors=False):
                         self.sphinx.build()
 
                         if not skip_broken_links:
@@ -324,7 +313,7 @@ class Mudkip:
             patterns.append("*.py")
 
         with ExitStack() as stack:
-            stack.enter_context(self.sphinx_config(nbsphinx_execute="never"))
+            stack.enter_context(self.sphinx_config(jupyter_execute_notebooks="auto"))
 
             notebook_url = None
             if notebook:

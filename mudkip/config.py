@@ -48,6 +48,9 @@ class Config:
         self.dev_server = dev_server
         self.poetry = {} if poetry is None else poetry
         self.override = override or {}
+        self.override.setdefault("html_static_path", []).append(
+            str(Path(__file__).resolve().with_name("_static"))
+        )
 
         self.mkdir = []
 

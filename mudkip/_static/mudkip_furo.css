@@ -1,0 +1,12 @@
+.cell_input,
+.cell_output .output {
+  border: none !important;
+  background: none !important;
+}
+
+.cell_output {
+  border: none !important;
+  padding-left: 1.8em !important;
+  background: no-repeat
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='22' viewBox='0 0 24 24' width='22'%3E%3Cpath d='M0 0h24v24H0V0z' fill='none'/%3E%3Cpath d='M19 15l-6 6-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z' fill='%2372747eaa '/%3E%3C/svg%3E%0A") !important;
+}

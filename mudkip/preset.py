@@ -41,4 +41,11 @@ def alabaster(config):
 @preset
 def rtd(config):
     alabaster(config)
-    config.sphinx_confoverrides.setdefault("html_theme", "sphinx_rtd_theme")
+    config.override.setdefault("html_theme", "sphinx_rtd_theme")
+
+
+@preset
+def furo(config):
+    alabaster(config)
+    config.override.setdefault("html_theme", "furo")
+    config.override.setdefault("html_css_files", []).append("mudkip_furo.css")

@@ -279,6 +279,7 @@ class Mudkip:
         try:
             if check:
                 self.clean()
+                self.config.output_dir.mkdir(parents=True, exist_ok=True)
 
                 with self.sphinx_warning_is_error():
                     with self.sphinx_config(execution_allow_errors=False):

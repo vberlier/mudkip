@@ -156,7 +156,11 @@ class Mudkip:
 
         self.sphinx.setup_extension("sphinx.ext.napoleon")
         self.sphinx.setup_extension("sphinx.ext.doctest")
-        self.sphinx.setup_extension("sphinx.ext.autosectionlabel")
+
+        if self.config.section_label_depth:
+            self.sphinx.setup_extension("sphinx.ext.autosectionlabel")
+            conf.autosectionlabel_maxdepth = self.config.section_label_depth
+
         self.sphinx.setup_extension("sphinx_autodoc_typehints")
 
         self.sphinx.setup_extension("mudkip.extension")

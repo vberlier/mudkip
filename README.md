@@ -292,6 +292,10 @@ $ mudkip init
 
   The `override` option lets you override sphinx configuration directly. You can use it to specify a custom theme or a logo for instance.
 
+- `section_label_depth`
+
+  Enables `sphinx.ext.autosectionlabel` and sets the `autosectionlabel_maxdepth` option.
+
 ## Contributing
 
 Contributions are welcome. This project uses [poetry](https://poetry.eustace.io/).

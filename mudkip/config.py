@@ -43,6 +43,7 @@ class Config:
         dev_server=None,
         poetry=None,
         override=None,
+        section_label_depth=None,
     ):
         self.preset = preset if isinstance(preset, Preset) else Preset.get(preset)
         self.dev_server = dev_server
@@ -76,6 +77,8 @@ class Config:
         self.author = author or join_authors(self.poetry.get("authors"))
         self.release = release or self.poetry.get("version")
         self.version = version or self.release and ".".join(self.release.split(".")[:2])
+
+        self.section_label_depth = section_label_depth
 
         self.mkdir += self.source_dir, self.output_dir
 

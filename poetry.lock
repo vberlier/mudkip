@@ -207,7 +207,7 @@ python-versions = ">=2.7"
 
 [[package]]
 name = "furo"
-version = "2021.3.20b31"
+version = "2021.4.11b34"
 description = "A clean customisable Sphinx documentation theme."
 category = "main"
 optional = false
@@ -218,7 +218,7 @@ beautifulsoup4 = "*"
 sphinx = ">=3.0,<4.0"
 
 [package.extras]
-doc = ["myst-parser", "sphinx-copybutton", "sphinx-inline-tabs"]
+doc = ["myst-parser", "sphinx-copybutton", "sphinx-inline-tabs", "docutils (!=0.17)"]
 test = ["pytest", "pytest-cov", "pytest-xdist"]
 
 [[package]]
@@ -1446,8 +1446,8 @@ entrypoints = [
     {file = "entrypoints-0.3.tar.gz", hash = "sha256:c70dd71abe5a8c85e55e12c19bd91ccfeec11a6e99044204511f9ed547d48451"},
 ]
 furo = [
-    {file = "furo-2021.3.20b31-py3-none-any.whl", hash = "sha256:34bd70a839794872d4ba6656d18b4d94cca16684e16e224a0073cf1977f29e43"},
-    {file = "furo-2021.3.20b31.tar.gz", hash = "sha256:6fd32e204195d0bc39ca9eb15dd7cbeb068410a496bc4f76b9cd198cb4e12eaf"},
+    {file = "furo-2021.4.11b34-py3-none-any.whl", hash = "sha256:576a1dc1bcbe337d7c53cbc75b886802778a5964fd2e3324433d706066e9aea8"},
+    {file = "furo-2021.4.11b34.tar.gz", hash = "sha256:3d88e2855949cecf5f562e8a28cab1a6d3355d82f3cf5796eddf9ec234e97519"},
 ]
 gitdb = [
     {file = "gitdb-4.0.5-py3-none-any.whl", hash = "sha256:91f36bfb1ab7949b3b40e23736db18231bf7593edada2ba5c3a174a7b23657ac"},

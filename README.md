@@ -81,7 +81,7 @@ Server running on http://localhost:5500
 
 The command will create the "docs" directory if it doesn't already exist and launch a development server with live reloading. If you create an `index.rst` file and open the link in your browser, you'll see that mudkip uses the [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme by default.
 
-> Note that mudkip enables the [`recommonmark`](https://recommonmark.readthedocs.io/en/latest/) extension, allowing you to use both reStructuredText and markdown files. You can create an `index.md` file if you want to use markdown instead of reStructuredText.
+> Note that mudkip enables the [`myst_parser`](https://myst-parser.readthedocs.io/en/latest/) extension, allowing you to use both reStructuredText and markdown files. You can create an `index.md` file if you want to use markdown instead of reStructuredText.
 
 Press `Ctrl+C` at any time to exit.
 

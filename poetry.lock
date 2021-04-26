@@ -486,7 +486,7 @@ test = ["jupyter-contrib-core", "nose", "requests", "selenium", "mock"]
 
 [[package]]
 name = "jupyter-sphinx"
-version = "0.3.1"
+version = "0.3.2"
 description = "Jupyter Sphinx Extensions"
 category = "main"
 optional = false
@@ -579,7 +579,7 @@ python-versions = "*"
 
 [[package]]
 name = "myst-nb"
-version = "0.12.0"
+version = "0.12.2"
 description = "A Jupyter Notebook Sphinx reader built on top of the MyST markdown parser."
 category = "main"
 optional = false
@@ -587,12 +587,12 @@ python-versions = ">=3.6"
 
 [package.dependencies]
 docutils = ">=0.15"
-importlib-metadata = "*"
+importlib-metadata = ">=3.6"
 ipython = "*"
 ipywidgets = ">=7.0.0,<8"
 jupyter-cache = ">=0.4.1,<0.5.0"
-jupyter-sphinx = "0.3.1"
-myst-parser = ">=0.13.3,<0.14.0"
+jupyter-sphinx = ">=0.3.2,<0.4.0"
+myst-parser = ">=0.13.5,<0.14.0"
 nbconvert = ">=5.6,<6.0"
 nbformat = ">=5.0,<6.0"
 pyyaml = "*"
@@ -600,9 +600,9 @@ sphinx = ">=2,<4"
 sphinx-togglebutton = ">=0.2.2,<0.3.0"
 
 [package.extras]
-code_style = ["flake8 (>=3.7.0,<3.8.0)", "black", "pre-commit (==1.17.0)"]
-rtd = ["jupytext (>=1.8.0,<1.9.0)", "coconut (>=1.4.3,<1.5.0)", "sphinxcontrib-bibtex", "ipywidgets", "pandas", "numpy", "sympy", "altair", "alabaster", "bokeh", "plotly", "matplotlib", "sphinx-copybutton", "sphinx-book-theme", "sphinx-panels (>=0.4.1,<0.5.0)"]
-testing = ["pytest (>=5.4,<6.0)", "pytest-cov (>=2.8,<3.0)", "coverage (<5.0)", "pytest-regressions", "matplotlib", "numpy", "sympy", "pandas", "jupytext (>=1.8.0,<1.9.0)"]
+code_style = ["pre-commit (>=2.12,<3.0)"]
+rtd = ["alabaster", "altair", "bokeh", "coconut (>=1.4.3,<1.5.0)", "ipywidgets", "jupytext (>=1.8.0,<1.9.0)", "matplotlib", "numpy", "pandas", "plotly", "sphinx-book-theme (>=0.1.0,<0.2.0)", "sphinx-copybutton", "sphinx-panels (>=0.4.1,<0.5.0)", "sphinxcontrib-bibtex", "sympy"]
+testing = ["coverage (<5.0)", "jupytext (>=1.8.0,<1.9.0)", "matplotlib (>=3.3.0,<3.4.0)", "numpy", "pandas", "pytest (>=5.4,<6.0)", "pytest-cov (>=2.8,<3.0)", "pytest-regressions", "sympy"]
 
 [[package]]
 name = "myst-parser"
@@ -1518,8 +1518,8 @@ jupyter-nbextensions-configurator = [
     {file = "jupyter_nbextensions_configurator-0.4.1.tar.gz", hash = "sha256:e5e86b5d9d898e1ffb30ebb08e4ad8696999f798fef3ff3262d7b999076e4e83"},
 ]
 jupyter-sphinx = [
-    {file = "jupyter_sphinx-0.3.1-py3-none-any.whl", hash = "sha256:56f4cd319b96c491c61bfa9d11a2ee452d2758beecbd2723b23916aaac4c2bab"},
-    {file = "jupyter_sphinx-0.3.1.tar.gz", hash = "sha256:c4caf8bbf2be6edfe0319aa76127d17fdbe6927c8189cda2d6ac59c01f38404b"},
+    {file = "jupyter_sphinx-0.3.2-py3-none-any.whl", hash = "sha256:301e36d0fb3007bb5802f6b65b60c24990eb99c983332a2ab6eecff385207dc9"},
+    {file = "jupyter_sphinx-0.3.2.tar.gz", hash = "sha256:37fc9408385c45326ac79ca0452fbd7ae2bf0e97842d626d2844d4830e30aaf2"},
 ]
 jupyterlab-widgets = [
     {file = "jupyterlab_widgets-1.0.0-py3-none-any.whl", hash = "sha256:caeaf3e6103180e654e7d8d2b81b7d645e59e432487c1d35a41d6d3ee56b3fef"},
@@ -1599,8 +1599,8 @@ mypy-extensions = [
     {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
 ]
 myst-nb = [
-    {file = "myst-nb-0.12.0.tar.gz", hash = "sha256:d0b64c41a43594d3a06bc109fdfed27b442c542d9c6b9def257300133a532496"},
-    {file = "myst_nb-0.12.0-py3-none-any.whl", hash = "sha256:4966029f0af73801eef77cefab4d147451c0c1968a5dfd43d1cb72d339df1a80"},
+    {file = "myst-nb-0.12.2.tar.gz", hash = "sha256:5745f0c3e2da14b9f4ccd20ef26f7bdb2012f1064fa5d4a80493f4264e6cc3d0"},
+    {file = "myst_nb-0.12.2-py3-none-any.whl", hash = "sha256:10fe75a22ed2979cf59e78a65df3af4a05c6bf6ee4584fcabbc865073a9e1a85"},
 ]
 myst-parser = [
     {file = "myst-parser-0.13.6.tar.gz", hash = "sha256:bec01ecebe9b9c04322f8aebd6fd8e61d2cb9ab711d531065a374cc3dcb1d7be"},

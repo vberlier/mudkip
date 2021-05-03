@@ -578,7 +578,7 @@ python-versions = "*"
 
 [[package]]
 name = "myst-nb"
-version = "0.12.2"
+version = "0.12.3"
 description = "A Jupyter Notebook Sphinx reader built on top of the MyST markdown parser."
 category = "main"
 optional = false
@@ -586,7 +586,7 @@ python-versions = ">=3.6"
 
 [package.dependencies]
 docutils = ">=0.15"
-importlib-metadata = ">=3.6"
+importlib-metadata = "*"
 ipython = "*"
 ipywidgets = ">=7.0.0,<8"
 jupyter-cache = ">=0.4.1,<0.5.0"
@@ -1583,8 +1583,8 @@ mypy-extensions = [
     {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
 ]
 myst-nb = [
-    {file = "myst-nb-0.12.2.tar.gz", hash = "sha256:5745f0c3e2da14b9f4ccd20ef26f7bdb2012f1064fa5d4a80493f4264e6cc3d0"},
-    {file = "myst_nb-0.12.2-py3-none-any.whl", hash = "sha256:10fe75a22ed2979cf59e78a65df3af4a05c6bf6ee4584fcabbc865073a9e1a85"},
+    {file = "myst-nb-0.12.3.tar.gz", hash = "sha256:4666039f538abf32d6489f4caf912d505e8798a2709bcf7a7936823ca6b15810"},
+    {file = "myst_nb-0.12.3-py3-none-any.whl", hash = "sha256:3bc5191494720748419b8247e9ffc92d39b4ea7689f92d937e65110b346403fd"},
 ]
 myst-parser = [
     {file = "myst-parser-0.13.7.tar.gz", hash = "sha256:e4bc99e43e19f70d22e528de8e7cce59f7e8e7c4c34dcba203de92de7a7c7c85"},

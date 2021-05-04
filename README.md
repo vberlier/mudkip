@@ -1,4 +1,4 @@
-# 📘 Mudkip
+# Mudkip
 
 [![GitHub Actions](https://github.com/vberlier/mudkip/workflows/CI/badge.svg)](https://github.com/vberlier/mudkip/actions)
 [![PyPI](https://img.shields.io/pypi/v/mudkip.svg)](https://pypi.org/project/mudkip/)

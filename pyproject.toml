@@ -12,6 +12,11 @@ documentation = "https://github.com/vberlier/mudkip"
 readme = "README.md"
 
 keywords = [
+  "documentation",
+  "sphinx",
+  "jupyter-notebooks",
+  "autodoc",
+  "doctests"
 ]
 
 [tool.poetry.dependencies]

@@ -6,6 +6,7 @@ A friendly Sphinx wrapper.
 :hidden:
 
 notebook_example
+changelog
 ```
 
 ```{toctree}

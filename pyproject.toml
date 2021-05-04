@@ -42,6 +42,13 @@ python-semantic-release = "^7.15.4"
 [tool.poetry.scripts]
 mudkip = 'mudkip.cli:main'
 
+[tool.semantic_release]
+branch = "main"
+version_variable = ["mudkip/__init__.py:__version__"]
+version_toml = "pyproject.toml:tool.poetry.version"
+major_on_zero = false
+build_command = "poetry build"
+
 [tool.mudkip]
 preset = "furo"
 

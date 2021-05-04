@@ -79,7 +79,6 @@ class Mudkip:
         self.mudkip = mudkip
 
         self.create_sphinx_application()
-        self.configure_sphinx()
 
         package_json_dir = locate_package_json(config)
         self.npm_driver = (
@@ -99,71 +98,79 @@ class Mudkip:
         if not self.config.verbose:
             extra_args["status"] = None
 
+        conf = self.config.sphinx_confoverrides
+
+        if self.config.sphinx_project:
+            conf.setdefault("project", self.config.sphinx_project)
+
+        copyright = conf.setdefault("copyright", time.strftime("%Y"))
+
+        if self.config.author:
+            author = conf.setdefault("author", self.config.author)
+            conf.setdefault("copyright", copyright + ", " + author)
+
+        if self.config.copyright:
+            conf.setdefault("copyright", self.config.copyright)
+        if self.config.version:
+            conf.setdefault("version", self.config.version)
+        if self.config.release:
+            conf.setdefault("release", self.config.release)
+        if self.config.base_url:
+            conf.setdefault("html_baseurl", self.config.base_url)
+
+        conf.setdefault("master_doc", "index")
+        conf.setdefault("nitpicky", True)
+
+        conf.setdefault(
+            "exclude_patterns",
+            [
+                ".*",
+                "**/.*",
+                "_*",
+                "**/_*",
+                "node_modules",
+                "venv",
+                self.config.output_dir.name,
+            ],
+        )
+
+        extensions = conf.setdefault("extensions", [])
+
+        extensions.append("myst_nb")
+        conf.setdefault("jupyter_execute_notebooks", "force")
+        conf.setdefault("execution_allow_errors", True)
+        conf.setdefault(
+            "nb_render_priority", {"xml": get_default_render_priority("dirhtml")}
+        )
+
+        extensions.append("sphinx.ext.autodoc")
+        conf.setdefault("autodoc_member_order", "bysource")
+
+        extensions.append("sphinx.ext.napoleon")
+        extensions.append("sphinx.ext.doctest")
+
+        if self.config.section_label_depth:
+            extensions.append("sphinx.ext.autosectionlabel")
+            conf.setdefault(
+                "autosectionlabel_maxdepth", self.config.section_label_depth
+            )
+
+        extensions.append("sphinx_autodoc_typehints")
+
+        extensions.append("mudkip.extension")
+
         self.sphinx = Sphinx(
             self.config.sphinx_srcdir,
             self.config.sphinx_confdir,
             self.config.sphinx_outdir,
             self.config.sphinx_doctreedir,
             self.config.sphinx_buildername,
-            self.config.sphinx_confoverrides,
+            conf,
             **extra_args,
         )
 
-    def configure_sphinx(self):
-        conf = self.sphinx.config
-
-        if self.config.sphinx_project:
-            conf.project = self.config.sphinx_project
-
-        conf.copyright = time.strftime("%Y")
-
-        if self.config.author:
-            conf.author = self.config.author
-            conf.copyright += ", " + conf.author
-
-        if self.config.copyright:
-            conf.copyright = self.config.copyright
-
-        if self.config.version:
-            conf.version = self.config.version
-
-        if self.config.release:
-            conf.release = self.config.release
-
-        if self.config.base_url:
-            conf.html_baseurl = self.config.base_url
-
-        conf.master_doc = "index"
-        conf.nitpicky = True
-
-        conf.exclude_patterns = [
-            ".*",
-            "**/.*",
-            "_*",
-            "**/_*",
-            "node_modules",
-            "venv",
-            self.config.output_dir.name,
-        ]
-
-        self.sphinx.setup_extension("myst_nb")
-        conf.jupyter_execute_notebooks = "force"
-        conf.execution_allow_errors = True
-        conf.nb_render_priority = {"xml": get_default_render_priority("dirhtml")}
-
-        self.sphinx.setup_extension("sphinx.ext.autodoc")
-        conf.autodoc_member_order = "bysource"
-
-        self.sphinx.setup_extension("sphinx.ext.napoleon")
-        self.sphinx.setup_extension("sphinx.ext.doctest")
-
-        if self.config.section_label_depth:
-            self.sphinx.setup_extension("sphinx.ext.autosectionlabel")
-            conf.autosectionlabel_maxdepth = self.config.section_label_depth
-
-        self.sphinx.setup_extension("sphinx_autodoc_typehints")
-
-        self.sphinx.setup_extension("mudkip.extension")
+        if self.sphinx.config.myst_update_mathjax:
+            del self.sphinx.config.mathjax_config
 
         self.sphinx._init_env(True)
         self.sphinx._init_builder()

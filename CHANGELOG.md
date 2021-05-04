@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.8 (2021-05-04)
+### Fix
+* Load extensions earlier so that overrides can change extension config ([`9fdfbd4`](https://github.com/vberlier/mudkip/commit/9fdfbd4739bd4b36cd53ed1a8694c1cf76d7e176))
+
 ## v0.4.7 (2021-05-04)
 ### Fix
 * Update README ([`8bf7237`](https://github.com/vberlier/mudkip/commit/8bf72375a155cf0f437796bb9c577d708e897d09))

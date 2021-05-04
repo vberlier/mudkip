@@ -1,12 +1,11 @@
 # 📘 Mudkip
 
+[![GitHub Actions](https://github.com/vberlier/mudkip/workflows/CI/badge.svg)](https://github.com/vberlier/mudkip/actions)
 [![PyPI](https://img.shields.io/pypi/v/mudkip.svg)](https://pypi.org/project/mudkip/)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mudkip.svg)](https://pypi.org/project/mudkip/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-> A friendly [Sphinx](https://sphinx-doc.org) wrapper.
-
-**🚧 Work in progress 🚧**
+> A friendly [Sphinx](https://sphinx-doc.org) wrapper for the rest of us.
 
 Mudkip is a small wrapper around [Sphinx](https://sphinx-doc.org) that bundles essential tools and extensions, providing everything needed for building rich documentation for Python projects.
 
@@ -71,7 +70,7 @@ $ pip install mudkip
 
 ## Getting started
 
-After installing the package, no need to run `sphinx-quickstart` or to configure anything, you can run the `develop` command right away and start writing docs.
+You can forget everything about `sphinx-quickstart`, `conf.py` and intimidating Makefiles. After installing the package, no need to configure anything you can run the `develop` command right away and start writing docs.
 
 ```bash
 $ mudkip develop
@@ -149,7 +148,7 @@ Passed.
 
 ### Using Jupyter notebooks
 
-The [`nbsphinx`](https://nbsphinx.readthedocs.io) extension provides support for Jupyter notebooks. This means that in addition to `.rst` and `.md` files, Sphinx will also generate pages for `.ipynb` files.
+The [`myst-nb`](https://myst-nb.readthedocs.io/en/latest/) extension provides support for Jupyter notebooks. This means that in addition to `.rst` and `.md` files, Sphinx will also generate pages for `.ipynb` files.
 
 The `develop` command can launch the Jupyter notebook in the "docs" directory and open it in your browser with the `--notebook` or `-n` flag.
 
@@ -298,13 +297,13 @@ $ mudkip init
 
 ## Contributing
 
-Contributions are welcome. This project uses [poetry](https://poetry.eustace.io/).
+Contributions are welcome. Make sure to first open an issue discussing the problem or the new feature before creating a pull request. The project uses [poetry](https://python-poetry.org/).
 
 ```bash
 $ poetry install
 ```
 
-The code follows the [black](https://github.com/ambv/black) code style.
+The code follows the [black](https://github.com/psf/black) code style.
 
 ```bash
 $ poetry run black mudkip

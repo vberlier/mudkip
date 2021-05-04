@@ -5,9 +5,9 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mudkip.svg)](https://pypi.org/project/mudkip/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-> A friendly [Sphinx](https://sphinx-doc.org) wrapper.
+> A friendly [Sphinx](https://www.sphinx-doc.org/en/master/) wrapper.
 
-Mudkip is a small wrapper around [Sphinx](https://sphinx-doc.org) that bundles essential tools and extensions, providing everything needed for building rich documentation for Python projects.
+Mudkip is a small wrapper around [Sphinx](https://www.sphinx-doc.org/en/master/) that bundles essential tools and extensions, providing everything needed for building rich documentation for Python projects.
 
 ```bash
 $ mudkip --help
@@ -38,7 +38,7 @@ Mudkip enables the following Sphinx extensions:
 - [`sphinx_autodoc_typehints`](https://github.com/agronholm/sphinx-autodoc-typehints) for pulling type information from Python 3 annotations
 - [`sphinx.ext.doctest`](https://www.sphinx-doc.org/en/master/usage/extensions/doctest.html) for doctest support
 - [`sphinx.ext.autosectionlabel`](https://www.sphinx-doc.org/en/master/usage/extensions/autosectionlabel.html) for referencing sections with their title
-- [`sphinx.ext.githubpages`](https://www.sphinx-doc.org/fr/latest/usage/extensions/githubpages.html) when deploying to GitHub Pages
+- [`sphinx.ext.githubpages`](https://www.sphinx-doc.org/en/master/usage/extensions/githubpages.html) when deploying to GitHub Pages
 - [`myst_parser`](https://myst-parser.readthedocs.io/en/latest/) for markdown support
 - [`myst_nb`](https://myst-nb.readthedocs.io/en/latest/) for Jupyter notebook support
 
@@ -100,7 +100,7 @@ $ mudkip build --check
 
 The `--check` flag also makes sure that there are no broken links by running the [`linkcheck`](https://www.sphinx-doc.org/en/master/usage/builders/index.html#sphinx.builders.linkcheck.CheckExternalLinksBuilder) builder on your documentation. You can disable this with the `--skip-broken-links` flag.
 
-The `build` command also features a really handy flag if you're deploying the documentation to GitHub Pages. The `--update-gh-pages` flag will invoke Sphinx with the [`sphinx.ext.githubpages`](https://www.sphinx-doc.org/fr/latest/usage/extensions/githubpages.html) extension and then force push the output directory to the `gh-pages` branch of your repository.
+The `build` command also features a really handy flag if you're deploying the documentation to GitHub Pages. The `--update-gh-pages` flag will invoke Sphinx with the [`sphinx.ext.githubpages`](https://www.sphinx-doc.org/en/master/usage/extensions/githubpages.html) extension and then force push the output directory to the `gh-pages` branch of your repository.
 
 ```bash
 $ mudkip build --update-gh-pages

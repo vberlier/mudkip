@@ -1,0 +1,25 @@
+# Mudkip
+
+A friendly Sphinx wrapper for the rest of us.
+
+```{toctree}
+:hidden:
+
+notebook_example
+```
+
+```{toctree}
+:caption: Project links
+:hidden:
+
+GitHub Repository <https://github.com/vberlier/mudkip>
+PyPI Package <https://pypi.org/project/mudkip>
+```
+
+---
+
+```{eval-rst}
+.. mdinclude:: ../README.md
+  :start-line: 9
+  :end-line: -3
+```

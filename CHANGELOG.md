@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.7 (2021-05-04)
+### Fix
+* Update README ([`8bf7237`](https://github.com/vberlier/mudkip/commit/8bf72375a155cf0f437796bb9c577d708e897d09))
+
+### Documentation
+* Add changelog ([`462ae75`](https://github.com/vberlier/mudkip/commit/462ae7596949e1a4f7dd880ba14ed7aa50d66655))
+
 ## v0.4.6 (2021-05-04)
 ### Fix
 * Improve furo cell outputs ([`f346fd8`](https://github.com/vberlier/mudkip/commit/f346fd8b4d4b4edbe7d2576cef50b270814a7114))

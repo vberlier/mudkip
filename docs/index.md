@@ -1,6 +1,6 @@
 # Mudkip
 
-A friendly Sphinx wrapper for the rest of us.
+A friendly Sphinx wrapper.
 
 ```{toctree}
 :hidden:

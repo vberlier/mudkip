@@ -5,7 +5,7 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mudkip.svg)](https://pypi.org/project/mudkip/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-> A friendly [Sphinx](https://sphinx-doc.org) wrapper for the rest of us.
+> A friendly [Sphinx](https://sphinx-doc.org) wrapper.
 
 Mudkip is a small wrapper around [Sphinx](https://sphinx-doc.org) that bundles essential tools and extensions, providing everything needed for building rich documentation for Python projects.
 

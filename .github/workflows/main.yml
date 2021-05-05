@@ -8,7 +8,7 @@ on:
 
 jobs:
   main:
-    name: Build docs and release
+    name: Update docs and release
     runs-on: ubuntu-latest
 
     steps:
@@ -34,12 +34,7 @@ jobs:
         run: poetry install
       - name: Check formatting
         run: poetry run black --check mudkip
-      - name: Build and deploy documentation
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "action@github.com"
-          poetry run mudkip build --check --update-gh-pages --repository https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-      - name: Release
+      - name: Update docs and release
         if: |
           github.repository == 'vberlier/mudkip'
           && github.event_name == 'push'

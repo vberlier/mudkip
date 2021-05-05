@@ -20,7 +20,11 @@ def jupyter_notebook(source_dir, verbose, ip, port):
 
 def notebook_process(queue, source_dir, verbose, ip, port):
     Notebook.launch_instance(
-        argv=[source_dir], queue=queue, verbose=verbose, ip=ip, port=port
+        argv=[source_dir, "--no-browser"],
+        queue=queue,
+        verbose=verbose,
+        ip=ip,
+        port=port,
     )
 
 
@@ -33,4 +37,4 @@ class Notebook(NotebookApp):
             self.ip = ip
         if port:
             self.port = port
-        queue.put(self.display_url)
+        queue.put(self.display_url.split()[0])

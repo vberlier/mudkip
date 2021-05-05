@@ -369,6 +369,8 @@ class Mudkip:
                 if open_browser:
                     try:
                         webbrowser.open(server_url)
+                        if notebook_url:
+                            webbrowser.open(notebook_url)
                     except webbrowser.Error:
                         pass
 

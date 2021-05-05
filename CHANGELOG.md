@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.9 (2021-05-05)
+### Fix
+* Only open notebook in browser with the --open flag ([`25763c7`](https://github.com/vberlier/mudkip/commit/25763c7700be97db887ccc6d0c9d791d7af12584))
+
 ## v0.4.8 (2021-05-04)
 ### Fix
 * Load extensions earlier so that overrides can change extension config ([`9fdfbd4`](https://github.com/vberlier/mudkip/commit/9fdfbd4739bd4b36cd53ed1a8694c1cf76d7e176))

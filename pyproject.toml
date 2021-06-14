@@ -36,7 +36,7 @@ myst-nb = "^0.12.0"
 furo = "^2021.3.20-beta.31"
 
 [tool.poetry.dev-dependencies]
-black = { version = "^21.5b2", allow-prereleases = true }
+black = { version = "^21.6b0", allow-prereleases = true }
 python-semantic-release = "^7.15.4"
 
 [tool.poetry.scripts]

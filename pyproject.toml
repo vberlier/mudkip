@@ -37,7 +37,7 @@ furo = "^2021.3.20-beta.31"
 
 [tool.poetry.dev-dependencies]
 black = { version = "^21.6b0", allow-prereleases = true }
-python-semantic-release = "^7.15.4"
+python-semantic-release = "^7.16.0"
 
 [tool.poetry.scripts]
 mudkip = 'mudkip.cli:main'

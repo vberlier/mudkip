@@ -22,7 +22,7 @@ keywords = [
 [tool.poetry.dependencies]
 python = "^3.8"
 Sphinx = "^3.5.3"
-click = "^7.1.2"
+click = ">=7.1.2,<9.0.0"
 watchdog = "^2.0.2"
 sphinx-autodoc-typehints = "^1.11.1"
 sphinx-rtd-theme = "^0.5.1"

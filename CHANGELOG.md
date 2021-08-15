@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.10 (2021-08-15)
+### Fix
+* Upgrade to click 8 ([`40c0932`](https://github.com/vberlier/mudkip/commit/40c0932461bdbefe2f76494baa5f9f1a848335a7))
+
 ## v0.4.9 (2021-05-05)
 ### Fix
 * Only open notebook in browser with the --open flag ([`25763c7`](https://github.com/vberlier/mudkip/commit/25763c7700be97db887ccc6d0c9d791d7af12584))

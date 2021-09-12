@@ -169,9 +169,6 @@ class Mudkip:
             **extra_args,
         )
 
-        if self.sphinx.config.myst_update_mathjax:
-            del self.sphinx.config.mathjax_config
-
         self.sphinx._init_env(True)
         self.sphinx._init_builder()
 

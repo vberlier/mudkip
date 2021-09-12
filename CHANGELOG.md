@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.11 (2021-09-12)
+### Fix
+* Update dependencies ([`713520a`](https://github.com/vberlier/mudkip/commit/713520a39938c91275706b3236c9bf1eecbf0315))
+
 ## v0.4.10 (2021-08-15)
 ### Fix
 * Upgrade to click 8 ([`40c0932`](https://github.com/vberlier/mudkip/commit/40c0932461bdbefe2f76494baa5f9f1a848335a7))

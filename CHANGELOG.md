@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.12 (2021-09-23)
+### Fix
+* Update furo to the latest version ([`0f0707a`](https://github.com/vberlier/mudkip/commit/0f0707af53de1328ef5b4228dd286042b055c1c7))
+
 ## v0.4.11 (2021-09-12)
 ### Fix
 * Update dependencies ([`713520a`](https://github.com/vberlier/mudkip/commit/713520a39938c91275706b3236c9bf1eecbf0315))

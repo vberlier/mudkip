@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.13 (2021-11-20)
+### Fix
+* Tweak watch patterns ([`76f42b5`](https://github.com/vberlier/mudkip/commit/76f42b547970b43d17c3722f3234ebb57397dfea))
+
 ## v0.4.12 (2021-09-23)
 ### Fix
 * Update furo to the latest version ([`0f0707a`](https://github.com/vberlier/mudkip/commit/0f0707af53de1328ef5b4228dd286042b055c1c7))

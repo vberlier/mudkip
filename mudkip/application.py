@@ -129,6 +129,7 @@ class Mudkip:
                 "_*",
                 "**/_*",
                 "node_modules",
+                "env",
                 "venv",
                 self.config.output_dir.name,
             ],
@@ -337,11 +338,12 @@ class Mudkip:
         patterns = [f"*{suff}" for suff in self.sphinx.config.source_suffix]
         ignore_patterns = self.sphinx.config.exclude_patterns
 
+        patterns += ["*.py", "*.pyi", "*.pyx", "*.js", "*.html", "*.css", "*.png"]
+
         dirs = [self.config.source_dir]
 
         if self.config.project_dir:
             dirs.append(self.config.project_dir)
-            patterns.append("*.py")
 
         with ExitStack() as stack:
             stack.enter_context(self.sphinx_config(jupyter_execute_notebooks="auto"))

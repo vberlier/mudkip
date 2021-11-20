@@ -379,7 +379,12 @@ class Mudkip:
             with build_manager(server_url=server_url, notebook_url=notebook_url):
                 self.build()
 
-            for event_batch in DirectoryWatcher(dirs, patterns, ignore_patterns):
+            for event_batch in DirectoryWatcher(
+                directories=dirs,
+                patterns=patterns,
+                ignore_patterns=ignore_patterns,
+                output_directory=self.config.output_dir,
+            ):
                 with build_manager(event_batch):
                     self.build()
 

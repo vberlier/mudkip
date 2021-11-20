@@ -1,12 +1,12 @@
-from queue import Queue, Empty
-from threading import Timer
-from pathlib import Path
 from functools import partial
 from itertools import chain
+from pathlib import Path
+from queue import Empty, Queue
+from threading import Timer
 from typing import NamedTuple
 
-from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
+from watchdog.observers import Observer
 
 
 class EventBatch(NamedTuple):
@@ -20,6 +20,31 @@ class EventBatch(NamedTuple):
         return list(chain(self.moved, self.created, self.modified, self.deleted))
 
 
+class EventHandler(PatternMatchingEventHandler):
+    def __init__(
+        self,
+        patterns=None,
+        ignore_patterns=None,
+        ignore_directories=False,
+        case_sensitive=False,
+        output_directory=None,
+    ):
+        super().__init__(
+            patterns=patterns,
+            ignore_patterns=ignore_patterns,
+            ignore_directories=ignore_directories,
+            case_sensitive=case_sensitive,
+        )
+        self.output_directory = output_directory
+
+    def dispatch(self, event):
+        if self.output_directory:
+            if path := getattr(event, "dest_path", getattr(event, "src_path", None)):
+                if path.startswith(self.output_directory):
+                    return
+        return super().dispatch(event)
+
+
 class DirectoryWatcher:
     def __init__(
         self,
@@ -28,6 +53,7 @@ class DirectoryWatcher:
         ignore_patterns=None,
         ignore_directories=False,
         case_sensitive=False,
+        output_directory=None,
         recursive=True,
         debounce_time=0.25,
         queue_timeout=2,
@@ -37,6 +63,9 @@ class DirectoryWatcher:
         self.ignore_patterns = ignore_patterns
         self.ignore_directories = ignore_directories
         self.case_sensitive = case_sensitive
+        self.output_directory = output_directory and str(
+            Path(output_directory).resolve()
+        )
         self.recursive = recursive
         self.debounce_time = debounce_time
         self.queue_timeout = queue_timeout
@@ -66,11 +95,12 @@ class DirectoryWatcher:
         observer = Observer()
 
         for directory in self.directories:
-            handler = PatternMatchingEventHandler(
+            handler = EventHandler(
                 self.patterns,
                 self.ignore_patterns,
                 self.ignore_directories,
                 self.case_sensitive,
+                self.output_directory,
             )
             handler.on_moved = partial(self.callback, self.moved)
             handler.on_created = partial(self.callback, self.created)

@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.14 (2021-11-20)
+### Fix
+* Take into account the output directory when detecting changes ([`a5749f4`](https://github.com/vberlier/mudkip/commit/a5749f473064896dbde80a96eb366a5779e5b1b4))
+
 ## v0.4.13 (2021-11-20)
 ### Fix
 * Tweak watch patterns ([`76f42b5`](https://github.com/vberlier/mudkip/commit/76f42b547970b43d17c3722f3234ebb57397dfea))

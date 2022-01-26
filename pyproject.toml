@@ -33,7 +33,7 @@ jupyter_nbextensions_configurator = "^0.4.1"
 colorama = {version = "*", markers = 'sys_platform == "win32"'}
 myst-parser = "^0.15.2"
 myst-nb = "^0.13.0"
-furo = "^2021.9.22"
+furo = ">=2021.9.22,<2023.0.0"
 
 [tool.poetry.dev-dependencies]
 black = "^21.12b0"

@@ -776,7 +776,7 @@ python-versions = "*"
 
 [[package]]
 name = "myst-nb"
-version = "0.13.1"
+version = "0.13.2"
 description = "A Jupyter Notebook Sphinx reader built on top of the MyST markdown parser."
 category = "main"
 optional = false
@@ -794,12 +794,12 @@ nbconvert = ">=5.6,<7"
 nbformat = ">=5.0,<6.0"
 pyyaml = "*"
 sphinx = ">=3.1,<5"
-sphinx-togglebutton = ">=0.2.2,<0.3.0"
+sphinx-togglebutton = ">=0.3.0,<0.4.0"
 
 [package.extras]
 code_style = ["pre-commit (>=2.12,<3.0)"]
 rtd = ["alabaster", "altair", "bokeh", "coconut (>=1.4.3,<1.5.0)", "ipykernel (>=5.5,<6.0)", "ipywidgets", "jupytext (>=1.11.2,<1.12.0)", "matplotlib", "numpy", "pandas", "plotly", "sphinx-book-theme (>=0.1.0,<0.2.0)", "sphinx-copybutton", "sphinx-panels (>=0.4.1,<0.5.0)", "sphinxcontrib-bibtex", "sympy"]
-testing = ["coverage (<5.0)", "ipykernel (>=5.5,<6.0)", "jupytext (>=1.11.2,<1.12.0)", "matplotlib (>=3.3.0,<3.4.0)", "numpy", "pandas", "pytest (>=5.4,<6.0)", "pytest-cov (>=2.8,<3.0)", "pytest-regressions", "sympy"]
+testing = ["coverage (<5.0)", "ipykernel (>=5.5,<6.0)", "ipython (<8)", "jupytext (>=1.11.2,<1.12.0)", "matplotlib (>=3.3.0,<3.4.0)", "numpy", "pandas (<1.4)", "pytest (>=5.4,<6.0)", "pytest-cov (>=2.8,<3.0)", "pytest-regressions", "sympy"]
 
 [[package]]
 name = "myst-parser"
@@ -1418,7 +1418,7 @@ dev = ["transifex-client", "sphinxcontrib-httpdomain", "bump2version"]
 
 [[package]]
 name = "sphinx-togglebutton"
-version = "0.2.3"
+version = "0.3.0"
 description = "Toggle page content and collapse admonitions in Sphinx."
 category = "main"
 optional = false
@@ -1429,7 +1429,7 @@ docutils = "*"
 sphinx = "*"
 
 [package.extras]
-sphinx = ["myst-nb", "sphinx-book-theme"]
+sphinx = ["myst-parser", "sphinx-book-theme", "sphinx-design"]
 
 [[package]]
 name = "sphinxcontrib-applehelp"
@@ -2165,8 +2165,8 @@ mypy-extensions = [
     {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
 ]
 myst-nb = [
-    {file = "myst-nb-0.13.1.tar.gz", hash = "sha256:7a2da1d30bb7d00600febb3d93abc89f1f5a05c0602ba330e83db54f154b5c08"},
-    {file = "myst_nb-0.13.1-py3-none-any.whl", hash = "sha256:ab990e5497036774310597e6204eeb7eeaeca8bf6791fbc7263a305104395f8a"},
+    {file = "myst-nb-0.13.2.tar.gz", hash = "sha256:81e0a4f186bb35c487f5443c7005a474d68ffb58f518f469102d1db7b452066a"},
+    {file = "myst_nb-0.13.2-py3-none-any.whl", hash = "sha256:1b9ea3a04c9e0eee05145aa297d2feeabb94c4e23e3047b92efa011ddba4f4b4"},
 ]
 myst-parser = [
     {file = "myst-parser-0.15.2.tar.gz", hash = "sha256:f7f3b2d62db7655cde658eb5d62b2ec2a4631308137bd8d10f296a40d57bbbeb"},
@@ -2468,8 +2468,8 @@ sphinx-rtd-theme = [
     {file = "sphinx_rtd_theme-1.0.0.tar.gz", hash = "sha256:eec6d497e4c2195fa0e8b2016b337532b8a699a68bcb22a512870e16925c6a5c"},
 ]
 sphinx-togglebutton = [
-    {file = "sphinx-togglebutton-0.2.3.tar.gz", hash = "sha256:41cbe2f87459eade8dc5718bb56146e8e113a05fb97459b90472470f0d357b55"},
-    {file = "sphinx_togglebutton-0.2.3-py3-none-any.whl", hash = "sha256:8a3707154b1b3480a7918f189f43b7eee0d34ffa552895af77bb273476b8d5e0"},
+    {file = "sphinx-togglebutton-0.3.0.tar.gz", hash = "sha256:005594ceb82c3da382d7b3a20aa0ceabc79648fc14f85bbef1424d1409112831"},
+    {file = "sphinx_togglebutton-0.3.0-py3-none-any.whl", hash = "sha256:a6f37dc04fab6f07154c598973fcb4615171885d90a0e4575f80203c9ddef44a"},
 ]
 sphinxcontrib-applehelp = [
     {file = "sphinxcontrib-applehelp-1.0.2.tar.gz", hash = "sha256:a072735ec80e7675e3f432fcae8610ecf509c5f1869d17e2eecff44389cdbc58"},

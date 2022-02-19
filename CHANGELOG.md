@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.15 (2022-02-19)
+### Fix
+* Use native autodoc typehints and add intersphinx ([`ed51b54`](https://github.com/vberlier/mudkip/commit/ed51b5480e2b3d2735350fe69dba1ef285a465e7))
+
 ## v0.4.14 (2021-11-20)
 ### Fix
 * Take into account the output directory when detecting changes ([`a5749f4`](https://github.com/vberlier/mudkip/commit/a5749f473064896dbde80a96eb366a5779e5b1b4))

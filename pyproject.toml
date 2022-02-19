@@ -37,7 +37,7 @@ furo = ">=2021.9.22,<2023.0.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1"
-python-semantic-release = "^7.24.0"
+python-semantic-release = "^7.25.0"
 
 [tool.poetry.scripts]
 mudkip = 'mudkip.cli:main'

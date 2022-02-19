@@ -35,9 +35,9 @@ Mudkip enables the following Sphinx extensions:
 
 - [`sphinx.ext.autodoc`](http://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html) for generating documentation from docstrings
 - [`sphinx.ext.napoleon`](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html) for Google-style and NumPy-style docstring support
-- [`sphinx_autodoc_typehints`](https://github.com/agronholm/sphinx-autodoc-typehints) for pulling type information from Python 3 annotations
 - [`sphinx.ext.doctest`](https://www.sphinx-doc.org/en/master/usage/extensions/doctest.html) for doctest support
 - [`sphinx.ext.autosectionlabel`](https://www.sphinx-doc.org/en/master/usage/extensions/autosectionlabel.html) for referencing sections with their title
+- [`sphinx.ext.intersphinx`](https://www.sphinx-doc.org/en/master/usage/extensions/intersphinx.html) for linking to other projects’ documentation
 - [`sphinx.ext.githubpages`](https://www.sphinx-doc.org/en/master/usage/extensions/githubpages.html) when deploying to GitHub Pages
 - [`myst_parser`](https://myst-parser.readthedocs.io/en/latest/) for markdown support
 - [`myst_nb`](https://myst-nb.readthedocs.io/en/latest/) for Jupyter notebook support

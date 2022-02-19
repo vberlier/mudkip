@@ -146,6 +146,8 @@ class Mudkip:
 
         extensions.append("sphinx.ext.autodoc")
         conf.setdefault("autodoc_member_order", "bysource")
+        conf.setdefault("autodoc_typehints", "description")
+        conf.setdefault("autodoc_typehints_description_target", "documented")
 
         extensions.append("sphinx.ext.napoleon")
         extensions.append("sphinx.ext.doctest")
@@ -156,7 +158,10 @@ class Mudkip:
                 "autosectionlabel_maxdepth", self.config.section_label_depth
             )
 
-        extensions.append("sphinx_autodoc_typehints")
+        extensions.append("sphinx.ext.intersphinx")
+        conf.setdefault(
+            "intersphinx_mapping", {"python": ("https://docs.python.org/3", None)}
+        )
 
         extensions.append("mudkip.extension")
 

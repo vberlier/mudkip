@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.5.0 (2022-02-20)
+### Feature
+* Add wip vitepress preset ([`fc8c928`](https://github.com/vberlier/mudkip/commit/fc8c928821cebb07ce20da5eb2b9adfc8e724a92))
+
 ## v0.4.15 (2022-02-19)
 ### Fix
 * Use native autodoc typehints and add intersphinx ([`ed51b54`](https://github.com/vberlier/mudkip/commit/ed51b5480e2b3d2735350fe69dba1ef285a465e7))

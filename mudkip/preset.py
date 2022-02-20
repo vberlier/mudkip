@@ -49,3 +49,22 @@ def furo(config):
     alabaster(config)
     config.override.setdefault("html_theme", "furo")
     config.override.setdefault("html_css_files", []).append("mudkip_furo.css")
+
+
+@preset
+def vitepress(config):
+    config.sphinx_buildername = "vitepress"
+    config.override.setdefault("nb_render_priority", {}).setdefault(
+        "vitepress",
+        (
+            "application/vnd.jupyter.widget-view+json",
+            "application/javascript",
+            "text/html",
+            "image/svg+xml",
+            "image/png",
+            "image/jpeg",
+            "text/markdown",
+            "text/latex",
+            "text/plain",
+        ),
+    )

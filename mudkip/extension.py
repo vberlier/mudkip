@@ -7,6 +7,7 @@ from docutils.utils import new_document, relative_path
 from myst_parser.sphinx_parser import MystParser
 
 from . import __version__
+from .vitepress import VitePressBuilder
 
 
 def process_doctree(app, doctree, docname):
@@ -84,6 +85,8 @@ class MdInclude(rst.Directive):
 def setup(app):
     app.connect("doctree-resolved", process_doctree)
     app.add_directive("mdinclude", MdInclude)
+
+    app.add_builder(VitePressBuilder)
 
     return {
         "version": __version__,

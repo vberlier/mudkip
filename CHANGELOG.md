@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.5.1 (2022-02-20)
+### Fix
+* Disable smartquotes by default ([`3822594`](https://github.com/vberlier/mudkip/commit/382259450b68d0b5fe51fb307abd76729ee314d8))
+
 ## v0.5.0 (2022-02-20)
 ### Feature
 * Add wip vitepress preset ([`fc8c928`](https://github.com/vberlier/mudkip/commit/fc8c928821cebb07ce20da5eb2b9adfc8e724a92))

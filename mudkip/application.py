@@ -120,6 +120,7 @@ class Mudkip:
 
         conf.setdefault("master_doc", "index")
         conf.setdefault("nitpicky", True)
+        conf.setdefault("smartquotes", False)
 
         conf.setdefault(
             "exclude_patterns",

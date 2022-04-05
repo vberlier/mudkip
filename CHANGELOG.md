@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.5.2 (2022-04-05)
+### Fix
+* Update dependencies ([`e857c0a`](https://github.com/vberlier/mudkip/commit/e857c0ad90e513bb8d62485d84d7ccf06e31f7bf))
+
 ## v0.5.1 (2022-02-20)
 ### Fix
 * Disable smartquotes by default ([`3822594`](https://github.com/vberlier/mudkip/commit/382259450b68d0b5fe51fb307abd76729ee314d8))

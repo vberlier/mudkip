@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.5.3 (2022-04-05)
+### Fix
+* Relax myst-nb requirement ([`67f1ea9`](https://github.com/vberlier/mudkip/commit/67f1ea924f1f879cde2fb6d456eb58f77816c2bc))
+
 ## v0.5.2 (2022-04-05)
 ### Fix
 * Update dependencies ([`e857c0a`](https://github.com/vberlier/mudkip/commit/e857c0ad90e513bb8d62485d84d7ccf06e31f7bf))

@@ -21,21 +21,21 @@ keywords = [
 
 [tool.poetry.dependencies]
 python = "^3.8"
-Sphinx = "^4.4.0"
-click = "^8.0.4"
-watchdog = "^2.1.6"
+Sphinx = "^4.5.0"
+click = "^8.1.2"
+watchdog = "^2.1.7"
 sphinx-rtd-theme = "^1.0.0"
 livereload = "^2.6.3"
-tomlkit = "^0.7.0"
-notebook = "^6.4.8"
+tomlkit = ">=0.7.0"
+notebook = "^6.4.10"
 jupyter_nbextensions_configurator = "^0.4.1"
 colorama = {version = "*", markers = 'sys_platform == "win32"'}
 myst-nb = "^0.13.2"
-furo = "^2022.2.14"
+furo = "^2022.3.4"
 
 [tool.poetry.dev-dependencies]
-black = "^22.1"
-python-semantic-release = "^7.25.0"
+black = "^22.3.0"
+python-semantic-release = "^7.27.1"
 
 [tool.poetry.scripts]
 mudkip = 'mudkip.cli:main'

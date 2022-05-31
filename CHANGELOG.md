@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.7.0 (2022-05-31)
+### Feature
+* Remove mdinclude as the normal include directive supports custom parsers now ([`f7da3f0`](https://github.com/vberlier/mudkip/commit/f7da3f07b989d7476d234c49bbc8f0422faa7157))
+
 ## v0.6.1 (2022-05-31)
 ### Fix
 * Change myst-nb settings ([`e6b2452`](https://github.com/vberlier/mudkip/commit/e6b245224e1761a5803f2b98d4ff03a3e2d108e1))

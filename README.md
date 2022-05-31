@@ -42,24 +42,6 @@ Mudkip enables the following Sphinx extensions:
 - [`myst_parser`](https://myst-parser.readthedocs.io/en/latest/) for markdown support
 - [`myst_nb`](https://myst-nb.readthedocs.io/en/latest/) for Jupyter notebook support
 
-Additional features are provided through an internal extension.
-
-- `mdinclude` directive
-
-  The built-in `include` directive doesn't handle markdown so mudkip provides an `mdinclude` directive to include markdown files.
-
-  ```reStructuredText
-  .. mdinclude:: ../README.md
-  ```
-
-  It's also possible to only include a specific section of the file with the `start-line` and `end-line` options.
-
-  ```reStructuredText
-  .. mdinclude:: ../README.md
-    :start-line: 7
-    :end-line: -3
-  ```
-
 ## Installation
 
 The package can be installed with `pip`.

@@ -138,8 +138,8 @@ class Mudkip:
         extensions = conf.setdefault("extensions", [])
 
         extensions.append("myst_nb")
-        conf.setdefault("jupyter_execute_notebooks", "force")
-        conf.setdefault("execution_allow_errors", True)
+        conf.setdefault("nb_execution_mode", "force")
+        conf.setdefault("nb_execution_allow_errors", True)
 
         extensions.append("sphinx.ext.autodoc")
         conf.setdefault("autodoc_member_order", "bysource")
@@ -293,7 +293,7 @@ class Mudkip:
                 os.makedirs(self.sphinx.outdir, exist_ok=True)
 
                 with self.sphinx_warning_is_error():
-                    with self.sphinx_config(execution_allow_errors=False):
+                    with self.sphinx_config(nb_execution_allow_errors=False):
                         self.sphinx.build()
 
                         if not skip_broken_links:
@@ -348,7 +348,7 @@ class Mudkip:
             dirs.append(self.config.project_dir)
 
         with ExitStack() as stack:
-            stack.enter_context(self.sphinx_config(jupyter_execute_notebooks="auto"))
+            stack.enter_context(self.sphinx_config(nb_execution_mode="auto"))
 
             notebook_url = None
             if notebook:

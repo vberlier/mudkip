@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.6.0 (2022-05-31)
+### Feature
+* New myst-nb version that integrates recent markdown-it-py ([`6281675`](https://github.com/vberlier/mudkip/commit/62816755ab74f7adf4992da38dc05073cd0e4bc4))
+
 ## v0.5.3 (2022-04-05)
 ### Fix
 * Relax myst-nb requirement ([`67f1ea9`](https://github.com/vberlier/mudkip/commit/67f1ea924f1f879cde2fb6d456eb58f77816c2bc))

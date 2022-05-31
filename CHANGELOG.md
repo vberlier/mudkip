@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.6.1 (2022-05-31)
+### Fix
+* Change myst-nb settings ([`e6b2452`](https://github.com/vberlier/mudkip/commit/e6b245224e1761a5803f2b98d4ff03a3e2d108e1))
+* Remove nb_render_priority ([`e703076`](https://github.com/vberlier/mudkip/commit/e703076323ae1cd7771e4a16b3841a3104b2b533))
+
 ## v0.6.0 (2022-05-31)
 ### Feature
 * New myst-nb version that integrates recent markdown-it-py ([`6281675`](https://github.com/vberlier/mudkip/commit/62816755ab74f7adf4992da38dc05073cd0e4bc4))

@@ -54,17 +54,3 @@ def furo(config):
 @preset
 def vitepress(config):
     config.sphinx_buildername = "vitepress"
-    config.override.setdefault("nb_render_priority", {}).setdefault(
-        "vitepress",
-        (
-            "application/vnd.jupyter.widget-view+json",
-            "application/javascript",
-            "text/html",
-            "image/svg+xml",
-            "image/png",
-            "image/jpeg",
-            "text/markdown",
-            "text/latex",
-            "text/plain",
-        ),
-    )

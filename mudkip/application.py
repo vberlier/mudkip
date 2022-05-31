@@ -7,7 +7,6 @@ from contextlib import ExitStack, contextmanager, nullcontext
 from io import StringIO
 
 import tomlkit
-from myst_nb.render_outputs import get_default_render_priority
 from sphinx.application import Sphinx
 from sphinx.errors import SphinxError
 from sphinx.util import logging
@@ -141,9 +140,6 @@ class Mudkip:
         extensions.append("myst_nb")
         conf.setdefault("jupyter_execute_notebooks", "force")
         conf.setdefault("execution_allow_errors", True)
-        conf.setdefault(
-            "nb_render_priority", {"xml": get_default_render_priority("dirhtml")}
-        )
 
         extensions.append("sphinx.ext.autodoc")
         conf.setdefault("autodoc_member_order", "bysource")

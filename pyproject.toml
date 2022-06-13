@@ -30,7 +30,7 @@ tomlkit = ">=0.7.0"
 notebook = "^6.4.11"
 jupyter_nbextensions_configurator = "^0.4.1"
 colorama = {version = "*", markers = 'sys_platform == "win32"'}
-myst-nb = "^0.15.0"
+myst-nb = ">=0.15,<0.17"
 furo = "^2022.4.7"
 
 [tool.poetry.dev-dependencies]

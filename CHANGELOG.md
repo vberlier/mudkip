@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v0.8.0 (2022-08-09)
+### Feature
+* Add latex preset ([`774f663`](https://github.com/vberlier/mudkip/commit/774f6637a2a4f653187901ca7d7d7fc600a212fc))
+* Add preset for pydata theme ([`364be03`](https://github.com/vberlier/mudkip/commit/364be0378189d68bfd443c738cc2ae9e80f83f34))
+* Add mermaid ([`2979d61`](https://github.com/vberlier/mudkip/commit/2979d6151a399ada8f3f83cc7e993592c2efec82))
+
 ## v0.7.0 (2022-05-31)
 ### Feature
 * Remove mdinclude as the normal include directive supports custom parsers now ([`f7da3f0`](https://github.com/vberlier/mudkip/commit/f7da3f07b989d7476d234c49bbc8f0422faa7157))

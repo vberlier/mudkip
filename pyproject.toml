@@ -33,6 +33,7 @@ colorama = {version = "*", markers = 'sys_platform == "win32"'}
 myst-nb = "^0.16.0"
 furo = "^2022.6.21"
 sphinxcontrib-mermaid = "^0.7.1"
+pydata-sphinx-theme = "^0.9.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.6.0"

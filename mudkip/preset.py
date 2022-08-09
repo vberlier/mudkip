@@ -58,5 +58,11 @@ def furo(config):
 
 
 @preset
+def pydata(config):
+    dirhtml(config)
+    config.override.setdefault("html_theme", "pydata_sphinx_theme")
+
+
+@preset
 def vitepress(config):
     config.sphinx_buildername = "vitepress"

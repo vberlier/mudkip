@@ -33,6 +33,11 @@ def xml(config):
 
 
 @preset
+def latex(config):
+    config.sphinx_buildername = "latex"
+
+
+@preset
 def dirhtml(config):
     config.dev_server = livereload_dev_server
     config.sphinx_buildername = "dirhtml"

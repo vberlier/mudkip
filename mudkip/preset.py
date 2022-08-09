@@ -33,20 +33,26 @@ def xml(config):
 
 
 @preset
-def alabaster(config):
+def dirhtml(config):
     config.dev_server = livereload_dev_server
     config.sphinx_buildername = "dirhtml"
 
 
 @preset
+def alabaster(config):
+    dirhtml(config)
+    config.override.setdefault("html_theme", "alabaster")
+
+
+@preset
 def rtd(config):
-    alabaster(config)
+    dirhtml(config)
     config.override.setdefault("html_theme", "sphinx_rtd_theme")
 
 
 @preset
 def furo(config):
-    alabaster(config)
+    dirhtml(config)
     config.override.setdefault("html_theme", "furo")
     config.override.setdefault("html_css_files", []).append("mudkip_furo.css")
 

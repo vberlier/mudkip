@@ -41,6 +41,7 @@ Mudkip enables the following Sphinx extensions:
 - [`sphinx.ext.githubpages`](https://www.sphinx-doc.org/en/master/usage/extensions/githubpages.html) when deploying to GitHub Pages
 - [`myst_parser`](https://myst-parser.readthedocs.io/en/latest/) for markdown support
 - [`myst_nb`](https://myst-nb.readthedocs.io/en/latest/) for Jupyter notebook support
+- [`sphinxcontrib.mermaid`](https://github.com/mgaitan/sphinxcontrib-mermaid) for [Mermaid](https://mermaid-js.github.io/mermaid/) graphs and flowcharts
 
 ## Installation
 

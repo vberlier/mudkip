@@ -160,6 +160,8 @@ class Mudkip:
             "intersphinx_mapping", {"python": ("https://docs.python.org/3", None)}
         )
 
+        extensions.append("sphinxcontrib.mermaid")
+
         extensions.append("mudkip.extension")
 
         self.sphinx = Sphinx(

@@ -1446,6 +1446,14 @@ python-versions = ">=3.5"
 test = ["mypy", "flake8", "pytest"]
 
 [[package]]
+name = "sphinxcontrib-mermaid"
+version = "0.7.1"
+description = "Mermaid diagrams in yours Sphinx powered docs"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "sphinxcontrib-qthelp"
 version = "1.0.3"
 description = "sphinxcontrib-qthelp is a sphinx extension which outputs QtHelp document."
@@ -1694,7 +1702,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "5142d6e92c662d0346b99ec67716f74e02287e35bc4e6d3cdd4179320f7e3d78"
+content-hash = "25e0372447373abdfecc059b20b009e4fb82ccfaadfddf25ddcefc2c42f8f1f4"
 
 [metadata.files]
 alabaster = []
@@ -1809,6 +1817,7 @@ sphinxcontrib-applehelp = []
 sphinxcontrib-devhelp = []
 sphinxcontrib-htmlhelp = []
 sphinxcontrib-jsmath = []
+sphinxcontrib-mermaid = []
 sphinxcontrib-qthelp = []
 sphinxcontrib-serializinghtml = []
 sqlalchemy = []

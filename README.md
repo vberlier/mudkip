@@ -70,6 +70,7 @@ Server running on http://localhost:5500
 The command will create the `docs` directory and `index.rst` file if they do not already exist and launch a development server with live reloading. You can open the link in your browser and see that mudkip uses the [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme by default.
 
 > Note that mudkip enables the [`myst_parser`](https://myst-parser.readthedocs.io/en/latest/) extension, allowing you to use both reStructuredText and markdown files. You can create an `index.md` file if you want to use markdown instead of reStructuredText.
+Check out this project's own [`docs` folder](https://github.com/vberlier/mudkip/tree/main/docs) as an example.
 
 Press `Ctrl+C` at any time to exit.
 
@@ -198,14 +199,11 @@ $ mudkip init
 
   **default**: `"rtd"`
 
-  Presets configure Mudkip and Sphinx to enable specific features. The `rtd`, `furo`, `pydata` and `alabaster` presets enable the development server and configure Sphinx to use the `dirhtml` builder. The `rtd` preset changes the html theme to the [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme, `furo` preset uses [Furo](https://pradyunsg.me/furo/) theme, and
-  `pydata` changes to [PyData](https://pydata-sphinx-theme.readthedocs.io/en/stable/) theme.
+  Presets configure Mudkip and Sphinx to enable specific features. The `rtd`, `furo`, `pydata` and `alabaster` presets enable the development server and configure Sphinx to use the `dirhtml` builder. The `rtd` preset changes the html theme to the [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme, `furo` preset uses [Furo](https://pradyunsg.me/furo/) theme, and `pydata` changes to [PyData](https://pydata-sphinx-theme.readthedocs.io/en/stable/) theme.
 
   The `xml` preset configures Sphinx to use the `xml` builder. This is useful for more advanced usecases when you process a hierarchy of docutils documents further in your static site generator pipeline (experimental).
 
-  The `latex` preset uses `latex` builder that is used to generate a PDF version of your
-  documentation. You may want to change `--output-dir` manually to a different directory 
-  when using `latex` preset.
+  The `latex` preset uses `latex` builder, which creates source files for making a PDF version of your documentation. You may want to change `--output-dir` manually to a different directory when using `latex` preset to separate HTML and latex outputs.
 
 - `source_dir`
 
@@ -288,7 +286,7 @@ $ mudkip init
   The `override` option lets you specify sphinx configuration directly. For example, you can use it to define a custom theme or a logo image. 
 
   Note that `override` option is effectively a replacement for `conf.py` configuration. 
-  You can specify an `override` section in `mudkip.toml` file as shown in example below.  
+  You can put an `override` section in `mudkip.toml` file as shown in an example below.  
 
   ```toml
   [mudkip.override]
@@ -296,7 +294,7 @@ $ mudkip init
   html_static_path = ["_static"]
   ```
 
-  In a `pyproject.toml` file this section name should be `[tool.mudkip.override]`.
+  In a `pyproject.toml` file the `override` section name should be `[tool.mudkip.override]`.
 
 - `section_label_depth`
 

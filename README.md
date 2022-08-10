@@ -294,6 +294,12 @@ The code follows the [black](https://github.com/psf/black) code style.
 $ poetry run black mudkip
 ```
 
+## Why package name Mudkip?
+
+[wiki]: https://en.wikipedia.org/wiki/List_of_generation_III_Pok%C3%A9mon#Mudkip
+
+This package started as a hobby project, which **@vberlier** usually named after Pokémon characters. [Mudkip][wiki] _"has a fin on its head, which acts as a radar for its surroundings. Even in muddy water, Mudkip can sense where it is going."_ Cute video about Mudkip [here](https://www.youtube.com/watch?v=l7kK9bxEGMg).
+
 ---
 
 License - [MIT](https://github.com/vberlier/mudkip/blob/master/LICENSE)

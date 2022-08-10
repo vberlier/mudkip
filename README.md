@@ -67,7 +67,7 @@ The command will create the `docs` directory and `index.rst` file if they do not
 
 Press `Ctrl+C` at any time to exit.
 
-Most changes in `index.rst` or other documentation source files will be processed immediately and shown in browser, for deep changes (eg use a different theme) to take effect you need stop the live server with `Ctrl-C` and start it again with `mudkip develop` command.
+Most changes in `index.rst` or other documentation source files will be processed immediately and shown in browser. Deep changes (eg using a different theme) take effect after you stop and restart the live server.
 
 ### Building and checking documentation
 

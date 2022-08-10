@@ -180,7 +180,7 @@ $ mudkip build --source-dir path/to/docs --output-dir path/to/output
 
 Passing these options to every single command can become tedious so you can use a configuration file to save your custom settings.
 
-Running the `init` command will either add a `[tool.mudkip]` section to your `pyproject.toml` or create a `mudkip.toml` file with some basic configuration.
+Running the `init` command will either add a `[tool.mudkip]` section to your existing `pyproject.toml` or create a new `mudkip.toml` file with some basic configuration.
 
 ```bash
 $ mudkip init
@@ -274,7 +274,18 @@ $ mudkip init
 
   **default**: An empty dictionary
 
-  The `override` option lets you override sphinx configuration directly. You can use it to specify a custom theme or a logo for instance.
+  The `override` option lets you specify sphinx configuration directly. For example, you can use it to define a custom theme or a logo image. 
+
+  Note that `override` option is effectively a replacement for `conf.py` configuration. 
+  You can specify an `override` section in `mudkip.toml` file as shown in example below.  
+
+  ```toml
+  [mudkip.override]
+  myst_enable_extensions = ["replacements", "tasklist"]
+  html_static_path = ["_static"]
+  ```
+
+  In a `pyproject.toml` file this section name should be `[tool.mudkip.override]`.
 
 - `section_label_depth`
 

@@ -192,9 +192,14 @@ $ mudkip init
 
   **default**: `"rtd"`
 
-  Presets configure Mudkip and Sphinx to enable specific features. The `rtd`, `furo` and `alabaster` presets enable the development server and configure Sphinx to use the `dirhtml` builder. The `rtd` preset changes the html theme to the [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme and the `furo` preset to the [Furo](https://pradyunsg.me/furo/) theme.
+  Presets configure Mudkip and Sphinx to enable specific features. The `rtd`, `furo`, `pydata` and `alabaster` presets enable the development server and configure Sphinx to use the `dirhtml` builder. The `rtd` preset changes the html theme to the [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme) theme, `furo` preset uses [Furo](https://pradyunsg.me/furo/) theme, and
+  `pydata` changes to [PyData](https://pydata-sphinx-theme.readthedocs.io/en/stable/) theme.
 
-  The `xml` preset configures Sphinx to use the `xml` builder. This is useful for more advanced use-cases when you have a separate static site generator that can process a hierarchy of docutils documents.
+  The `xml` preset configures Sphinx to use the `xml` builder. This is useful for more advanced usecases when you process a hierarchy of docutils documents further in your static site generator pipeline (experimental).
+
+  The `latex` preset uses `latex` builder that is used to generate a PDF version of your
+  documentation. You may want to change `--output-dir` manually to a different directory 
+  when using `latex` preset.
 
 - `source_dir`
 

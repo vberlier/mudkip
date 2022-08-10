@@ -51,6 +51,12 @@ The package can be installed with `pip`.
 $ pip install mudkip
 ```
 
+To use the development version:
+
+```bash
+$ pip install update git+https://github.com/vberlier/mudkip.git
+```
+
 ## Getting started
 
 You can forget everything about `sphinx-quickstart`, `conf.py` and intimidating Makefiles. After installing the package, no need to configure anything you can run the `develop` command right away and start writing docs.
